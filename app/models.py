@@ -120,13 +120,11 @@ class Update(db.Model):
     comments = db.relationship("Comment", back_populates="update")
 
     def to_dict(self):
-        petition_id = self.petition.id
         return {
             "id": self.id,
-            "petition_id": self.petition_id,
             "header": self.header,
             "content": self.content,
-            "petition": self.petition
+            "petition": self.petition_id
         }
 
 
