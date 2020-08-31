@@ -94,17 +94,17 @@ class Signature(db.Model):
     petition_id = db.Column(db.Integer, db.ForeignKey(
         "petitions.id"), nullable=False)
     message = db.Column(db.String(255))
+
     user = db.relationship("User", back_populates="signatures")
     petition = db.relationship("Petition", back_populates="signatures")
 
     def to_dict(self):
+
         return {
             "id": self.id,
-            "user_id": self.user_id,
-            "petition_id": self.petition_id,
             "message": self.message,
-            "user": self.user,
-            "petition": self.petition
+            "user": self.user_id,
+            "petition": self.petition_id
         }
 
 
