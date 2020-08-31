@@ -1,6 +1,11 @@
 #NODE
 .DS_Store
 
+.env 
+.vscode/
+settings.json
+.venv/
+
 # Logs
 logs
 *.log

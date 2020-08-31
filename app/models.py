@@ -13,6 +13,7 @@ class User(db.Model):
     encrypted_password = db.Column(db.String, nullable=False)
     profile_pic_url = db.Column(db.String)
     location = db.Column(db.String)
+
     signatures = db.relationship("Signature", back_populates="user")
     created_petitions = db.relationship("Petition", back_populates="creator")
     comments = db.relationship("Comment", back_populates="user")
@@ -21,6 +22,8 @@ class User(db.Model):
         created_petition_ids = [
             petition.id for petition in self.created_petitions
         ]
+        signed_petitions = [signature.petition.id for signature in self.signatures]
+        comments = [comment.id for comment in self.comments]
 
         return {
             "id": self.id,
@@ -30,9 +33,9 @@ class User(db.Model):
             "encrypted_password": self.encrypted_password,
             "profile_pic_url": self.profile_pic_url,
             "location": self.location,
-            "signatures": self.signatures,
+            "signed_petitions": signed_petitions,
             "created_petitions": created_petition_ids,
-            "comments": self.comments
+            "comments": comments
         }        
 
 
