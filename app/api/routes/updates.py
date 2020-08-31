@@ -1,23 +1,48 @@
 from flask import Blueprint, jsonify
-from app.models import Update
+from app.models import Update, db
+
 
 bp = Blueprint('updates', __name__)
 
 
 @bp.route('/<update_id>', methods=['GET', 'PATCH', 'DELETE'])
-def get_update (update_id):
+def get_update (id):
   # Get Specific Update Based On Id
-    response = Update.query.get(update_id)
+    response = Update.query.get(id)
     return {"updates": [update.to_dict() for update in response]}
 
-def edit_update(update_id):
-  #Edit A Specific Update
-  
+def edit_update(id):
+    update = get_update(id)
+    if request.method == 'PATCH':
+       petition_id = request.form['title']
+       header = request.form['header']
+       content = request.form['content']
+       error = None 
+
+       if not header:
+         error = 'Header is required.'
+       if not content:
+         error = 'Content is required.'
+
+       if error is not None:
+         flash(error)
+       else:
+         db.execute(
+           'UPDATE update SET header = ?, content = ?'
+           'WHERE id = ?',
+           (title, body, id)
+         )
+         db.commit()
+
+def delete_update(id):
+    get_update(id)
+    db.execute('DELETE FROM post WHERE id = ?', (id,))
+    db.commit()
 
 @bp.route('/<update_id>/comments', methods=['GET', 'POST'])
 #Get Comments From Specific Update
 def get_comments(update_id):
-  update_response = Update.comments.query.filter_by(update_id=update_id)
+  comments_response = Update.comments.query.filter_by(update_id=update_id)
   return {"updates": [update.to_dict() for update in update_response] }
 
 def add_comment():
