@@ -24,7 +24,6 @@ WTForms = "==2.3.3"
 Flask-JWT-Extended = "==3.24.1"
 alembic = "*"
 flask-migrate = "*"
-psycopg2-binary = "*"
 bcrypt = "*"
 
 [requires]
