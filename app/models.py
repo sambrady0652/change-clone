@@ -10,7 +10,7 @@ class User(db.Model):
     first_name = db.Column(db.String(40), nullable=False)
     last_name = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    encrypted_password = db.Column(db.String, nullable=False)
+    encrypted_password = db.Column(db.LargeBinary, nullable=False)
     profile_pic_url = db.Column(db.String)
     location = db.Column(db.String)
 
@@ -94,17 +94,17 @@ class Signature(db.Model):
     petition_id = db.Column(db.Integer, db.ForeignKey(
         "petitions.id"), nullable=False)
     message = db.Column(db.String(255))
+
     user = db.relationship("User", back_populates="signatures")
     petition = db.relationship("Petition", back_populates="signatures")
 
     def to_dict(self):
+
         return {
             "id": self.id,
-            "user_id": self.user_id,
-            "petition_id": self.petition_id,
             "message": self.message,
-            "user": self.user,
-            "petition": self.petition
+            "user": self.user_id,
+            "petition": self.petition_id
         }
 
 
@@ -120,13 +120,11 @@ class Update(db.Model):
     comments = db.relationship("Comment", back_populates="update")
 
     def to_dict(self):
-        petition_id = self.petition.id
         return {
             "id": self.id,
-            "petition_id": self.petition_id,
             "header": self.header,
             "content": self.content,
-            "petition": self.petition
+            "petition": self.petition_id
         }
 
 
