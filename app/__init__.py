@@ -6,14 +6,23 @@ from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 
 from app.models import db, User
+<<<<<<< HEAD
 from app.api.api import user_routes, petition_routes, update_routes
+=======
+from app.api.routes.petitions import bp as petition_routes
+from app.api.user_routes import user_routes
+>>>>>>> signin
 from app.config import Config
 
 app = Flask(__name__, static_url_path='')
 
 app.config.from_object(Config)
+<<<<<<< HEAD
 app.register_blueprint(petition_routes, url_prefix='/api/petitions')
 app.register_blueprint(update_routes, url_prefix='/api/updates')
+=======
+app.register_blueprint(petition_routes, url_prefix='/petitions')
+>>>>>>> signin
 app.register_blueprint(user_routes, url_prefix='/api/users')
 db.init_app(app)
 jwt = JWTManager(app)

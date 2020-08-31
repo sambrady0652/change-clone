@@ -10,7 +10,7 @@ class User(db.Model):
     first_name = db.Column(db.String(40), nullable=False)
     last_name = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    encrypted_password = db.Column(db.String, nullable=False)
+    encrypted_password = db.Column(db.LargeBinary, nullable=False)
     profile_pic_url = db.Column(db.String)
     location = db.Column(db.String)
 
