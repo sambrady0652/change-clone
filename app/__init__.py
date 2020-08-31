@@ -4,16 +4,14 @@ from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_migrate import Migrate
 
-
 from app.models import db, User
-from app.api.user_routes import user_routes
-from app.api.petition_routes import petition_routes
+from app.api import bp as api_routes
 from app.config import Config
 
 app = Flask(__name__, static_url_path='')
 
 app.config.from_object(Config)
-app.register_blueprint(user_routes, url_prefix='/api/users')
+app.register_blueprint(api_routes, url_prefix='/api')
 db.init_app(app)
 Migrate(app, db)
 

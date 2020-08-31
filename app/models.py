@@ -33,7 +33,7 @@ class User(db.Model):
             "signatures": self.signatures,
             "created_petitions": created_petition_ids,
             "comments": self.comments
-        }
+        }        
 
 
 class Topic(db.Model):
@@ -42,6 +42,7 @@ class Topic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     topic = db.Column(db.String(50))
     image_url = db.Column(db.String)
+
     petitions = db.relationship("Petition", back_populates="topic")
 
 
@@ -58,12 +59,16 @@ class Petition(db.Model):
         db.Integer, db.ForeignKey("users.id"), nullable=False)
     topic_id = db.Column(db.Integer, db.ForeignKey(
         "topics.id"), nullable=False)
+
     updates = db.relationship("Update", back_populates="petition")
     signatures = db.relationship("Signature", back_populates="petition")
     creator = db.relationship("User", back_populates="created_petitions")
     topic = db.relationship("Topic", back_populates="petitions")
 
     def to_dict(self):
+        updates = [update.id for update in self.updates]
+        signatures = [signature.id for signature in self.signatures]
+
         return {
             "id": self.id,
             "image_url": self.image_url,
@@ -72,9 +77,9 @@ class Petition(db.Model):
             "goal": self.goal,
             "current": self.current,
             "creator": self.creator_id,
-            "topic_id": self.topic_id,
-            "updates": self.updates,
-            "signatures": self.signatures,
+            "topic": self.topic_id,
+            "updates": updates,
+            "signatures": signatures,
             "topic": self.topic
         }
 
