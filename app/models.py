@@ -80,7 +80,6 @@ class Petition(db.Model):
             "topic": self.topic_id,
             "updates": updates,
             "signatures": signatures,
-            "topic": self.topic
         }
 
 

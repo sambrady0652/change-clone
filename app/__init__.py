@@ -5,13 +5,13 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_migrate import Migrate
 
 from app.models import db, User
-from app.api import bp as api_routes
+from app.api.routes.petitions import bp as petition_routes
 from app.config import Config
 
 app = Flask(__name__, static_url_path='')
 
 app.config.from_object(Config)
-app.register_blueprint(api_routes, url_prefix='/api')
+app.register_blueprint(petition_routes, url_prefix='/petitions')
 db.init_app(app)
 Migrate(app, db)
 
