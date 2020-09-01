@@ -4,10 +4,10 @@ import { Box, Form, Button } from 'grommet';
 
 import { FormFieldLabel } from '../Grommet/FormField';
 import SignInButton from './SignInButton'
-import { signUp } from '../store/users'
+import { signUp } from '../store/auth'
 
 
-const Signup = () => {
+const Signup = (props) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('');
@@ -18,12 +18,12 @@ const Signup = () => {
     e.preventDefault();
     dispatch(signUp(firstName, lastName, email, password))
   }
-
+  const { toggleLast } = props
   return (
 
     <Box align="center" pad="large">
       <div>
-        Already have an account? <SignInButton label="sign in here!" context="signup" />
+        Already have an account? <SignInButton label="sign in here!" onClickProp={toggleLast} />
       </div>
       <Form
         onSubmit={handleSubmit}>

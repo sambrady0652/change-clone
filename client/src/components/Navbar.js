@@ -8,7 +8,7 @@ import NavAnchor from './NavAnchor';
 
 
 const Navbar = () => {
-  const { needSignIn } = useSelector(state => state.user)
+  const { needSignIn } = useSelector(state => state.currentUser)
 
   return (
     <Header justify="around" pad={{ vertical: "xsmall" }}>
@@ -22,7 +22,7 @@ const Navbar = () => {
       <Header >
         <NavAnchor href="/search" icon={<Search color="plain" />} />
         {needSignIn ?
-          <SignInButton label="Sign in" context="nav" />
+          <SignInButton label="Sign in" />
           :
           <AccountMenu />
         }

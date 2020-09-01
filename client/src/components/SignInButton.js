@@ -7,15 +7,34 @@ import Signup from './Signup';
 
 const SignInButton = (props) => {
 
-  const [show, setShow] = useState(false)
-  const { label, context } = props
-  const { needSignIn } = useSelector(state => state.user)
+  const [showIn, setShowIn] = useState(false)
+  const [showUp, setShowUp] = useState(false)
+  const { label, onClickProp } = props
+  const { needSignIn } = useSelector(state => state.currentUser)
 
   useEffect(() => {
     if (!needSignIn) {
-      setShow(false)
+      close()
     }
   }, [needSignIn])
+
+  const close = () => {
+    setShowIn(false)
+    setShowUp(false)
+  }
+
+  const toggleLast = () => {
+    if (!showIn && !showUp) {
+      setShowUp(false)
+      setShowIn(true)
+    } else if (!showIn && showUp) {
+      setShowUp(false)
+      setShowIn(true)
+    } else if (showIn && !showUp) {
+      setShowIn(false)
+      setShowUp(true)
+    }
+  }
 
   return (
     <Box>
@@ -23,21 +42,21 @@ const SignInButton = (props) => {
         plain
         hoverIndicator={{ color: "#ffffff" }}
         label={label}
-        onClick={() => setShow(true)} />
-      {show ? (
+        onClick={() => { onClickProp ? onClickProp() : toggleLast() }} />
+      {(showIn || showUp) && (
         <Layer
-          onEsc={() => setShow(false)}
-          onClickOutside={() => setShow(false)}
+          onEsc={() => close()}
+          onClickOutside={() => close()}
         >
-          {context === 'signin' ?
+          {showIn ?
             (
-              <Signup />
+              <Signin toggleLast={toggleLast} />
             ) : (
-              <Signin />
+              <Signup toggleLast={toggleLast} />
             )
           }
         </Layer>
-      ) : <> </>}
+      )}
     </Box>
   )
 }

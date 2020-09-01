@@ -2,7 +2,7 @@ import React from 'react'
 import { Menu, Box } from 'grommet'
 import { useDispatch } from 'react-redux'
 
-import { signOut } from '../store/users'
+import { signOut } from '../store/auth'
 
 const AccountMenu = () => {
   const dispatch = useDispatch()
