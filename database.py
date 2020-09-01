@@ -1,6 +1,7 @@
 from app.models import User, Petition, Signature, Update, Topic, Comment
 from app import app, db
 from dotenv import load_dotenv
+import bcrypt
 load_dotenv()
 
 
@@ -12,7 +13,7 @@ with app.app_context():
         first_name="Default",
         last_name="User",
         email="default@user.com",
-        encrypted_password="pass",
+        encrypted_password=bcrypt.hashpw("password".encode('utf-8'), bcrypt.gensalt(14)),
         profile_pic_url="",
         location="Chicago, IL, USA")
 

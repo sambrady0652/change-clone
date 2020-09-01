@@ -31,7 +31,7 @@ def post_petition():
     }
 
 
-@bp.route('/<int id>', methods=['GET', 'PUT', 'PATCH', 'DELETE'])
+@bp.route('/<int:id>', methods=['GET', 'PUT', 'PATCH', 'DELETE'])
 def petition(id):
     petition = Petition.query.filter(Petition.id == id).one()
     if petition == None:
@@ -56,7 +56,7 @@ def petition(id):
         db.session.commit()
 
 
-@bp.route('/<int id>/signatures', methods=['GET', 'POST'])
+@bp.route('/<int:id>/signatures', methods=['GET', 'POST'])
 def petiton_signatures(petition_id):
     if request.method == 'GET':
         signatures = Signature.query.filter(
@@ -71,7 +71,7 @@ def petiton_signatures(petition_id):
         return new_sig.to_dict()
 
 
-@bp.route('/<int id>/updates', methods=['GET', 'POST'])
+@bp.route('/<int:id>/updates', methods=['GET', 'POST'])
 def petition_updates(petition_id):
     if request.method == 'GET':
         updates = Update.query.filter(
