@@ -16,14 +16,15 @@ export const signIn = (email, password) => async dispatch => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
-    console.log(response)
-    if (!response.ok) {
+
+    if (response.status !== 200) {
       throw response;
     }
     //Place token in Local Storage, update Redux State
-    const { access_token } = await response.json();
+    const { access_token, id } = await response.json();
     localStorage.setItem(SESSION_TOKEN, access_token);
-    // dispatch(setUser(token, user));
+    localStorage.setItem(USER_ID, id);
+    dispatch(setUser(access_token, id));
   }
   catch (err) {
     console.error(err);
@@ -42,19 +43,19 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
     //   formData.append("profPic", profPic, `${firstName}-profpic`)
     // }
 
-    const response = await fetch(`${baseUrl}/api/signup`, {
+    const response = await fetch(`${baseUrl}/api/users/signup`, {
       method: 'post',
       body: formData
     });
-    console.log(response)
-    if (!response.ok) {
+
+    if (response.status !== 200) {
       throw response
     }
     //Place token in Local Storage, update Redux State
-    const { access_token, user } = await response.json();
+    const { access_token, id } = await response.json();
     localStorage.setItem(SESSION_TOKEN, access_token);
-    // localStorage.setItem(USER_ID, user.id);
-    // dispatch(setUser(token, user));
+    localStorage.setItem(USER_ID, id);
+    dispatch(setUser(access_token, id));
   }
   catch (err) {
     console.error(err);
@@ -71,13 +72,23 @@ export const signOut = () => async (dispatch) => {
 //LOAD USER INFO
 
 //ACTION CREATOR FUNCTIONS
+export const setUser = (access_token, id) => ({
+  type: SET_USER,
+  access_token,
+  id
+});
 
-
-export default function reducer(state = {}, action) {
+export default function reducer(state = { needSignIn: true }, action) {
   Object.freeze(state);
   const newState = Object.assign({}, state);
   switch (action.type) {
-    // INSERT CASES HERE 
-    default: return state;
+    case SET_USER: {
+      return {
+        token: action.access_token,
+        id: action.id,
+        needSignIn: false
+      }
+    }
+    default: return newState;
   }
 }

@@ -4,6 +4,7 @@ import { Box, Form, Button } from 'grommet';
 
 import { FormFieldLabel } from '../Grommet/FormField';
 import SignInButton from './SignInButton'
+import { signIn } from '../store/users'
 
 
 const Signin = () => {
@@ -13,7 +14,7 @@ const Signin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // HANDLE SUBMIT
+    dispatch(signIn(email, password))
   }
 
   return (
