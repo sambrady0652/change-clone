@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -8,16 +8,23 @@ import StartPetition from "./components/StartPetition"
 import MyPetitions from "./components/MyPetitions"
 import Petitions from "./components/Petitions"
 import SettingsPage from "./components/SettingsPage"
-import { setUser } from './store/users'
+import { setUser } from './store/auth'
+import { fetchPetitions } from './store/petitions'
+import { fetchUsers } from './store/users'
 
 function App() {
     const token = localStorage.getItem("SESSION_TOKEN")
     const id = localStorage.getItem("USER_ID")
     const dispatch = useDispatch()
 
-    if (token && id) {
-        dispatch(setUser(token, id))
-    }
+    useEffect(() => {
+        if (token && id) {
+            dispatch(setUser(token, id))
+        }
+        dispatch(fetchPetitions())
+        dispatch(fetchUsers())
+    })
+
     return (
         <>
             <BrowserRouter>
