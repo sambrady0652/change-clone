@@ -1,18 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import Signin from './Signin'
-import Signup from './Signup'
+import { useSelector } from 'react-redux';
 import { Box, Button, Layer } from 'grommet';
 
-const SignInButton = (props) => {
-  const [show, setShow] = useState(false)
-  const { label, context } = props
+import Signin from './Signin';
+import Signup from './Signup';
 
-  const handleClick = () => {
-    if (context === "nav") {
-      setShow(true)
+const SignInButton = (props) => {
+
+  const [showIn, setShowIn] = useState(false)
+  const [showUp, setShowUp] = useState(false)
+  const { label, onClickProp } = props
+  const { needSignIn } = useSelector(state => state.currentUser)
+
+  useEffect(() => {
+    if (!needSignIn) {
+      close()
     }
-    if (context === "signin" || context === "signup") {
-      setShow(true)
+  }, [needSignIn])
+
+  const close = () => {
+    setShowIn(false)
+    setShowUp(false)
+  }
+
+  const toggleLast = () => {
+    if (!showIn && !showUp) {
+      setShowUp(false)
+      setShowIn(true)
+    } else if (!showIn && showUp) {
+      setShowUp(false)
+      setShowIn(true)
+    } else if (showIn && !showUp) {
+      setShowIn(false)
+      setShowUp(true)
     }
   }
 
@@ -20,24 +40,23 @@ const SignInButton = (props) => {
     <Box>
       <Button
         plain
-        focusIndicator={false}
-        hoverIndicator={{ color: "#ED2D23" }}
+        hoverIndicator={{ color: "#ffffff" }}
         label={label}
-        onClick={() => handleClick()} />
-      {show ? (
+        onClick={() => { onClickProp ? onClickProp() : toggleLast() }} />
+      {(showIn || showUp) && (
         <Layer
-          onEsc={() => setShow(false)}
-          onClickOutside={() => setShow(false)}
+          onEsc={() => close()}
+          onClickOutside={() => close()}
         >
-          {context === 'signin' ?
+          {showIn ?
             (
-              <Signup />
+              <Signin toggleLast={toggleLast} />
             ) : (
-              <Signin />
+              <Signup toggleLast={toggleLast} />
             )
           }
         </Layer>
-      ) : <> </>}
+      )}
     </Box>
   )
 }

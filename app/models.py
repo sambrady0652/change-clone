@@ -30,7 +30,6 @@ class User(db.Model):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "email": self.email,
-            "encrypted_password": self.encrypted_password,
             "profile_pic_url": self.profile_pic_url,
             "location": self.location,
             "signed_petitions": signed_petitions,
