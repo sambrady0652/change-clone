@@ -71,6 +71,41 @@ def signin():
     else:
         return {'error': 'password was not correct'}
 
+@bp.route('/<int:id>/', methods=['GET'])
+def user_page(id):
+    found_user = User.query.filter(User.id == id).first()
+    if found_user:
+        return {'first_name': found_user.first_name, 'last_name': found_user.last_name, 'location': found_user.location}
+    else:
+        return {'error': "User not found", 'status': 400}
+
+@bp.route('/<int:id>/', methods=['PATCH'])
+@jwt_required
+def user_details_patch(id):
+    #gather user submitted data
+    first_name = request.form.get('first_name')
+    last_name = request.form.get('last_name')
+    location = request.form.get('location')
+
+    #validate user submitted data
+    errors = validations_user_details(last_name, first_name)
+    if len(errors) > 0:
+        return {'errors': errors}
+
+    #get id from json web token
+    current_user_id = get_jwt_identity()
+
+    #if user is found in database then update user details. If not, send error to client
+    found_user = User.query.filter(User.id == current_user_id).first()
+    if(found_user):
+        found_user.first_name = first_name
+        found_user.last_name = last_name
+        found_user.location = location
+        db.session.commit()
+        return {'message':'Success', 'status': 200}
+    else:
+        return {'error': 'User was not found', 'status': 400}
+
 @bp.route('/delete_account', methods=['DELETE'])
 @jwt_required
 def delete_account():
@@ -121,4 +156,22 @@ def validations_signin(email, password):
         return errors
     if len(email) > 255:
         errors.append('email length is too long')
+    return errors
+
+def validations_user_details(last_name, first_name):
+    errors = []
+    if last_name is None:
+        errors.append('first name is missing')
+    if first_name is None:
+        errors.append('last name is missing')
+    if len(errors) > 0:
+        return errors
+    if len(last_name) > 40:
+        errors.append('last name length is too long')
+    if len(first_name) > 40:
+        errors.append('first name length is too long')
+    if len(last_name) < 1:
+        errors.append('last name was not provided')
+    if len(first_name) < 1:
+        errors.append('first name was not provided')
     return errors
