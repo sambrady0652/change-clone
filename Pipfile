@@ -25,6 +25,7 @@ alembic = "*"
 flask-migrate = "*"
 bcrypt = "*"
 pylint = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.8"

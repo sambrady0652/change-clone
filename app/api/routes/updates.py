@@ -1,5 +1,5 @@
-from flask import Blueprint, jsonify
-from app.models import Update, db
+from flask import Blueprint, jsonify, request
+from app.models import Update, db, Comment
 
 
 bp = Blueprint('updates', __name__)
@@ -43,7 +43,7 @@ def delete_update(id):
 #Get Comments From Specific Update
 def get_comments(update_id):
   comments_response = Update.comments.query.filter_by(update_id=update_id)
-  return {"updates": [update.to_dict() for update in update_response] }
+  return {"updates": [update.to_dict() for update in comments_response] }
 
 def add_comment():
     # Write Comment On Specific Update
