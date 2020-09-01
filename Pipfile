@@ -26,6 +26,7 @@ flask-migrate = "*"
 bcrypt = "*"
 pylint = "*"
 psycopg2-binary = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.8"
