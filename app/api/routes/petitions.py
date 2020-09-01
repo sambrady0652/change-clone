@@ -39,6 +39,7 @@ def petition(id):
 
     if request.method == 'GET':
         return petition.to_dict()
+    # Edit petition data
     elif request.method == 'PUT':
         data = request.data
         petition.header = data.header
@@ -46,6 +47,7 @@ def petition(id):
         petition.goal = data.goal
         petition.current = data.current
         db.session.commit()
+    # Update s
     elif request.method == 'PATCH':
         data = request.data
         petition.current = data.current

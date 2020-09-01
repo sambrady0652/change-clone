@@ -17,7 +17,7 @@ app.register_blueprint(update_routes, url_prefix='/api/updates')
 app.register_blueprint(user_routes, url_prefix='/api/users')
 db.init_app(app)
 jwt = JWTManager(app)
-Migrate(app, db)
+Migrate(app, db, compare_type=True)
 
 # Application Security
 CORS(app)
