@@ -4,15 +4,15 @@ from flask_jwt_extended import create_access_token, get_jwt_identity
 import bcrypt
 import re
 
-user_routes = Blueprint('users', __name__, '')
+bp = Blueprint('users', __name__, '')
 
 
-@user_routes.route('/')
+@bp.route('/')
 def index():
     response = User.query.all()
     return {"users": [user.to_dict() for user in response]}
 
-@user_routes.route('/signup', methods=['POST'])
+@bp.route('/signup', methods=['POST'])
 def signup():
     #gather user submitted data
     email = request.form.get('email')
@@ -47,7 +47,7 @@ def signup():
     access_token = create_access_token(identity=temp_user['id'])
     return {'access_token': access_token, 'status': 200}
 
-@user_routes.route('/signin', methods=['POST'])
+@bp.route('/signin', methods=['POST'])
 def signin():
     #gather user submitted data
     email = request.json.get('email')
