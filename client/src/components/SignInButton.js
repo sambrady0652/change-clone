@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import Signin from './Signin'
-import Signup from './Signup'
+import { useSelector } from 'react-redux';
 import { Box, Button, Layer } from 'grommet';
 
+import Signin from './Signin';
+import Signup from './Signup';
+
 const SignInButton = (props) => {
+
   const [show, setShow] = useState(false)
   const { label, context } = props
+  const { needSignIn } = useSelector(state => state.user)
 
-  const handleClick = () => {
-    if (context === "nav") {
-      setShow(true)
+  useEffect(() => {
+    if (!needSignIn) {
+      setShow(false)
     }
-    if (context === "signin" || context === "signup") {
-      setShow(true)
-    }
-  }
+  }, [needSignIn])
 
   return (
     <Box>
       <Button
         plain
-        focusIndicator={false}
-        hoverIndicator={{ color: "#ED2D23" }}
+        hoverIndicator={{ color: "#ffffff" }}
         label={label}
-        onClick={() => handleClick()} />
+        onClick={() => setShow(true)} />
       {show ? (
         <Layer
           onEsc={() => setShow(false)}

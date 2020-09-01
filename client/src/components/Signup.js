@@ -60,7 +60,7 @@ const Signup = () => {
           plain={false}
           primary
           color="#ED2D23">
-          sign in</Button>
+          sign up</Button>
       </Form>
     </Box>
   );

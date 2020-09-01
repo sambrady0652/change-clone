@@ -27,7 +27,7 @@ def signup():
 
     #see if email has already been used to sign up previously
     email_found = User.query.filter(User.email == email).first()
-    if(email_found is not None):
+    if(email_found is not None): #MAYBE EDIT
         error_response = {'error': 'Account already exists with this email address'}
         return jsonify(error_response, 401)
 
@@ -42,10 +42,10 @@ def signup():
     #get id from inserted user
     user1 = User.query.filter(User.email == email).first()
     temp_user = user1.to_dict()
-
+    print(temp_user)
     #create jwt and send back to frontend
     access_token = create_access_token(identity=temp_user['id'])
-    return {'access_token': access_token, 'status': 200}
+    return {'access_token': access_token, 'id': temp_user['id'], 'status': 200}
 
 @bp.route('/signin', methods=['POST'])
 def signin():
@@ -67,7 +67,7 @@ def signin():
     #check user entered password vs hashed password
     if bcrypt.checkpw(password.encode('utf-8'), user.encrypted_password):
         access_token = create_access_token(identity=temp_user['id'])
-        return {'access_token':access_token, 'status': 200}
+        return {'access_token':access_token, 'id': temp_user['id'], 'status': 200}
     else:
         return {'error': 'password was not correct'}
 
