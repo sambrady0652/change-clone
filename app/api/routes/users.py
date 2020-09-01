@@ -15,10 +15,10 @@ def index():
 @user_routes.route('/signup', methods=['POST'])
 def signup():
     #gather user submitted data
-    email = request.json.get('email')
-    first_name = request.json.get('first_name')
-    last_name = request.json.get('last_name')
-    password = request.json.get('password')
+    email = request.form.get('email')
+    first_name = request.form.get('first_name')
+    last_name = request.form.get('last_name')
+    password = request.form.get('password')
 
     #validations
     errors = validations_signup(email, first_name, last_name, password)
