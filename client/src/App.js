@@ -7,6 +7,7 @@ import Search from "./components/Search"
 import StartPetition from "./components/StartPetition"
 import MyPetitions from "./components/MyPetitions"
 import Petitions from "./components/Petitions"
+import SettingsPage from "./components/SettingsPage"
 import { setUser } from './store/users'
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
                     <Route
                         path="/search"
                         component={Search} />
+                    <Route
+                        path="/settings"
+                        component={SettingsPage} />
                 </Switch>
             </BrowserRouter>
         </>
