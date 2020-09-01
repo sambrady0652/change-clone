@@ -2,7 +2,7 @@
 import { baseUrl } from '../config';
 
 //ACTION TYPES AND LOCAL STORAGE ASSIGNMENTS
-const REMOVE_TOKEN = 'change/users/REMOVE_TOKEN';
+const REMOVE_USER = 'change/users/REMOVE_USER';
 const SET_USER = 'change/users/SET_USER';
 const SESSION_TOKEN = 'SESSION_TOKEN';
 const USER_ID = 'USER_ID';
@@ -66,7 +66,7 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
 export const signOut = () => async (dispatch) => {
   localStorage.removeItem(SESSION_TOKEN);
   localStorage.removeItem(USER_ID);
-  // dispatch(removeToken())
+  dispatch(removeUser())
 }
 
 //LOAD USER INFO
@@ -78,6 +78,10 @@ export const setUser = (access_token, id) => ({
   id
 });
 
+export const removeUser = () => ({
+  type: REMOVE_USER
+})
+
 export default function reducer(state = { needSignIn: true }, action) {
   Object.freeze(state);
   const newState = Object.assign({}, state);
@@ -87,6 +91,11 @@ export default function reducer(state = { needSignIn: true }, action) {
         token: action.access_token,
         id: action.id,
         needSignIn: false
+      }
+    }
+    case REMOVE_USER: {
+      return {
+        needSignIn: true
       }
     }
     default: return newState;
