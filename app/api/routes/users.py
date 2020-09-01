@@ -71,6 +71,14 @@ def signin():
     else:
         return {'error': 'password was not correct'}
 
+@bp.route('/<int:id>/', methods=['GET'])
+def user_page(id):
+    found_user = User.query.filter(User.id == id).first()
+    if found_user:
+        return {'first_name': found_user.first_name, 'last_name': found_user.last_name, 'location': found_user.location}
+    else:
+        return {'error': "User not found", 'status': 400}
+
 @bp.route('/<int:id>/', methods=['PATCH'])
 @jwt_required
 def user_details_patch(id):
