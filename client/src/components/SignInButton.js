@@ -21,8 +21,7 @@ const SignInButton = (props) => {
     <Box>
       <Button
         plain
-        focusIndicator={false}
-        hoverIndicator={{ color: "#ED2D23" }}
+        hoverIndicator={{ color: "#ffffff" }}
         label={label}
         onClick={() => setShow(true)} />
       {show ? (
