@@ -145,5 +145,4 @@ class Comment(db.Model):
             "update_id": self.update_id,
             "body": self.body,
             "user_id": self.user_id,
-            "user": self.user
         }

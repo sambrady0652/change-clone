@@ -5,52 +5,44 @@ from app.models import Update, db, Comment
 bp = Blueprint('updates', __name__)
 
 
-@bp.route('/<update_id>', methods=['GET', 'PATCH', 'DELETE'])
+@bp.route('/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
 def get_update (id):
   # Get Specific Update Based On Id
-    response = Update.query.get(id)
-    return {"updates": [update.to_dict() for update in response]}
+    response = Update.query.filter(Update.id == id).one()
+    return response.to_dict()
 
 def edit_update(id):
-    update = get_update(id)
-    if request.method == 'PATCH':
-       petition_id = request.form['title']
-       header = request.form['header']
-       content = request.form['content']
-       error = None 
-
-       if not header:
-         error = 'Header is required.'
-       if not content:
-         error = 'Content is required.'
-
-       if error is not None:
-         flash(error)
-       else:
-         db.execute(
-           'UPDATE update SET header = ?, content = ?'
-           'WHERE id = ?',
-           (title, body, id)
-         )
-         db.commit()
+  #Edit Specific Update
+  if request.method == 'PATCH':
+    response = Update.query.filter(Update.id == id).one()
+    data = request.data
+    response.current = data.current
+    db.session.commit()
+    return {'current': response.current}
 
 def delete_update(id):
-    get_update(id)
-    db.execute('DELETE FROM post WHERE id = ?', (id,))
-    db.commit()
+  #Delete Specific Update
+  response = Update.query.filter(Update.id == id).one()
+  response.delete
+  db.session.commit()
 
-@bp.route('/<update_id>/comments', methods=['GET', 'POST'])
+@bp.route('/<int:id>/comments', methods=['GET', 'POST'])
 #Get Comments From Specific Update
-def get_comments(update_id):
-  comments_response = Update.comments.query.filter_by(update_id=update_id)
-  return {"updates": [update.to_dict() for update in comments_response] }
+def get_comments(id):
+    comments = Comment.query.filter(
+               Comment.update_id == id).all()
+    return {str(comment.id): comment.to_dict() for comment in comments}
 
-def add_comment():
+def add_comment(id):
     # Write Comment On Specific Update
-    print(dir(request.data))
-    data = request.form
-    new_comment = Comment(update_id=data['update_id'], body=data['body'], user_id=data['user_id'])
-    db.session.add(new_comment)
-    db.session.commit()
+    if request.method == 'POST':
+      form = Comment(request.form)
+      comment = Comment(form.update_id.data, 
+                          form.body.data,
+                          form.user_id.data)
+      db_session.add(comment)
+      db.session.add(comment)
+      db.session.commit()
+      return comment.to_dict()
 
 
