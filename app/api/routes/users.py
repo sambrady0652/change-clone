@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from app.models import db, User
-from flask_jwt_extended import create_access_token, get_jwt_identity
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 import bcrypt
 import re
 
@@ -54,9 +54,9 @@ def signin():
     password = request.json.get('password')
 
     #work in progress below
-    # errors = validations_signin(email, password)
-    # if len(errors) > 0:
-    #     return {'errors': errors}
+    errors = validations_signin(email, password)
+    if len(errors) > 0:
+        return {'errors': errors}
 
     #see if user has already created an account
     user = User.query.filter_by(email=email).first()
@@ -71,6 +71,21 @@ def signin():
     else:
         return {'error': 'password was not correct'}
 
+@bp.route('/delete_account', methods=['DELETE'])
+@jwt_required
+def delete_account():
+    #get id from json web token
+    current_user_id = get_jwt_identity()
+
+    #retrieve user from data to be deleted if exists
+    temp_user = User.query.filter(User.id == current_user_id).first()
+    if temp_user is None:
+        return {'error': 'User with given id does not exist', 'status': 400}
+
+    #delete user from database
+    db.session.delete(temp_user)
+    db.session.commit()
+    return {'status': 200}
 
 
 def validations_signup(email, first_name, last_name, password):
