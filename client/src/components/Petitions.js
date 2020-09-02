@@ -24,7 +24,7 @@ const Petitions = () => {
   // TODO: Develop algorithm to select Featured, Popular, and Recent Petitions
   const allPetitions = Object.values(petitions)
   return (
-    <Box>
+    <>
       <Navbar />
       <Box justify="center" align="center" style={{ position: "relative" }}>
         <Heading level={2} >Discover petitions</Heading>
@@ -51,7 +51,7 @@ const Petitions = () => {
           </Tab>
         </Tabs>
       </Box>
-    </Box>
+    </>
   )
 }
 
