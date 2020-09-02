@@ -82,21 +82,21 @@ const SettingsPage = () => {
             <Heading margin={{ bottom: "small" }} textAlign="center">Account Settings</Heading>
             <Form
               onSubmit={handleSubmit}>
-              <FormFieldLabel
+              <FormField
                 required
                 name="first_name"
                 label="First Name"
                 type="text"
                 value={firstName}
                 onChange={e => setFirstName(e.target.value)} />
-              <FormFieldLabel
+              <FormField
                 required
                 name="last_name"
                 label="Last Name"
                 type="text"
                 value={lastName}
                 onChange={e => setLastName(e.target.value)} />
-              <FormFieldLabel
+              <FormField
                 required
                 name="location"
                 label="location"
