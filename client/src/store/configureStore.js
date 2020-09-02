@@ -3,13 +3,14 @@ import thunk from 'redux-thunk';
 import currentUser from './auth'
 import petitions from './petitions'
 import users from './users'
-
+import updates from './updates'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const reducer = combineReducers({
   currentUser,
   petitions,
-  users
+  users, 
+  updates
   //ADD ADDITIONAL SLICES OF STATE HERE 
 });
 

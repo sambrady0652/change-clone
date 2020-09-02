@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { Header, Button, Anchor } from 'grommet'
+import { Header } from 'grommet'
 import { Search } from 'grommet-icons'
 import SignInButton from './SignInButton'
 import AccountMenu from './AccountMenu'

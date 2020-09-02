@@ -2,8 +2,9 @@
 import { baseUrl } from '../config';
 
 //ACTION TYPES AND LOCAL STORAGE ASSIGNMENTS
-const REMOVE_USER = 'change/users/REMOVE_USER';
-const SET_USER = 'change/users/SET_USER';
+const SET_USER = 'change/auth/SET_USER';
+const REMOVE_USER = 'change/auth/REMOVE_USER';
+const AUTH_ERROR = 'change/auth/AUTH_ERROR'
 const SESSION_TOKEN = 'SESSION_TOKEN';
 const USER_ID = 'USER_ID';
 
@@ -28,8 +29,7 @@ export const signIn = (email, password) => async dispatch => {
   }
   catch (err) {
     const errJSON = await err.json()
-    //HANDLE ERRORS IN FORM 
-    console.log(errJSON)
+    dispatch(handleAuthErrors(errJSON))
   }
 }
 
@@ -61,8 +61,7 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
   }
   catch (err) {
     const errJSON = await err.json()
-    //HANDLE ERRORS IN FORM 
-    console.log(errJSON)
+    dispatch(handleAuthErrors(errJSON))
   }
 }
 
@@ -81,6 +80,11 @@ export const setUser = (access_token, id) => ({
   id
 });
 
+export const handleAuthErrors = (errJSON) => ({
+  type: AUTH_ERROR,
+  errJSON
+})
+
 export const removeUser = () => ({
   type: REMOVE_USER
 })
@@ -96,6 +100,12 @@ export default function reducer(state = { needSignIn: true }, action) {
         token: action.access_token,
         id: action.id,
         needSignIn: false
+      }
+    }
+    case AUTH_ERROR: {
+      return {
+        needSignIn: true,
+        authErrors: action.errJSON['errors']
       }
     }
     case REMOVE_USER: {
