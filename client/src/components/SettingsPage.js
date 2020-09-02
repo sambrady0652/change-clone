@@ -17,7 +17,12 @@ const SettingsPage = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch(apiUrl + `/users/${id}`);
+            console.log(apiUrl + `/users/${id}`)
+            const response = await fetch(apiUrl + `/users/${id}`, {
+              headers: {
+                'Authorization': `Bearer ${localStorage.getItem('SESSION_TOKEN')}`
+              },
+            });
             const responseData = await response.json();
             setFirstName(responseData.first_name)
             setLastName(responseData.last_name)
@@ -33,9 +38,14 @@ const SettingsPage = () => {
         const response = await fetch(apiUrl + `/users/${id}`, {
             method: 'patch',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('SESSION_TOKEN')}`
+                'Authorization': `Bearer ${localStorage.getItem('SESSION_TOKEN')}`,
+                'Content-Type': 'application/json'
             },
-            withCredentials: true
+            body: JSON.stringify({
+              'first_name': firstName,
+              'last_name': lastName,
+              'location': location
+            })
         })
         let data = await response.json()
         console.log(data)
