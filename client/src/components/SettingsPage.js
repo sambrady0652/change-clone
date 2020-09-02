@@ -73,47 +73,50 @@ const SettingsPage = () => {
 
   return (
     <>
-      <Navbar />
-      <Box justify="center" align="center" >
-        <Heading margin={{ bottom: "small" }} textAlign="center">{firstName} {lastName}</Heading>
-        <Text margin={{ top: "small" }} weight="bold">Thanks for being an active member of our community. Together we are Change.  </Text>
-      </Box>
-      <Box justify="center" align="center" >
-        <Heading margin={{ bottom: "small" }} textAlign="center">Account Settings</Heading>
-        <Form
-          onSubmit={handleSubmit}>
-          <FormField
-            name="first_name"
-            label="First Name"
-            type="text"
-            value={firstName}
-            onChange={e => setFirstName(e.target.value)} />
-          <FormField
-            name="last_name"
-            label="Last Name"
-            type="text"
-            value={lastName}
-            onChange={e => setLastName(e.target.value)} />
-          <FormField
-            name="location"
-            label="location"
-            type="text"
-            value={location}
-            onChange={e => setLocation(e.target.value)} />
-          <Button
-            type="submit"
-            plain={false}
-            primary
-            color="#ED2D23">
-            Save</Button>
-        </Form>
-      </Box>
-      <Button
-        type="submit"
-        plain={false}
-        primary
-        color="#ED2D23" onClick={deleteAccount}>
-        Delete Account</Button>
+        <Navbar/>
+        <Box justify="center" align="center" >
+            <Heading margin={{ bottom: "small" }} textAlign="center">{firstName} {lastName}</Heading>
+            <Text margin={{ top: "small" }} weight="bold">Thanks for being an active member of our community. Together we are Change.  </Text>
+        </Box>
+        <Box justify="center" align="center" >
+            <Heading margin={{ bottom: "small" }} textAlign="center">Account Settings</Heading>
+            <Form
+              onSubmit={handleSubmit}>
+              <FormFieldLabel
+                required
+                name="first_name"
+                label="First Name"
+                type="text"
+                value={firstName}
+                onChange={e => setFirstName(e.target.value)} />
+              <FormFieldLabel
+                required
+                name="last_name"
+                label="Last Name"
+                type="text"
+                value={lastName}
+                onChange={e => setLastName(e.target.value)} />
+              <FormFieldLabel
+                required
+                name="location"
+                label="location"
+                type="text"
+                value={location}
+                onChange={e => setLocation(e.target.value)} />
+              <Button
+                type="submit"
+                plain={false}
+                primary
+                color="#ED2D23">
+                Save</Button>
+            </Form>
+        </Box>
+        <Button
+          type="submit"
+          plain={false}
+          primary
+          color="#ED2D23" onClick={deleteAccount}>
+          Delete Account</Button>
     </>
   )
 }
