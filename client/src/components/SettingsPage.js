@@ -14,14 +14,42 @@ const SettingsPage = () => {
   //need to implement
   //if no user id, redirect to home page to sign up
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(apiUrl + `/users/${id}`);
-      const responseData = await response.json();
-      setFirstName(responseData.first_name)
-      setLastName(responseData.last_name)
-      setLocation(responseData.location)
 
+    useEffect(() => {
+        async function fetchData() {
+            console.log(apiUrl + `/users/${id}`)
+            const response = await fetch(apiUrl + `/users/${id}`, {
+              headers: {
+                'Authorization': `Bearer ${localStorage.getItem('SESSION_TOKEN')}`
+              },
+            });
+            const responseData = await response.json();
+            setFirstName(responseData.first_name)
+            setLastName(responseData.last_name)
+            setLocation(responseData.location)
+
+        }
+        fetchData();
+    }, []);
+
+    //cross origin issue, does not work yet
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const response = await fetch(apiUrl + `/users/${id}`, {
+            method: 'patch',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('SESSION_TOKEN')}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              'first_name': firstName,
+              'last_name': lastName,
+              'location': location
+            })
+        })
+        let data = await response.json()
+        console.log(data)
+        history.push("/")
     }
     fetchData();
   }, []);

@@ -65,40 +65,48 @@ def signin():
     else:
         return {'error': 'password was not correct'}, 400
 
-@bp.route('/<int:id>/', methods=['GET'])
-def user_page(id):
-    found_user = User.query.filter(User.id == id).first()
-    if found_user:
-        return {'first_name': found_user.first_name, 'last_name': found_user.last_name, 'location': found_user.location}
-    else:
-        return {'error': "User not found"}, 400
+# @bp.route('/g/<int:id>', methods=['GET'])
+# def user_page(id):
+#     found_user = User.query.filter(User.id == id).first()
+#     if found_user:
+#         return {'first_name': found_user.first_name, 'last_name': found_user.last_name, 'location': found_user.location}
+#     else:
+#         return {'error': "User not found"}, 400
 
-@bp.route('/<int:id>/', methods=['PATCH'])
+@bp.route('/<int:id>', methods=['GET','PATCH'])
 @jwt_required
-def user_details_patch(id):
-    #gather user submitted data
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
-    location = request.form.get('location')
-
-    #validate user submitted data
-    errors = validations_user_details(last_name, first_name)
-    if len(errors) > 0:
-        return {'errors': errors}
-
-    #get id from json web token
-    current_user_id = get_jwt_identity()
-
-    #if user is found in database then update user details. If not, send error to client
-    found_user = User.query.filter(User.id == current_user_id).first()
-    if(found_user):
-        found_user.first_name = first_name
-        found_user.last_name = last_name
-        found_user.location = location
-        db.session.commit()
-        return {'message':'Success'}, 200
+def user_page(id):
+    if request.method == 'GET':
+        found_user = User.query.filter(User.id == id).first()
+        if found_user:
+            return {'first_name': found_user.first_name, 'last_name': found_user.last_name, 'location': found_user.location}
+        else:
+            return {'error': "User not found"}, 400
     else:
-        return {'error': 'User was not found'}, 400
+        #gather user submitted data
+        json = request.get_json()
+        first_name = json.get('first_name')
+        last_name = json.get('last_name')
+        location = json.get('location')
+
+        #validate user submitted data
+        errors = validations_user_details(last_name, first_name)
+        if len(errors) > 0:
+            return {'errors': errors}
+
+        #get id from json web token
+        current_user_id = get_jwt_identity()
+
+        #if user is found in database then update user details. If not, send error to client
+        found_user = User.query.filter(User.id == current_user_id).first()
+        if(found_user):
+            found_user.first_name = first_name
+            found_user.last_name = last_name
+            found_user.location = location
+            db.session.commit()
+            return {'message':'Success'}, 200
+        else:
+            return {'error': 'User was not found'}, 400
 
 @bp.route('/delete_account', methods=['DELETE'])
 @jwt_required
