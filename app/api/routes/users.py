@@ -23,12 +23,7 @@ def signup():
     #validations
     errors = validations_signup(email, first_name, last_name, password)
     if len(errors) > 0:
-        return {'errors': errors}
-
-    #see if email has already been used to sign up previously
-    email_found = User.query.filter(User.email == email).first()
-    if(email_found is not None): #MAYBE EDIT
-        return {'error': 'Account already exists with this email address'}, 401
+        return {'errors': errors}, 401
 
     #hash password
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(14))
@@ -41,7 +36,7 @@ def signup():
     #get id from inserted user
     user1 = User.query.filter(User.email == email).first()
     temp_user = user1.to_dict()
-    print(temp_user)
+    
     #create jwt and send back to frontend
     access_token = create_access_token(identity=temp_user['id'])
     return {'access_token': access_token, 'id': temp_user['id']}, 200
@@ -133,16 +128,18 @@ def delete_account():
 def validations_signup(email, first_name, last_name, password):
     regex ='[^@]+@[^@]+\.[^@]+'
     errors = []
-    if email is None:
+    #Check Email is Unique
+    email_found = User.query.filter(User.email == email).first()
+    if(email_found):
+        errors.append('Account already exists with this email address')
+    if not email:
         errors.append('Email is missing')
-    if first_name is None:
+    if not first_name:
         errors.append('first name is missing')
-    if last_name is None:
+    if not last_name:
         errors.append('last name is missing')
-    if password is None:
+    if not password:
         errors.append('password is missing')
-    if len(errors) > 0:
-        return errors
     if not re.search(regex, email):
         errors.append('email is not valid')
     if len(first_name) > 40:
@@ -155,9 +152,9 @@ def validations_signup(email, first_name, last_name, password):
 
 def validations_signin(email, password):
     errors = []
-    if email is None or '':
+    if not email:
         errors.append('Email is missing')
-    if password is None or '':
+    if not password:
         errors.append('password is missing')
     if len(email) > 255:
         errors.append('email length is too long')
@@ -165,9 +162,9 @@ def validations_signin(email, password):
 
 def validations_user_details(last_name, first_name):
     errors = []
-    if last_name is None:
+    if not last_name:
         errors.append('first name is missing')
-    if first_name is None:
+    if not first_name:
         errors.append('last name is missing')
     if len(errors) > 0:
         return errors

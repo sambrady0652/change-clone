@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Box, Form, Button } from 'grommet';
+import { useDispatch, useSelector } from 'react-redux';
+import { Box, Form, Button, FormField } from 'grommet';
 
-import { FormFieldLabel } from '../Grommet/FormField';
 import SignInButton from './SignInButton'
 import { signIn } from '../store/auth'
+import ErrorBox from '../Grommet/ErrorBox'
 
 
 const Signin = (props) => {
   const { toggleLast } = props
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { authErrors } = useSelector(state => state.currentUser)
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -22,17 +23,17 @@ const Signin = (props) => {
       <div>
         don't have an account? <SignInButton label="sign up here!" onClickProp={toggleLast} />
       </div>
+      {/* if authErrors, show Error Box */}
+      {authErrors && <ErrorBox />}
       <Form
         onSubmit={handleSubmit}>
-        <FormFieldLabel
-          required
+        <FormField
           name="email"
           label="Email"
           type="text"
           value={email}
           onChange={e => setEmail(e.target.value)} />
-        <FormFieldLabel
-          required
+        <FormField
           name="password"
           label="Password"
           type="password"
