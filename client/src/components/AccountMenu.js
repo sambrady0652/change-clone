@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Box } from 'grommet'
+import { Menu } from 'grommet'
 import { useDispatch } from 'react-redux'
 
 import { signOut } from '../store/auth'
