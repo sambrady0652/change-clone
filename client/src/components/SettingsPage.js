@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Navbar from './Navbar'
-import { Box, Heading, Text, Button, Form, TextInput, FormField } from 'grommet'
+import { Box, Heading, Text, Button, Form, FormField } from 'grommet'
 import { apiUrl } from '../config';
 
 const SettingsPage = () => {
@@ -30,7 +30,7 @@ const SettingsPage = () => {
 
     }
     fetchData();
-  }, []);
+  },);
 
   //cross origin issue, does not work yet
   const handleSubmit = async (e) => {
