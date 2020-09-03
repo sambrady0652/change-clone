@@ -19,6 +19,8 @@ app.register_blueprint(topic_routes, url_prefix='/api/topics')
 db.init_app(app)
 jwt = JWTManager(app)
 Migrate(app, db, compare_type=True)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 # Application Security
 CORS(app)
