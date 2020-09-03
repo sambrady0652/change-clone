@@ -1,31 +1,74 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Form, TextInput, Button, TextArea, Box, Text } from 'grommet'
 
-import { Form, TextInput, Button } from 'grommet'
+import { guestSignPetition, userSignPetition } from '../store/petitions'
+import SignInButton from './SignInButton'
 
-const SignPetitionForm = () => {
+const SignPetitionForm = (props) => {
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [message, setMessage] = useState("")
+  const dispatch = useDispatch()
+  const { petitionId } = props
+  const { id, needSignIn } = useSelector(state => state.currentUser)
 
-  const handleSubmit = async (e) => {
+
+  const handleGuestSubmit = async (e) => {
     e.preventDefault();
-    //HANDLE SUBMIT
+    dispatch(guestSignPetition(firstName, lastName, email, password, message, petitionId))
+    setMessage("")
+  }
+
+  const handleUserSubmit = async (e) => {
+    e.preventDefault();
+    dispatch(userSignPetition(id, message, petitionId))
+    setMessage("")
   }
   return (
-    <Form onSubmit={() => handleSubmit}>
-      <TextInput placeholder="First Name" name="first_name" value={firstName} onChange={e => setFirstName(e.target.value)} />
-      <TextInput placeholder="Last Name" name="last_name" value={lastName} onChange={e => setLastName(e.target.value)} />
-      <TextInput placeholder="Email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
-      <Button
-        fill="horizontal"
-        style={{ borderRadius: "4px" }}
-        type="submit"
-        plain={false}
-        primary
-        color="#ED2D23">
-        Sign the petition
+    <>
+      {needSignIn ? (
+        <Form onSubmit={handleGuestSubmit}>
+          <Box direction="row" align="center">
+            <Text margin={{ right: "small" }}>Want to add your signature?</Text>
+            <SignInButton label="sign in" />
+          </Box>
+          <Text size="small"> or create an account here:</Text>
+          <TextInput placeholder="First Name" name="first_name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+          <TextInput placeholder="Last Name" name="last_name" value={lastName} onChange={e => setLastName(e.target.value)} />
+          <TextInput placeholder="Email" name="email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
+          <TextInput placeholder="Password" name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+          <TextArea placeholder="Message (optional)" name="message" resize="vertical" value={message} onChange={e => setMessage(e.target.value)} />
+          <Button
+            fill="horizontal"
+            style={{ borderRadius: "4px" }}
+            type="submit"
+            plain={false}
+            primary
+            color="#ED2D23">
+            Sign the petition
         </Button>
-    </Form >
+        </Form >
+      ) :
+        (
+          <Form onSubmit={handleUserSubmit}>
+            <TextInput value={id} style={{ display: "none" }} />
+            <Button
+              fill="horizontal"
+              style={{ borderRadius: "4px" }}
+              type="submit"
+              plain={false}
+              primary
+              color="#ED2D23">
+              Sign the petition
+            </Button>
+            <TextArea placeholder="Add an optional message telling us why you signed" name="message" resize="vertical" value={message} onChange={e => setMessage(e.target.value)} />
+          </Form >
+        )
+      }
+    </>
   )
 }
 

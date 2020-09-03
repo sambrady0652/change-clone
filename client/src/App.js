@@ -10,7 +10,7 @@ import Petitions from "./components/Petitions"
 import SettingsPage from "./components/SettingsPage"
 import { setUser } from './store/auth'
 import { fetchPetitions } from './store/petitions'
-import { fetchUsers } from './store/users'
+// import { fetchUsers } from './store/users'
 import PetitionDetails from './components/PetitionDetails';
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
             dispatch(setUser(token, id))
         }
         dispatch(fetchPetitions())
-        dispatch(fetchUsers())
+        // dispatch(fetchUsers())
     })
 
     return (

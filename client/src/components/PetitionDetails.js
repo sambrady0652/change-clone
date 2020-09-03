@@ -30,8 +30,8 @@ const PetitionDetails = () => {
     }
   }
   //Destructure Relevant Information from Objects returned from Redux Store
-  const { header, description, image_url, creator, current, goal, signatures, topic, updates } = getOnePetition()
-  const { first_name, last_name, profile_pic_url } = getCreator()
+  const { id, header, description, creator, current, goal } = getOnePetition()
+  const { first_name, last_name } = getCreator()
   return (
     <>
       <Navbar />
@@ -65,7 +65,7 @@ const PetitionDetails = () => {
           />
           <Text size="xxsmall" weight="bold">{current} signed of {goal} goal</Text>
           <div>LIVE STREAM OF SIGNATURES</div>
-          <SignPetitionForm />
+          <SignPetitionForm petitionId={id} />
         </Box>
       </Box>
     </>
