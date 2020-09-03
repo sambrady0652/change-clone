@@ -4,13 +4,14 @@ import currentUser from './auth'
 import petitions from './petitions'
 import topics from './topics'
 import users from './users'
-
+import updates from './updates'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const reducer = combineReducers({
   currentUser,
   petitions,
-  users,
+  users, 
+  updates,
   topics
   //ADD ADDITIONAL SLICES OF STATE HERE 
 });

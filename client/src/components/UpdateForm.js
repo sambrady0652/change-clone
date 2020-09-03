@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment} from 'react';
 import { useDispatch } from 'react-redux';
 
 const UpdateForm = (props) => {
@@ -33,7 +33,7 @@ return (
   <Fragment>
     <Navbar />
     <div id="update_form_wrapper">
-      <div id="updateh1">Update your supporters></div>
+      <div id="updateh1">Update your supporters</div>
         <form>
           <div id="headline_div">
             <label>Headline:</label>
@@ -75,17 +75,19 @@ return (
             <button id="addUrl">Add</button>
             <div id="orDiv">or</div>
             <div id="uploadPhoto_container">
-              <button id="uploadPhoto" type='file' name='updatePhoto' onClick={handleMediaSubmit}> Upload photo</button>
-              <div id="photoWarningDiv">
+                <button id="uploadPhoto" type='file' name='updatePhoto' onClick={handleMediaSubmit}> Upload photo</button>
+                <div id="photoWarningDiv">
                 Photos should be at least 1200 × 675 pixels. Large photos without text are best.
-              </div>
+                </div>
+            </div>
             </div>
           </div>
           <div id="submit_div">
-            <button onClick={handleSubmit} />
-            <div id="warning_div">You can post one update every 24 hours. Updates appear on your 
-              petition page, and will be sent in an email to all of your supporters.</div>
-        </form>
+              <button onClick={handleSubmit} />
+              <div id="warning_div">You can post one update every 24 hours. Updates appear on your 
+                petition page, and will be sent in an email to all of your supporters.</div>
+          </div>
+    </form>
     </div>
   </Fragment>
   )

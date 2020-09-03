@@ -14,6 +14,7 @@ import { setUser } from "./store/auth";
 import { fetchPetitions } from "./store/petitions";
 import { fetchUsers } from "./store/users";
 import { fetchTopics } from "./store/topics";
+import PetitionDetails from './components/PetitionDetails';
 
 function App() {
   const token = localStorage.getItem("SESSION_TOKEN");
@@ -34,12 +35,28 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/start-a-petition" component={StartPetition} />
-          <Route path="/u/me" component={MyPetitions} />
-          <Route path="/petitions" component={Petitions} />
-          <Route path="/search" component={Search} />
-          <Route path="/settings" component={SettingsPage} />
+          <Route
+            exact path="/"
+            component={Home}
+          />
+          <Route
+            path="/start-a-petition"
+            component={StartPetition} />
+          <Route
+            path="/u/me"
+            component={MyPetitions} />
+          <Route
+            path="/petitions"
+            component={Petitions} />
+          <Route
+            path="/p/:name"
+            component={PetitionDetails} />
+          <Route
+            path="/search"
+            component={Search} />
+          <Route
+            path="/settings"
+            component={SettingsPage} />
         </Switch>
       </BrowserRouter>
     </>

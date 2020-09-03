@@ -1,4 +1,7 @@
 /* TODO Add site wide styles */
+.body {
+  margin: 0px
+}
 .truncate-overflow {
   --max-lines: 10;
   max-height: calc(var(--lh) * var(--max-lines));

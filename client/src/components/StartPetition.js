@@ -82,4 +82,12 @@ function InputDescription(props) {
   )
 }
 
+function InputGoal(props) {
+  return (
+    <dov>
+      <h3>Set</h3>
+    </dov>
+  )
+}
+
 export default StartPetitions;

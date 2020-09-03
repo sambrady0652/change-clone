@@ -22,7 +22,7 @@ Migrate(app, db, compare_type=True)
 
 # Application Security
 CORS(app)
-
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.after_request
 def inject_csrf_token(response):

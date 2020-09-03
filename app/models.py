@@ -151,7 +151,7 @@ class Comment(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "update_id": self.update_id,
+            "update": self.update_id,
             "body": self.body,
-            "user_id": self.user_id,
+            "user": self.user_id
         }

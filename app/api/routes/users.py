@@ -23,12 +23,7 @@ def signup():
     #validations
     errors = validations_signup(email, first_name, last_name, password)
     if len(errors) > 0:
-        return {'errors': errors}
-
-    #see if email has already been used to sign up previously
-    email_found = User.query.filter(User.email == email).first()
-    if(email_found is not None): #MAYBE EDIT
-        return {'error': 'Account already exists with this email address'}, 401
+        return {'errors': errors}, 401
 
     #hash password
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(14))
@@ -41,7 +36,7 @@ def signup():
     #get id from inserted user
     user1 = User.query.filter(User.email == email).first()
     temp_user = user1.to_dict()
-    print(temp_user)
+    
     #create jwt and send back to frontend
     access_token = create_access_token(identity=temp_user['id'])
     return {'access_token': access_token, 'id': temp_user['id']}, 200
@@ -70,40 +65,48 @@ def signin():
     else:
         return {'error': 'password was not correct'}, 400
 
-@bp.route('/<int:id>/', methods=['GET'])
-def user_page(id):
-    found_user = User.query.filter(User.id == id).first()
-    if found_user:
-        return {'first_name': found_user.first_name, 'last_name': found_user.last_name, 'location': found_user.location}
-    else:
-        return {'error': "User not found"}, 400
+# @bp.route('/g/<int:id>', methods=['GET'])
+# def user_page(id):
+#     found_user = User.query.filter(User.id == id).first()
+#     if found_user:
+#         return {'first_name': found_user.first_name, 'last_name': found_user.last_name, 'location': found_user.location}
+#     else:
+#         return {'error': "User not found"}, 400
 
-@bp.route('/<int:id>/', methods=['PATCH'])
+@bp.route('/<int:id>', methods=['GET','PATCH'])
 @jwt_required
-def user_details_patch(id):
-    #gather user submitted data
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
-    location = request.form.get('location')
-
-    #validate user submitted data
-    errors = validations_user_details(last_name, first_name)
-    if len(errors) > 0:
-        return {'errors': errors}
-
-    #get id from json web token
-    current_user_id = get_jwt_identity()
-
-    #if user is found in database then update user details. If not, send error to client
-    found_user = User.query.filter(User.id == current_user_id).first()
-    if(found_user):
-        found_user.first_name = first_name
-        found_user.last_name = last_name
-        found_user.location = location
-        db.session.commit()
-        return {'message':'Success'}, 200
+def user_page(id):
+    if request.method == 'GET':
+        found_user = User.query.filter(User.id == id).first()
+        if found_user:
+            return {'first_name': found_user.first_name, 'last_name': found_user.last_name, 'location': found_user.location}
+        else:
+            return {'error': "User not found"}, 400
     else:
-        return {'error': 'User was not found'}, 400
+        #gather user submitted data
+        json = request.get_json()
+        first_name = json.get('first_name')
+        last_name = json.get('last_name')
+        location = json.get('location')
+
+        #validate user submitted data
+        errors = validations_user_details(last_name, first_name)
+        if len(errors) > 0:
+            return {'errors': errors}
+
+        #get id from json web token
+        current_user_id = get_jwt_identity()
+
+        #if user is found in database then update user details. If not, send error to client
+        found_user = User.query.filter(User.id == current_user_id).first()
+        if(found_user):
+            found_user.first_name = first_name
+            found_user.last_name = last_name
+            found_user.location = location
+            db.session.commit()
+            return {'message':'Success'}, 200
+        else:
+            return {'error': 'User was not found'}, 400
 
 @bp.route('/delete_account', methods=['DELETE'])
 @jwt_required
@@ -125,16 +128,18 @@ def delete_account():
 def validations_signup(email, first_name, last_name, password):
     regex ='[^@]+@[^@]+\.[^@]+'
     errors = []
-    if email is None:
+    #Check Email is Unique
+    email_found = User.query.filter(User.email == email).first()
+    if(email_found):
+        errors.append('Account already exists with this email address')
+    if not email:
         errors.append('Email is missing')
-    if first_name is None:
+    if not first_name:
         errors.append('first name is missing')
-    if last_name is None:
+    if not last_name:
         errors.append('last name is missing')
-    if password is None:
+    if not password:
         errors.append('password is missing')
-    if len(errors) > 0:
-        return errors
     if not re.search(regex, email):
         errors.append('email is not valid')
     if len(first_name) > 40:
@@ -147,9 +152,9 @@ def validations_signup(email, first_name, last_name, password):
 
 def validations_signin(email, password):
     errors = []
-    if email is None or '':
+    if not email:
         errors.append('Email is missing')
-    if password is None or '':
+    if not password:
         errors.append('password is missing')
     if len(email) > 255:
         errors.append('email length is too long')
@@ -157,9 +162,9 @@ def validations_signin(email, password):
 
 def validations_user_details(last_name, first_name):
     errors = []
-    if last_name is None:
+    if not last_name:
         errors.append('first name is missing')
-    if first_name is None:
+    if not first_name:
         errors.append('last name is missing')
     if len(errors) > 0:
         return errors
