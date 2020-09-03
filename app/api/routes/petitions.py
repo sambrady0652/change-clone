@@ -94,3 +94,12 @@ def petition_updates(petition_id):
         db.session.add(new_update)
         db.session.commit()
         return new_update.to_dict()
+
+@bp.route('/<int:id>/user_signed_petitions', methods=['GET'])
+def user_signed_petitions(id):
+    results = Signature.query.filter(Signature.user_id == id).all()
+    signatures = {str(signature.id): signature.to_dict() for signature in results}
+    petition_ids = []
+    for signature in signatures:
+        petition_ids.append((signatures[signature]['petition']))
+    return {str(identifier): identifier for identifier in petition_ids}
