@@ -25,7 +25,6 @@ const Petitions = () => {
   const allPetitions = Object.values(petitions)
   return (
     <>
-      <Navbar />
       <Box justify="center" align="center" style={{ position: "relative" }}>
         <Heading level={2} >Discover petitions</Heading>
         <Tabs>

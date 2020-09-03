@@ -5,7 +5,6 @@ import 'bulma/css/bulma.css'
 const Search = () => {
   return (
     <>
-      <Navbar/>
       <div style={{display: "flex", justifyContent: "center"}}>
         <div class="control">
           <div>Search</div>

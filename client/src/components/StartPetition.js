@@ -1,33 +1,64 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Button, RadioButtonGroup, TextInput, TextArea, } from 'grommet'
+import { useSelector, useDispatch } from "react-redux";
+import { Button, RadioButtonGroup, TextInput, TextArea, Heading, Box, Image, Paragraph } from 'grommet'
 import { NumberInput } from 'grommet-controls'
 
+import { postPetition } from '../store/petitions'
+
 const StartPetitions = () => {
-  const [topic, setTopic] = useState("1");
+  const [topic, setTopic] = useState('1');
   const [header, setHeader] = useState("");
   const [description, setDescription] = useState("");
-  const [goal, setGoal] = useState("");
+  const [goal, setGoal] = useState(0);
   const [imageUrl, setImageUrl] = useState("");
+  const [imagePreview, setImagePreivew] = useState('https://change-clone.s3-us-west-1.amazonaws.com/default_petition.png');
 
   const [currentView, setCurrentView] = useState(0);
 
+  // let testTopic = useSelector(state => state.topics[topic])
   const nextView = () => {
     let next = currentView + 1
     setCurrentView(next);
-    console.log(header)
+    // console.log(testTopic)
   };
 
+  const prevView = () => {
+    let prev = currentView - 1
+    setCurrentView(prev)
+  }
+
+  const dispatch = useDispatch()
+
+  const onSubmit = e => {
+    e.preventDefault()
+    console.log({
+      topic,
+      header,
+      description,
+      goal,
+      imageUrl
+    })
+    dispatch(postPetition({
+      topic,
+      header,
+      description,
+      goal,
+      file: imageUrl
+    }))
+
+  }
+
   const formViews = [
-    <SelectTopic nextView={nextView} setTopic={setTopic} />, 
-    <InputHeader nextView={nextView} header={header} setHeader={setHeader} />, 
-    <InputDescription nextView={nextView} description={description} setDescription={setDescription} />, 
-    "goal", 
-    "image"];
+    <SelectTopic nextView={nextView} setTopic={setTopic} />,
+    <InputHeader prevView={prevView} nextView={nextView} header={header} setHeader={setHeader} />,
+    <InputDescription prevView={prevView} nextView={nextView} description={description} setDescription={setDescription} />,
+    <InputGoal prevView={prevView} nextView={nextView} goal={goal} setGoal={setGoal} />,
+    <InputImage prevView={prevView} nextView={nextView} imageUrl={imageUrl} setImageUrl={setImageUrl} imagePreview={imagePreview} setImagePreivew={setImagePreivew} />,
+    <SubmitConfirmation onSubmit={onSubmit} prevView={prevView} topic={useSelector(state => state.topics[topic])} header={header} description={description} goal={goal} imagePreview={imagePreview} />
+  ];
 
   return (
     <div style={{ margin: '0 auto', textAlign: 'center', maxWidth: '750px' }}>
-      <h1>Create A Petition</h1>
       {formViews[currentView]}
     </div>
   );
@@ -46,15 +77,17 @@ function SelectTopic(props) {
 
   return (
     <div>
-      <h3>Choose a topic for your petitition:</h3>
+      <Box>
+        <Heading level={3} textAlign='center' alignSelf='center' margin='xxsmall'>Choose a topic for your petitition:</Heading>
+      </Box>
       <RadioButtonGroup
         name='topics'
         options={topics.map(topic => topic.topic)}
         value={selected}
         onChange={pickTopic}
-        style={{margin: '0 auto', width: '25%'}}
+        style={{ margin: '0 auto', width: '25%' }}
       />
-      <Button secondary label="Next >" onClick={props.nextView} style={{marginTop: '20px'}} />
+      <Button secondary label="Next >" onClick={props.nextView} style={{ marginTop: '20px' }} />
     </div>
   );
 }
@@ -63,10 +96,17 @@ function InputHeader(props) {
 
   return (
     <div>
-      <h3>Write your petition title</h3>
-      <p>This is the first thing people will see about your petition. Get their attention with a short title that focuses on the change you’d like them to support.</p>
+      <Box>
+        <Heading level={3} textAlign='center' alignSelf='center' margin='xxsmall'>Write your petition title</Heading>
+        <Heading level={6} textAlign='center' alignSelf='center' margin='xxsmall'>This is the first thing people will see about your petition. Get their attention with a short title that focuses on the change you’d like them to support.</Heading>
+      </Box>
       <TextInput size='xlarge' value={props.header} onChange={e => props.setHeader(e.target.value)} />
-      <Button secondary label="Next >" onClick={props.nextView} style={{marginTop: '20px'}} />
+
+      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around' }} >
+        <Button secondary label="< Previous" onClick={props.prevView} />
+        {props.header === '' ? null : <Button secondary label="Next >" onClick={props.nextView} />}
+      </div>
+
     </div>
   )
 }
@@ -74,20 +114,109 @@ function InputHeader(props) {
 function InputDescription(props) {
   return (
     <div>
-      <h3>Explain the problem you want to solve</h3>
-      <p>People are more likely to support your petition if it’s clear why you care. Explain how this change will impact you, your family, or your community.</p>
+      <Box>
+        <Heading level={3} textAlign='center' alignSelf='center' margin='xxsmall'>Explain the problem you want to solve</Heading>
+        <Heading level={6} textAlign='center' alignSelf='center' margin='xxsmall'>People are more likely to support your petition if it’s clear why you care. Explain how this change will impact you, your family, or your community.</Heading>
+      </Box>
+
       <TextArea size='xlarge' value={props.description} onChange={e => props.setDescription(e.target.value)} />
-      <Button secondary label="Next >" onClick={props.nextView} style={{marginTop: '20px'}} />
+
+      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around' }} >
+        <Button secondary label="< Previous" onClick={props.prevView} />
+        {props.description === '' ? null : <Button secondary label="Next >" onClick={props.nextView} />}
+      </div>
     </div>
   )
 }
 
 function InputGoal(props) {
   return (
-    <dov>
-      <h3>Set</h3>
-    </dov>
+    <div>
+      <Box>
+        <Heading level={3} textAlign='center' alignSelf='center' margin='xxsmall'>How many signatures do you want to get?</Heading>
+        <Heading level={6} textAlign='center' alignSelf='center' margin='xxsmall'>No pressure, you can change this later</Heading>
+      </Box>
+
+      <NumberInput min={0} max={100000000} step={100} value={props.goal} onChange={e => props.setGoal(e.target.value)} />
+
+      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around' }} >
+        <Button secondary label="< Previous" onClick={props.prevView} />
+        {props.goal == 0 ? null : <Button secondary label="Next >" onClick={props.nextView} />}
+      </div>
+    </div>
   )
 }
+
+function InputImage(props) {
+
+  const onChange = e => {
+    props.setImageUrl(e.target.files.item(0))
+    try {
+      props.setImagePreivew(URL.createObjectURL(e.target.files.item(0)))
+    } catch (e) {
+      props.setImagePreivew('https://change-clone.s3-us-west-1.amazonaws.com/default_petition.png')
+    }
+    console.log(e.target.files.item(0))
+  }
+
+  return (
+    <div>
+      <Box>
+        <Heading level={3} textAlign='center' alignSelf='center' margin='xxsmall'>Add a photo</Heading>
+        <Heading level={6} textAlign='center' alignSelf='center' margin='xxsmall'>Petitions with a photo receive six times more signatures than those without. Include one that captures the emotion of your story.</Heading>
+      </Box>
+
+      <Box height="medium" width="large" style={{ margin: '0 auto' }} fill={true} round='medium'>
+        <Image
+          fit="cover"
+          src={props.imagePreview}
+          alignSelf='center'
+        />
+      </Box>
+
+      <input type='file' onChange={onChange} accept='image/*' />
+
+      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around' }} >
+        <Button secondary label="< Previous" onClick={props.prevView} />
+        <Button secondary label="Next >" onClick={props.nextView} />
+      </div>
+    </div>
+
+  )
+}
+
+function SubmitConfirmation(props) {
+  console.log(props.topic)
+  return (
+    <div>
+      <Box>
+        <Heading level={3} textAlign='center' alignSelf='center' margin='xxsmall'>Confirmation</Heading>
+        <Heading level={6} textAlign='center' alignSelf='center' margin='xxsmall'>Review your petition details and click "Submit", or click "Previous" if you want to change something</Heading>
+      </Box>
+
+      <Box height="medium" width="large" style={{ margin: '0 auto' }} fill={true} round='medium'>
+        <Image
+          fit="cover"
+          src={props.imagePreview}
+          alignSelf='center'
+        />
+      </Box>
+
+
+      <Box>
+        <Heading level={2} textAlign='center' alignSelf='center' margin='xxsmall'>{props.header}</Heading>
+        <Paragraph textAlign='center' alignSelf='center'>{`Goal of ${props.goal} signatures`}</Paragraph>
+        <Paragraph textAlign='start' alignSelf='center'>{props.description}</Paragraph>
+      </Box>
+
+      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around', marginBottom: '30px'}} >
+        <Button secondary label="< Previous" onClick={props.prevView} />
+        <Button primary label="Submit" onClick={props.onSubmit} />
+      </div>
+    </div>
+
+  )
+}
+
 
 export default StartPetitions;
