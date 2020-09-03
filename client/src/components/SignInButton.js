@@ -39,6 +39,7 @@ const SignInButton = (props) => {
   return (
     <Box>
       <Button
+
         plain
         hoverIndicator={{ color: "#ffffff" }}
         label={label}

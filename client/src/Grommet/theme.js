@@ -1,6 +1,7 @@
 export const theme = {
   global: {
     font: {
+      color: "#363135",
       family: 'Arial',
       size: '16px',
       height: '20px',
@@ -23,7 +24,6 @@ export const theme = {
   },
   tabs: {
     extend: "width: 100%",
-    // extend: "height: 100vh",
   },
   tab: {
     color: "#363135",
@@ -42,5 +42,8 @@ export const theme = {
         color: "#ED2D23"
       }
     },
-  }
+  },
+  image: {
+    extend: "border-radius: 5px; max-width: 100%; height: auto;"
+  },
 };

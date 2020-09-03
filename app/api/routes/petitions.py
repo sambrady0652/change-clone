@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 
-from app.models import Petition, db, Signature, Update
+from app.models import Petition, db, Signature, Update, User
 
 bp = Blueprint('petitions', __name__)
 
@@ -58,18 +58,26 @@ def petition(id):
         db.session.commit()
 
 
-@bp.route('/<int:id>/signatures', methods=['GET', 'POST'])
+@bp.route('/<int:petition_id>/signatures', methods=['GET', 'POST'])
 def petiton_signatures(petition_id):
     if request.method == 'GET':
         signatures = Signature.query.filter(
             Signature.petition_id == petition_id).all()
         return {str(signature.id): signature.to_dict() for signature in signatures}
     if request.method == 'POST':
-        data = request.json
-        new_sig = Signature(user_id=data.user_id,
-                            petition_id=petition_id, message=data.message)
+        user_id = request.json.get('user_id')
+        message = request.json.get('message')
+        new_sig = Signature(user_id=user_id, petition_id=petition_id, message=message)
         db.session.add(new_sig)
         db.session.commit()
+
+        all_sigs_count = Signature.query.filter(Signature.petition_id == petition_id).count()
+        
+        petition = Petition.query.filter(Petition.id == petition_id).one()
+        petition.current = all_sigs_count
+        db.session.add(petition)
+        db.session.commit()
+
         return new_sig.to_dict()
 
 
@@ -86,3 +94,12 @@ def petition_updates(petition_id):
         db.session.add(new_update)
         db.session.commit()
         return new_update.to_dict()
+
+@bp.route('/<int:id>/user_signed_petitions', methods=['GET'])
+def user_signed_petitions(id):
+    results = Signature.query.filter(Signature.user_id == id).all()
+    signatures = {str(signature.id): signature.to_dict() for signature in results}
+    petition_ids = []
+    for signature in signatures:
+        petition_ids.append((signatures[signature]['petition']))
+    return {str(identifier): identifier for identifier in petition_ids}

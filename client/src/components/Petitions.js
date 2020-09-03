@@ -5,7 +5,7 @@ import { Main, Heading, Box, Tab, Tabs } from 'grommet'
 import PetitionCard from './PetitionCard'
 import Navbar from './Navbar'
 
-const makeCard = (petition) => {
+export const makeCard = (petition) => {
   const { id, image_url, header, description, goal, current } = petition
   return (
     <Box alignSelf="center" pad="small" key={`box-around-card-${id}`}>
@@ -24,7 +24,7 @@ const Petitions = () => {
   // TODO: Develop algorithm to select Featured, Popular, and Recent Petitions
   const allPetitions = Object.values(petitions)
   return (
-    <Box>
+    <>
       <Navbar />
       <Box justify="center" align="center" style={{ position: "relative" }}>
         <Heading level={2} >Discover petitions</Heading>
@@ -51,7 +51,7 @@ const Petitions = () => {
           </Tab>
         </Tabs>
       </Box>
-    </Box>
+    </>
   )
 }
 

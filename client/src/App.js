@@ -11,7 +11,8 @@ import Petitions from "./components/Petitions"
 import SettingsPage from "./components/SettingsPage"
 import { setUser } from './store/auth'
 import { fetchPetitions } from './store/petitions'
-import { fetchUsers } from './store/users'
+// import { fetchUsers } from './store/users'
+import PetitionDetails from './components/PetitionDetails';
 
 function App() {
     const token = localStorage.getItem("SESSION_TOKEN")
@@ -23,7 +24,7 @@ function App() {
             dispatch(setUser(token, id))
         }
         dispatch(fetchPetitions())
-        dispatch(fetchUsers())
+        // dispatch(fetchUsers())
     })
 
     return (
@@ -43,6 +44,9 @@ function App() {
                     <Route
                         path="/petitions"
                         component={Petitions} />
+                    <Route
+                        path="/p/:name"
+                        component={PetitionDetails} />
                     <Route
                         path="/search"
                         component={Search} />

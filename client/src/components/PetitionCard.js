@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, CardBody, Box, Image, Heading, Paragraph, Button, Meter, Text } from 'grommet'
+import { Card, CardBody, Box, Image, Heading, Paragraph, Button, Meter, Text, Anchor } from 'grommet'
 
 
 const PetitionCard = (props) => {
@@ -18,7 +18,9 @@ const PetitionCard = (props) => {
         {expanded ?
           // EXPANDED CARD 
           <Box direction="column" pad={{ horizontal: 'medium' }} responsive={true}>
-            <Heading level="3" margin={{ bottom: "none" }}>{header}</Heading>
+            <Anchor color="inherit" href={`/p/${header}`}>
+              <Heading level="3" margin={{ bottom: "none" }}>{header}</Heading>
+            </Anchor>
             <Paragraph>{description}</Paragraph>
             <Text size="xxsmall">{current} signatures out of {goal}</Text>
             <Meter
@@ -35,7 +37,9 @@ const PetitionCard = (props) => {
           :
           // SMALL CARD 
           <Box direction="column" pad={{ horizontal: 'medium' }} responsive={true} height="small">
-            <Heading level="3" margin={{ bottom: "none" }}>{header}</Heading>
+            <Anchor color="inherit" href={`/p/${header}`}>
+              <Heading level="3" margin={{ bottom: "none" }}>{header}</Heading>
+            </Anchor>
             <Paragraph className="truncate-overflow" margin={{ bottom: "none" }}>{description}</Paragraph>
             <Button hoverIndicator={{ color: "#ffffff" }} onClick={() => setExpanded(true)}>Read more</Button>
             <Box flex="grow" overflow="auto">
