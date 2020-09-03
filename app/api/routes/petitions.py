@@ -86,14 +86,3 @@ def petition_updates(petition_id):
         db.session.add(new_update)
         db.session.commit()
         return new_update.to_dict()
-
-@bp.route('/search', methods=['GET'])
-def search_petitions():
-    #get search term from user
-    search_term = request.form.get("search_term")
-
-    #search database for a header that contains search term
-    petitions = Petition.query.filter(Petition.header.like('%{0}%'.format(search_term))).all()
-    formatted_petitions = {str(petition.id): petition.to_dict()
-                           for petition in petitions}
-    return formatted_petitions
