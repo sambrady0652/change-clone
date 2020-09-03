@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import currentUser from './auth'
 import petitions from './petitions'
+import topics from './topics'
 import users from './users'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -9,7 +10,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const reducer = combineReducers({
   currentUser,
   petitions,
-  users
+  users,
+  topics
   //ADD ADDITIONAL SLICES OF STATE HERE 
 });
 

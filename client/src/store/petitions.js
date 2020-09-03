@@ -7,6 +7,7 @@ const GET_PETITIONS = 'change/petitions/GET_PETITIONS';
 
 //PRIMARY FUNCTIONS
 export const fetchPetitions = () => async dispatch => {
+  console.log('FETCHING')
   const response = await fetch(`${baseUrl}/api/petitions`)
   if (!response.ok) {
     throw response;
