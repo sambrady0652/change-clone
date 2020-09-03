@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import Navbar from './Navbar'
 import 'bulma/css/bulma.css'
-import PetitionCard from '../components/PetitionCard'
 import { makeCard } from '../components/Petitions'
 
 const Search = () => {
