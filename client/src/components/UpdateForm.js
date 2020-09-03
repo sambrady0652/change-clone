@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment} from 'react';
 import { useDispatch } from 'react-redux';
+import Navbar from "./Navbar"
 
 const UpdateForm = (props) => {
   const [headline, setHeadline] = useState('')
@@ -32,16 +33,20 @@ const UpdateForm = (props) => {
 return (
   <Fragment>
     <Navbar />
-    <div id="update_form_wrapper">
+      <div id="siteWrapper">
       <div id="updateh1">Update your supporters</div>
-        <form>
+      <div id="update_form_wrapper">
+        <form id="form_form">
           <div id="headline_div">
-            <label>Headline:</label>
-            <input type="text" name="headline" id="update_headline"
-              value={headline}
-              onChange={e => setHeadline(e.target.value)}/>
+            <label id="headline_label">Headline:</label>
+            <div id="inputdiv2">
+              <input type="text" name="headline" id="update_headline"
+                value={headline}
+                onChange={e => setHeadline(e.target.value)}/>
+            </div>
           </div>
-          <div id="insert_link">
+
+          {/* <div id="insert_link">
             <div id="insertLinkDiv">
               <div id="inserLinkText">Insert Link</div>
               <div id="exitText">x</div>
@@ -60,20 +65,37 @@ return (
               <button id="okButton" onClick={handleInsertLink}>Ok</button>
               <button id="cancelButton" onClick={handleCancelButton}>Cancel</button>
             </div>
-          </div>
+          </div> */}
           <div id="body_div">
-            <label>Your latest development</label>
-            <input type="text" name="body" id="update_body"
+            <div id="body_control">
+            <label id="development_label">Your latest development</label>
+            <div id="body_input_div">
+              <input type="text" name="body" id="update_body"
                    value={body}
                    onChange={e => setBody(e.target.value)} />
+            </div>
+            </div>
           <div id="media_div">
-            <div id="media_exit">X</div>
-            <label>Add media(optional)</label>
-            <input type="text" 
+            {/* <div id="media_exit">X</div> */}
+            <label id="addMediadiv">Add media(optional)</label>
+            <div id="upload_media_div">
+              <div id="upload_container">
+                <label id="url_description">URL for an article, image, or video</label>
+            <div id="url_add">
+              <div id="urlinputdiv">
+            <input type="text" id="url_input"
                    value={mediaUrl}
                    onChange={e => setMediaUrl(e.target.value)}/>
+                   </div>
+            <span id="addSpan">
             <button id="addUrl">Add</button>
+            </span>
+            </div>
+            <div id="orContainer">
+            <div id="orSmallerContainer">
             <div id="orDiv">or</div>
+            </div>
+            </div>
             <div id="uploadPhoto_container">
                 <button id="uploadPhoto" type='file' name='updatePhoto' onClick={handleMediaSubmit}> Upload photo</button>
                 <div id="photoWarningDiv">
@@ -81,13 +103,18 @@ return (
                 </div>
             </div>
             </div>
+            </div>
+          </div>
           </div>
           <div id="submit_div">
-              <button onClick={handleSubmit} />
-              <div id="warning_div">You can post one update every 24 hours. Updates appear on your 
-                petition page, and will be sent in an email to all of your supporters.</div>
+            <div id="submit_container">
+              <button id="postButton" onClick={handleSubmit}>Post</button>
+              </div>
+              <div id="warning_div"><p id="warningP"><strong>You can post one update every 24 hours.</strong> Updates appear on your 
+                petition page, and will be sent in an email to all of your supporters.</p></div>
           </div>
     </form>
+    </div>
     </div>
   </Fragment>
   )

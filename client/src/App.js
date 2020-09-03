@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import Home from "./components/Home"
 import Search from "./components/Search"
+import UpdateForm from "./components/UpdateForm"
 import StartPetition from "./components/StartPetition"
 import MyPetitions from "./components/MyPetitions"
 import Petitions from "./components/Petitions"
@@ -48,6 +49,9 @@ function App() {
                     <Route
                         path="/settings"
                         component={SettingsPage} />
+                    <Route 
+                        path="/*/updateform"
+                        component={UpdateForm} />
                 </Switch>
             </BrowserRouter>
         </>
