@@ -39,7 +39,11 @@ def signup():
     
     #create jwt and send back to frontend
     access_token = create_access_token(identity=temp_user['id'])
-    return {'access_token': access_token, 'id': temp_user['id']}, 200
+    return {
+            'access_token':access_token, 
+            'id': temp_user['id'],
+            'signed_petitions': temp_user['signed_petitions']
+            }, 200
 
 @bp.route('/signin', methods=['POST'])
 def signin():
@@ -61,7 +65,11 @@ def signin():
     #check user entered password vs hashed password
     if bcrypt.checkpw(password.encode('utf-8'), user.encrypted_password):
         access_token = create_access_token(identity=temp_user['id'])
-        return {'access_token':access_token, 'id': temp_user['id']}, 200
+        return {
+            'access_token':access_token, 
+            'id': temp_user['id'],
+            'signed_petitions': temp_user['signed_petitions']
+            }, 200
     else:
         return {'error': 'password was not correct'}, 400
 
@@ -73,13 +81,24 @@ def signin():
 #     else:
 #         return {'error': "User not found"}, 400
 
+
+# Use this route to get creator information for petitions
+@bp.route('/creator/<int:id>')
+def get_creator(id):
+    found_user = User.query.filter(User.id == id).first()
+    if found_user:
+        return found_user.to_dict()
+    else:
+        return {'error': "User not found"}, 400
+
+
 @bp.route('/<int:id>', methods=['GET','PATCH'])
 @jwt_required
 def user_page(id):
     if request.method == 'GET':
         found_user = User.query.filter(User.id == id).first()
         if found_user:
-            return {'first_name': found_user.first_name, 'last_name': found_user.last_name, 'location': found_user.location}
+            return found_user.to_dict()
         else:
             return {'error': "User not found"}, 400
     else:

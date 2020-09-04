@@ -9,9 +9,7 @@ import StartPetition from "./components/StartPetition"
 import MyPetitions from "./components/MyPetitions"
 import Petitions from "./components/Petitions"
 import SettingsPage from "./components/SettingsPage"
-import { setUser } from './store/auth'
-import { fetchPetitions } from './store/petitions'
-// import { fetchUsers } from './store/users'
+import { fetchUserDetails } from './store/auth'
 import PetitionDetails from './components/PetitionDetails';
 
 function App() {
@@ -21,10 +19,8 @@ function App() {
 
     useEffect(() => {
         if (token && id) {
-            dispatch(setUser(token, id))
+            dispatch(fetchUserDetails(token, id))
         }
-        dispatch(fetchPetitions())
-        // dispatch(fetchUsers())
     })
 
     return (
@@ -45,7 +41,7 @@ function App() {
                         path="/petitions"
                         component={Petitions} />
                     <Route
-                        path="/p/:name"
+                        path="/p/:header"
                         component={PetitionDetails} />
                     <Route
                         path="/search"
@@ -53,7 +49,7 @@ function App() {
                     <Route
                         path="/settings"
                         component={SettingsPage} />
-                    <Route 
+                    <Route
                         path="/*/updateform"
                         component={UpdateForm} />
                 </Switch>
