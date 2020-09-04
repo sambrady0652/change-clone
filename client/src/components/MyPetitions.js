@@ -44,10 +44,11 @@ const MyPetitions = () => {
       const responseData = await response.json();
       const allPetitionsSigned = Object.values(responseData)
       setSigned(allPetitionsSigned)
+
     }
     fetchUserInfo();
     fetchSignedPetitions()
-  },);
+  },[]);
 
   if(Signed.length > 0){
    for(let key in petitions){
