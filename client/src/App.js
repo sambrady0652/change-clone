@@ -2,19 +2,6 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-<<<<<<< HEAD
-import Home from "./components/Home"
-import Search from "./components/Search"
-import UpdateForm from "./components/UpdateForm"
-import StartPetition from "./components/StartPetition"
-import MyPetitions from "./components/MyPetitions"
-import Petitions from "./components/Petitions"
-import SettingsPage from "./components/SettingsPage"
-import UpdateCard from './components/UpdateCard'
-import { setUser } from './store/auth'
-import { fetchPetitions } from './store/petitions'
-// import { fetchUsers } from './store/users'
-=======
 
 import Navbar from './components/Navbar'
 import Home from "./components/Home";
@@ -23,11 +10,11 @@ import StartPetition from "./components/StartPetition";
 import MyPetitions from "./components/MyPetitions";
 import Petitions from "./components/Petitions";
 import SettingsPage from "./components/SettingsPage";
+import UpdateCard from './components/UpdateCard'
 import { setUser } from "./store/auth";
 import { fetchPetitions } from "./store/petitions";
 import { fetchUsers } from "./store/users";
 import { fetchTopics } from "./store/topics";
->>>>>>> e3a09e9b7230f92b22c70cec396b326026aa4d22
 import PetitionDetails from './components/PetitionDetails';
 import {fetchUserDetails} from './store/auth'
 import UpdateForm from './components/UpdateForm'
@@ -70,9 +57,6 @@ function App() {
           <Route
             path="/settings"
             component={SettingsPage} />
-          <Route 
-            path="/petitions/:name/update/:id"
-            component={UpdateCard} />
           <Route 
             path="/petitions/:name/updateform"
             component={UpdateForm} />
