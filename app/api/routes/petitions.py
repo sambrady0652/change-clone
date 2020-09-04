@@ -30,6 +30,15 @@ def post_petition():
         'topic_id': new_petition.topic_id
     }
 
+# GET ROUTE USING HEADER INSTEAD OF ID
+@bp.route('/<path:header>')
+def get_current_petition(header):
+    petition = Petition.query.filter(Petition.header == header).one()
+    if not petition:
+        return {"error": "User not found"}
+
+    return petition.to_dict()
+
 
 @bp.route('/<int:id>', methods=['GET', 'PUT', 'PATCH', 'DELETE'])
 def petition(id):
