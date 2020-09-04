@@ -1,6 +1,6 @@
 //REQUISITE IMPORTS
 import { baseUrl } from '../config';
-import { signUp } from './auth';
+import { Paragraph } from 'grommet';
 
 //VARIABLE DECLARATIONS
 const GET_PETITIONS = 'change/petitions/GET_PETITIONS';
@@ -17,28 +17,15 @@ export const fetchPetitions = () => async dispatch => {
   dispatch(getPetitions(data))
 }
 
-//SIGN PETITION
-//GUEST SIGN PETITION
-export const guestSignPetition = (firstName, lastName, email, password, message, petitionId) => async dispatch => {
-  //Must wait until an Account is created before Signing Petitions
-  await dispatch(signUp(firstName, lastName, email, password))
-  //Once an account is created, we pull the account id from Local Storage
-  const id = Number(localStorage.getItem("USER_ID"))
-  //Dispatch the userSignPetition below to complete petition signature
-  dispatch(userSignPetition(id, message, petitionId))
-}
-
-//USER SIGN PETITION
-export const userSignPetition = (user_id, message, petition_id) => async dispatch => {
-  const body = { user_id, message }
-  await fetch(`${baseUrl}/api/petitions/${petition_id}/signatures`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(body)
-  });
-  dispatch(fetchPetitions())
+export const postPetition = data => async dispatch => {
+  const formData = new FormData()
+  Object.keys(data).forEach(key => formData.append(key, data[key]))
+  console.log(formData)
+  console.log(formData.get('files'))
+  const response = await fetch(`${baseUrl}/api/petitions`, { method: 'post', body: formData })
+  if (!response.ok) {
+    throw response;
+  }
 }
 
 //ACTION CREATORS

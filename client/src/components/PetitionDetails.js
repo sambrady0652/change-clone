@@ -1,40 +1,24 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
-import { Heading, Box, Meter, Text, Image, Avatar, Paragraph } from 'grommet'
+import { Heading, Box, Button, Meter, Text, Image, Avatar, Paragraph } from 'grommet'
 
 import Navbar from './Navbar'
 import SignPetitionForm from './SignPetitionForm'
+import { fetchPetitionDetails } from '../store/currentPetition';
 
 const PetitionDetails = () => {
-  const { name } = useParams()
-  const { petitions } = useSelector(state => state)
-  const { users } = useSelector(state => state)
+  const { header } = useParams()
+  const { id, description, creator, current, goal, image_url } = useSelector(state => state.currentPetition)
+  const { first_name, last_name, profile_pic_url } = creator
+  const dispatch = useDispatch()
+  const isCreator = id === creator.id
+  useEffect(() => {
+    dispatch(fetchPetitionDetails(header))
+  }, [])
 
-  //Retrieves relevant Petition from Redux Store (NOTE: does not make fetch call to database)
-  const getOnePetition = () => {
-    const allPetitions = Object.values(petitions)
-    const petitionArr = allPetitions.filter(petition => petition.header === name)
-    return Object.assign({}, petitionArr[0])
-  }
-  //Retrieves Petition Creator information from Redux Store (NOTE: does not make fetch call to database)
-  const getCreator = () => {
-    //This was a quick-fix for avoiding a 'failed to destructure undefined' error
-    //On initial load, redux store will be undefined so it will not hit this if statement
-    if (Object.keys(users).length) {
-      return users[creator]
-    }
-    //Instead, it will return an empty object (rather than returning 'undefined'), until Redux Store loads and it hits the If statement above.
-    else {
-      return {}
-    }
-  }
-  //Destructure Relevant Information from Objects returned from Redux Store
-  const { id, header, description, creator, current, goal } = getOnePetition()
-  const { first_name, last_name } = getCreator()
   return (
     <>
-      <Navbar />
       {/* TO DO */}
       <div>Secondary Nav Here?</div>
       <Box>
@@ -43,14 +27,17 @@ const PetitionDetails = () => {
       <Box direction="row" margin={{ horizontal: "xlarge" }} gap="large" width={{ max: "xlarge", min: "large" }}>
         <Box alignSelf="center" flex={{ shrink: 1 }}>
           {/* NOTE: Replace dummy images with image_url and prof_pic_url */}
-          <Image src="//v2.grommet.io/assets/IMG_4245.jpg" fit="cover" />
+          <Image src={image_url} fit="cover" />
           <Box direction="row" pad="xsmall" align="center">
-            <Avatar src="//v2.grommet.io/assets/IMG_4245.jpg" size="small" />
+            <Avatar src={profile_pic_url} size="small" />
             <Text size="small" color="#737273" weight="bold" margin={{ left: "xsmall" }}>{first_name} {last_name} started this petition</Text>
           </Box>
           <Paragraph fill={true}>{description}</Paragraph>
           {/* TO DO: */}
           <div>UPDATES</div>
+          {isCreator && (
+            <Button>Click Here</Button>
+          )}
           <div>REASONS FOR SIGNING</div>
         </Box>
         <Box flex={{ grow: 1 }}>
@@ -65,7 +52,7 @@ const PetitionDetails = () => {
           />
           <Text size="xxsmall" weight="bold">{current} signed of {goal} goal</Text>
           <div>LIVE STREAM OF SIGNATURES</div>
-          <SignPetitionForm petitionId={id} />
+          <SignPetitionForm petitionId={id} header={header} />
         </Box>
       </Box>
     </>

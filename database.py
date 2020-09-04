@@ -13,7 +13,8 @@ with app.app_context():
         first_name="Default",
         last_name="User",
         email="default@user.com",
-        encrypted_password=bcrypt.hashpw("password".encode('utf-8'), bcrypt.gensalt(14)),
+        encrypted_password=bcrypt.hashpw(
+            "password".encode('utf-8'), bcrypt.gensalt(14)),
         profile_pic_url="",
         location="Chicago, IL, USA")
 
@@ -44,13 +45,61 @@ with app.app_context():
         user_id=1
     )
 
-    default_topic = Topic(
-        topic="Default",
-        image_url=""
-    )
+    # default_topic = Topic(
+    #     topic="Default",
+    #     image_url=""
+    # )
+
+    local = Topic(
+        topic='Local', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/local.png')
+    health = Topic(
+        topic='Health', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/health.png')
+    racial_justice = Topic(
+        topic='Racial Justice', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/racial_justice.png')
+    human_rights = Topic(
+        topic='Human Rights', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/human_rights.png')
+    economic_justice = Topic(
+        topic='Economic Justice', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/economic_justice.png')
+    politics = Topic(
+        topic='Politics', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/politics.png')
+    animals = Topic(
+        topic='Animals', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/animals.png')
+    womens_rights = Topic(topic='Women\'s Rights',
+                          image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/womens_rights.png')
+    environment = Topic(
+        topic='Environment', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/environment.png')
+    family = Topic(
+        topic='Family', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/family.png')
+    criminal_justice = Topic(
+        topic='Criminal Justice', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/criminal_justice.png')
+    entertainment = Topic(
+        topic='Entertainment', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/entertainment.png')
+    immigration = Topic(
+        topic='Immigration', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/immigration.png')
+    food = Topic(
+        topic='Food', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/food.png')
+    education = Topic(
+        topic='Education', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/education.png')
+    other = Topic(
+        topic='Other', image_url='https://change-clone.s3-us-west-1.amazonaws.com/topic_icons/other.png')
 
     db.session.add(default_user)
-    db.session.add(default_topic)
+    db.session.add(local)
+    db.session.add(health)
+    db.session.add(racial_justice)
+    db.session.add(human_rights)
+    db.session.add(economic_justice)
+    db.session.add(politics)
+    db.session.add(animals)
+    db.session.add(womens_rights)
+    db.session.add(environment)
+    db.session.add(family)
+    db.session.add(criminal_justice)
+    db.session.add(entertainment)
+    db.session.add(immigration)
+    db.session.add(food)
+    db.session.add(education)
+    db.session.add(other)
     db.session.add(default_petition)
     db.session.add(default_signature)
     db.session.add(default_update)

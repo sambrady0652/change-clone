@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Navbar from './Navbar'
 import { makeCard } from '../components/Petitions'
 import { apiUrl } from '../config';
 import { Main, Heading, Box, Tab, Tabs } from 'grommet'
 import 'bulma/css/bulma.css'
+import { fetchPetitions } from '../store/petitions'
 
 const MyPetitions = () => {
+  const dispatch = useDispatch()
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [location, setLocation] = useState('')
@@ -17,9 +19,9 @@ const MyPetitions = () => {
   let petitions = useSelector(state => state.petitions);
   let startedPetitions = []
   let signedPetitions = []
-  for(let key in petitions){
-    if(petitions[key].creator === id)
-    startedPetitions.push(petitions[key])
+  for (let key in petitions) {
+    if (petitions[key].creator === id)
+      startedPetitions.push(petitions[key])
   }
 
   useEffect(() => {
@@ -48,16 +50,17 @@ const MyPetitions = () => {
     }
     fetchUserInfo();
     fetchSignedPetitions()
-  },[]);
+    dispatch(fetchPetitions())
+  }, []);
 
-  if(Signed.length > 0){
-   for(let key in petitions){
-    for(let num in Signed){
-      if(petitions[key].id === Signed[num]){
-        signedPetitions.push(petitions[key])
+  if (Signed.length > 0) {
+    for (let key in petitions) {
+      for (let num in Signed) {
+        if (petitions[key].id === Signed[num]) {
+          signedPetitions.push(petitions[key])
+        }
       }
     }
-   }
   }
 
   return (
@@ -82,7 +85,7 @@ const MyPetitions = () => {
           </Tabs>
         </Box>
     </div>
-      </>
+     </>
   )
 }
 

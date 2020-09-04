@@ -47,6 +47,16 @@ class Topic(db.Model):
 
     petitions = db.relationship("Petition", back_populates="topic")
 
+    def to_dict(self):
+        petitions = [petition.id for petition in self.petitions]
+
+        return {
+            "id": self.id,
+            'topic': self.topic,
+            'image_url': self.image_url,
+            'petitions': petitions
+        }
+
 
 class Petition(db.Model):
     __tablename__ = "petitions"

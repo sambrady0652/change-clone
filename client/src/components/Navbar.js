@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { Header } from 'grommet'
+import { Header, Heading, Anchor } from 'grommet'
 import { Search } from 'grommet-icons'
 import SignInButton from './SignInButton'
 import AccountMenu from './AccountMenu'
@@ -13,9 +13,9 @@ const Navbar = () => {
   return (
     <Header justify="around" pad={{ vertical: "xsmall" }}>
       <Header justify="center" >
-        <NavAnchor label="LOGO HERE" href="/" />
-        <NavAnchor label="Start a petition" href="/start-a-petition" />
-        <NavAnchor label="My petitions" href="/u/me" />
+        <Anchor href='/' alignSelf='center'><Heading level={3} color='#ED2D23'>Cause.com</Heading></Anchor>
+        {needSignIn ? null : <NavAnchor label="Start a petition" href="/start-a-petition" />}
+        {needSignIn ? null : <NavAnchor label="My petitions" href="/u/me" />}
         <NavAnchor label="Browse" href="/petitions" />
         <NavAnchor disabled label="Membership" href="" />
       </Header>
