@@ -14,7 +14,7 @@ const UpdateForm = (props) => {
   // const [petitionId, setPetitionId]
   const dispatch = useDispatch();
   const { name }  = useParams()
-console.log(name)
+
   const handleInsertLink = async (e) => {
     e.preventDefault();
     dispatch()

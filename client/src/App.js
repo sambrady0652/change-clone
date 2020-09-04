@@ -9,6 +9,7 @@ import StartPetition from "./components/StartPetition"
 import MyPetitions from "./components/MyPetitions"
 import Petitions from "./components/Petitions"
 import SettingsPage from "./components/SettingsPage"
+import UpdateCard from './components/UpdateCard'
 import { setUser } from './store/auth'
 import { fetchPetitions } from './store/petitions'
 // import { fetchUsers } from './store/users'
@@ -42,7 +43,7 @@ function App() {
                         path="/u/me"
                         component={MyPetitions} />
                     <Route
-                        path="/petitions"
+                       exact path="/petitions"
                         component={Petitions} />
                     <Route
                         path="/p/:name"
@@ -54,7 +55,10 @@ function App() {
                         path="/settings"
                         component={SettingsPage} />
                     <Route 
-                        path="/:name/updateform"
+                        path="/petitions/:name/update/:id"
+                        component={UpdateCard} />
+                    <Route 
+                        path="/petitions/:name/updateform"
                         component={UpdateForm} />
                 </Switch>
             </BrowserRouter>
