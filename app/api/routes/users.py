@@ -51,35 +51,20 @@ def signin():
     email = request.json.get('email')
     password = request.json.get('password')
 
-    #work in progress below
+    #Error Handling Validations
     errors = validations_signin(email, password)
     if len(errors) > 0:
         return {'errors': errors}, 400
 
-    #see if user has already created an account
+    #Pass validations, find user, create jwt, return user data
     user = User.query.filter_by(email=email).first()
     temp_user = user.to_dict()
-    if not user:
-        return {'error': 'User was not found'}, 404
-
-    #check user entered password vs hashed password
-    if bcrypt.checkpw(password.encode('utf-8'), user.encrypted_password):
-        access_token = create_access_token(identity=temp_user['id'])
-        return {
-            'access_token':access_token, 
-            'id': temp_user['id'],
-            'signed_petitions': temp_user['signed_petitions']
-            }, 200
-    else:
-        return {'error': 'password was not correct'}, 400
-
-# @bp.route('/g/<int:id>', methods=['GET'])
-# def user_page(id):
-#     found_user = User.query.filter(User.id == id).first()
-#     if found_user:
-#         return {'first_name': found_user.first_name, 'last_name': found_user.last_name, 'location': found_user.location}
-#     else:
-#         return {'error': "User not found"}, 400
+    access_token = create_access_token(identity=temp_user['id'])
+    return {
+        'access_token':access_token, 
+        'id': temp_user['id'],
+        'signed_petitions': temp_user['signed_petitions']
+        }, 200
 
 
 # Use this route to get creator information for petitions
@@ -171,12 +156,20 @@ def validations_signup(email, first_name, last_name, password):
 
 def validations_signin(email, password):
     errors = []
-    if not email:
-        errors.append('Email is missing')
-    if not password:
-        errors.append('password is missing')
-    if len(email) > 255:
-        errors.append('email length is too long')
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        errors.append('User was not found')
+        return errors
+    if user: 
+        password_match = bcrypt.checkpw(password.encode('utf-8'), user.encrypted_password)
+        if not email:
+            errors.append('Email is missing')
+        if not password:
+            errors.append('Password is missing')
+        if not password_match: 
+            errors.append('Password is incorrect')
+        if len(email) > 255:
+            errors.append('email length is too long')
     return errors
 
 def validations_user_details(last_name, first_name):
