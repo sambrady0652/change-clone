@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Form, TextInput, Button, TextArea, Box, Text } from 'grommet'
 
-import { guestSignPetition, userSignPetition } from '../store/petitions'
+import { guestSignPetition, userSignPetition } from '../store/currentPetition'
 import SignInButton from './SignInButton'
 
 const SignPetitionForm = (props) => {
@@ -12,19 +12,19 @@ const SignPetitionForm = (props) => {
   const [password, setPassword] = useState("")
   const [message, setMessage] = useState("")
   const dispatch = useDispatch()
-  const { petitionId } = props
-  const { id, needSignIn } = useSelector(state => state.currentUser)
-
+  const { petitionId, header } = props
+  const { id, needSignIn, signedPetitions } = useSelector(state => state.currentUser)
+  const alreadySigned = signedPetitions.includes(petitionId)
 
   const handleGuestSubmit = async (e) => {
     e.preventDefault();
-    dispatch(guestSignPetition(firstName, lastName, email, password, message, petitionId))
+    dispatch(guestSignPetition(firstName, lastName, email, password, message, petitionId, header))
     setMessage("")
   }
 
   const handleUserSubmit = async (e) => {
     e.preventDefault();
-    dispatch(userSignPetition(id, message, petitionId))
+    dispatch(userSignPetition(id, message, petitionId, header))
     setMessage("")
   }
   return (
@@ -53,19 +53,26 @@ const SignPetitionForm = (props) => {
         </Form >
       ) :
         (
-          <Form onSubmit={handleUserSubmit}>
-            <TextInput value={id} style={{ display: "none" }} />
-            <Button
-              fill="horizontal"
-              style={{ borderRadius: "4px" }}
-              type="submit"
-              plain={false}
-              primary
-              color="#ED2D23">
-              Sign the petition
-            </Button>
-            <TextArea placeholder="Add an optional message telling us why you signed" name="message" resize="vertical" value={message} onChange={e => setMessage(e.target.value)} />
-          </Form >
+          <>
+            {alreadySigned ? (
+              <Text>Thank you for signing this petition!</Text>
+            )
+              : (
+                <Form onSubmit={handleUserSubmit}>
+                  <TextInput value={id} style={{ display: "none" }} />
+                  <Button
+                    fill="horizontal"
+                    style={{ borderRadius: "4px" }}
+                    type="submit"
+                    plain={false}
+                    primary
+                    color="#ED2D23">
+                    Sign the petition
+                  </Button>
+                  <TextArea placeholder="Add an optional message telling us why you signed" name="message" resize="vertical" value={message} onChange={e => setMessage(e.target.value)} />
+                </Form >
+              )}
+          </>
         )
       }
     </>

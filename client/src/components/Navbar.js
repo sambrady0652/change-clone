@@ -14,8 +14,8 @@ const Navbar = () => {
     <Header justify="around" pad={{ vertical: "xsmall" }}>
       <Header justify="center" >
         <NavAnchor label="LOGO HERE" href="/" />
-        <NavAnchor label="Start a petition" href="/start-a-petition" />
-        <NavAnchor label="My petitions" href="/u/me" />
+        {needSignIn ? null : <NavAnchor label="Start a petition" href="/start-a-petition" />}
+        {needSignIn ? null : <NavAnchor label="My petitions" href="/u/me" />}
         <NavAnchor label="Browse" href="/petitions" />
         <NavAnchor disabled label="Membership" href="" />
       </Header>
