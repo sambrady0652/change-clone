@@ -8,7 +8,6 @@ const GET_PETITIONS = 'change/petitions/GET_PETITIONS';
 
 //FETCH ALL PETITIONS 
 export const fetchPetitions = () => async dispatch => {
-  console.log('FETCHING')
   const response = await fetch(`${baseUrl}/api/petitions`)
   if (!response.ok) {
     throw response;
