@@ -81,19 +81,23 @@ def petiton_signatures(petition_id):
         return new_sig.to_dict()
 
 
-@bp.route('/<int:id>/updates', methods=['GET', 'POST'])
+@bp.route('/<int:petition_id>/updates', methods=['GET', 'POST'])
 def petition_updates(petition_id):
     if request.method == 'GET':
         updates = Update.query.filter(
             Update.petition_id == petition_id).all()
         return {str(update.id): update.to_dict() for update in updates}
     if request.method == 'POST':
-        data = request.json
-        new_update = Update(petition_id=petition_id,
-                            header=data.header, content=data.content)
-        db.session.add(new_update)
-        db.session.commit()
-        return new_update.to_dict()
+        header = request.form.get('header')
+        content = request.form.get('content')
+        mediaurl = request.form.get('mediaurl')
+
+        newUpdate = Update(petition_id = petition_id, header=header, content=content, mediaurl=mediaurl)
+    db.session.add(newUpdate)
+    db.session.commit()
+    return newUpdate.to_dict()
+
+  
 
 @bp.route('/<int:id>/user_signed_petitions', methods=['GET'])
 def user_signed_petitions(id):
