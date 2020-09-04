@@ -12,7 +12,7 @@ const StartPetitions = () => {
 
   useEffect(() => {
     dispatch(fetchTopics())
-  }, [])
+  }, [dispatch])
 
   const [topic, setTopic] = useState('1');
   const [header, setHeader] = useState("");
@@ -27,7 +27,6 @@ const StartPetitions = () => {
   const nextView = () => {
     let next = currentView + 1
     setCurrentView(next);
-    // console.log(testTopic)
   };
 
   const prevView = () => {
@@ -36,11 +35,18 @@ const StartPetitions = () => {
   }
 
   const creator_id = useSelector(state => state.currentUser.id)
+<<<<<<< HEAD
   
   const onSubmit = async e => {
     e.preventDefault()
  
     await dispatch(postPetition({
+=======
+
+  const onSubmit = e => {
+    e.preventDefault()
+    dispatch(postPetition({
+>>>>>>> b497166d6b0644bbb26fa0b0f306c4ef29a42ca4
       topic_id: topic,
       header,
       description,
@@ -48,7 +54,7 @@ const StartPetitions = () => {
       creator_id,
       file: imageUrl
     }))
-    
+
   }
 
   const formViews = [
@@ -72,7 +78,6 @@ const StartPetitions = () => {
 function SelectTopic(props) {
   const topics = Object.values(useSelector((state) => ({ ...state.topics })));
   const [selected, setSelected] = useState('Local')
-  // console.log(topics);
 
   const pickTopic = e => {
     const chosen = topics.filter(topic => topic.topic === e.target.value)[0]
@@ -146,7 +151,7 @@ function InputGoal(props) {
 
       <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around' }} >
         <Button color='#ED2D23' secondary label="< Previous" onClick={props.prevView} />
-        {props.goal == 0 ? null : <Button color='#ED2D23' secondary label="Next >" onClick={props.nextView} />}
+        {props.goal === 0 ? null : <Button color='#ED2D23' secondary label="Next >" onClick={props.nextView} />}
       </div>
     </div>
   )
@@ -161,7 +166,6 @@ function InputImage(props) {
     } catch (e) {
       props.setImagePreivew('https://change-clone.s3-us-west-1.amazonaws.com/default_petition.png')
     }
-    console.log(e.target.files.item(0))
   }
 
   return (
@@ -218,7 +222,7 @@ function SubmitConfirmation(props) {
         <Paragraph textAlign='start' alignSelf='center'>{props.description}</Paragraph>
       </Box>
 
-      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around', marginBottom: '30px'}} >
+      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around', marginBottom: '30px' }} >
         <Button color='#ED2D23' secondary label="< Previous" onClick={props.prevView} />
         <Button color='#ED2D23' primary label="Submit" onClick={submit_redirect} />
       </div>

@@ -8,8 +8,6 @@ bp = Blueprint('petitions', __name__)
 
 s3 = boto3.resource('s3')
 bucket = s3.Bucket(name='change-clone')
-print(bucket.creation_date)
-# print(dir(bucket))
 
 @bp.route('', methods=['GET'])
 def get_petitions():
@@ -21,7 +19,6 @@ def get_petitions():
 
 @bp.route('', methods=['POST'])
 def post_petition():
-    # print(dir(request.data))
     data = dict(request.form)
     img_url = 'https://change-clone.s3-us-west-1.amazonaws.com/default_petition.png'
     if len(request.files) > 0:

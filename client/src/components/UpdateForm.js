@@ -1,29 +1,15 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { useDispatch } from 'react-redux';
-import Navbar from "./Navbar"
 import { baseUrl } from '../config';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'
 
 const UpdateForm = (props) => {
   const [header, setHeader] = useState('')
-  const [link, setLink] = useState('')
-  const [displayText, setDisplayText] = useState('');
   const [content, setContent] = useState('');
   const [mediaurl, setMediaUrl] = useState('');
-  // const [petitionId, setPetitionId]
   const dispatch = useDispatch();
-  const { name }  = useParams()
-
-  const handleInsertLink = async (e) => {
-    e.preventDefault();
-    dispatch()
-  }
-
-  const handleCancelButton = async (e) => {
-    e.preventDefault();
-    dispatch()
-  }
+  const { name } = useParams()
 
   const handleMediaSubmit = async (e) => {
     e.preventDefault();
@@ -33,24 +19,21 @@ const UpdateForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     var formData = new FormData();
-    var imagefile = document.querySelector('#file');
-   formData.append('header', header)
-   formData.append('content', content)
-   formData.append('mediaurl', mediaurl)
-   formData.append('name', name)
-   console.log(`this is ${name}`)
-  //  if (imagefile.files[0]){
-  //  formData.append('uploadPhoto', imagefile.files[0])
-  //  }
+
+    formData.append('header', header)
+    formData.append('content', content)
+    formData.append('mediaurl', mediaurl)
+    formData.append('name', name)
+
     axios.post(`${baseUrl}/api/petitions/${name}/updates`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     })
-    return 
- 
+    return
+
   };
-  
+
 
   return (
     <Fragment>
@@ -66,27 +49,6 @@ const UpdateForm = (props) => {
                   onChange={e => setHeader(e.target.value)} />
               </div>
             </div>
-
-            {/* <div id="insert_link">
-            <div id="insertLinkDiv">
-              <div id="inserLinkText">Insert Link</div>
-              <div id="exitText">x</div>
-            </div>
-            <label>
-              Url <input type="text" name="urlText"
-                     value={link}
-                     onChange={e => setLink(e.target.value)}/>
-            </label>
-            <label>
-              Text to display <input type="text" name="displayText"
-                                value={displayText}
-                                onChange={e => setDisplayText(e.target.value)}/>
-            </label>
-            <div id="buttons_div">
-              <button id="okButton" onClick={handleInsertLink}>Ok</button>
-              <button id="cancelButton" onClick={handleCancelButton}>Cancel</button>
-            </div>
-          </div> */}
             <div id="body_div">
               <div id="body_control">
                 <label id="development_label">Your latest development</label>
@@ -97,7 +59,6 @@ const UpdateForm = (props) => {
                 </div>
               </div>
               <div id="media_div">
-                {/* <div id="media_exit">X</div> */}
                 <label id="addMediadiv">Add media(optional)</label>
                 <div id="upload_media_div">
                   <div id="upload_container">
