@@ -65,24 +65,27 @@ const MyPetitions = () => {
 
   return (
     <>
+    <div style={{height: '100%', overflow: "hidden", paddingBottom: '125px', zIndex: '1'}}>
+      <Navbar />
       <Heading margin={{ bottom: "small" }} textAlign="center">{firstName} {lastName}</Heading>
-      <Box justify="center" align="center" style={{ position: "relative" }}>
-        <Heading level={2} >{location}</Heading>
-        <button className="button is-danger is-outlined" style={{ margin: "10px" }} onClick={() => { history.push("/settings") }}>Settings</button>
-        <Tabs>
-          <Tab title="Started">
-            <Main background="#F6F4F6">
-              {startedPetitions.map(petition => makeCard(petition))}
-            </Main>
-          </Tab>
-          <Tab title="Signed">
-            <Main background="#F6F4F6">
-              {signedPetitions.map(petition => makeCard(petition))}
-            </Main>
-          </Tab>
-        </Tabs>
-      </Box>
-    </>
+        <Box justify="center" align="center" style={{ position: "relative" }}>
+          <Heading level={2} >{location}</Heading>
+          <button className="button is-danger is-outlined" style={{margin: "10px"}} onClick={()=> {history.push("/settings")}}>Settings</button>
+          <Tabs>
+            <Tab title="Started">
+              <Main background="#F6F4F6">
+                {startedPetitions.map(petition => makeCard(petition))}
+              </Main>
+            </Tab>
+            <Tab title="Signed">
+              <Main background="#F6F4F6">
+                {signedPetitions.map(petition => makeCard(petition))}
+              </Main>
+              </Tab>
+          </Tabs>
+        </Box>
+    </div>
+     </>
   )
 }
 
