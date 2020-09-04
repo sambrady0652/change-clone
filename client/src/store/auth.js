@@ -88,7 +88,7 @@ export const signOut = () => async (dispatch) => {
 export const setUser = (access_token, id, signed_petitions) => ({
   type: SET_USER,
   access_token,
-  id,
+  id: Number(id),
   signed_petitions
 });
 

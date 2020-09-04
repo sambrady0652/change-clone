@@ -59,7 +59,7 @@ export const userSignPetition = (user_id, message, petition_id, header) => async
 
 //ACTION CREATORS
 export const getPetition = (data, creatorData) => {
-  const { id, description, creator, current, goal, header, signatures, image_url } = data
+  const { id, description, current, goal, header, signatures, image_url } = data
   return ({
     type: GET_PETITION,
     id,

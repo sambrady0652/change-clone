@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import Navbar from './Navbar'
 import { makeCard } from '../components/Petitions'
 import { apiUrl } from '../config';
 import { Main, Heading, Box, Tab, Tabs } from 'grommet'
@@ -13,7 +12,7 @@ const MyPetitions = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [location, setLocation] = useState('')
-  const [id, setId] = useState(parseInt(localStorage.getItem('USER_ID')))
+  const [id, setId] = useState(Number(localStorage.getItem('USER_ID')))
   const [Signed, setSigned] = useState([])
   const history = useHistory()
   let petitions = useSelector(state => state.petitions);
@@ -35,6 +34,7 @@ const MyPetitions = () => {
       setFirstName(responseData.first_name)
       setLastName(responseData.last_name)
       setLocation(responseData.location)
+      setId(Number(localStorage.getItem("USER_ID")))
     }
 
     async function fetchSignedPetitions() {
@@ -51,7 +51,7 @@ const MyPetitions = () => {
     fetchUserInfo();
     fetchSignedPetitions()
     dispatch(fetchPetitions())
-  }, []);
+  }, [dispatch]);
 
   if (Signed.length > 0) {
     for (let key in petitions) {

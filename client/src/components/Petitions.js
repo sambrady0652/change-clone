@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Main, Heading, Box, Tab, Tabs } from 'grommet'
 
 import PetitionCard from './PetitionCard'
-import Navbar from './Navbar'
 import { fetchPetitions } from '../store/petitions';
 
 export const makeCard = (petition) => {
@@ -26,7 +25,7 @@ const Petitions = () => {
 
   useEffect(() => {
     dispatch(fetchPetitions())
-  }, [])
+  }, [dispatch])
   // TODO: Develop algorithm to select Featured, Popular, and Recent Petitions
   const allPetitions = Object.values(petitions)
   return (
