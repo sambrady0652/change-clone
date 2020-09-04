@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
-import { Heading, Box, Meter, Text, Image, Avatar, Paragraph } from 'grommet'
+import { Heading, Box, Button, Meter, Text, Image, Avatar, Paragraph } from 'grommet'
 
 import Navbar from './Navbar'
 import SignPetitionForm from './SignPetitionForm'
@@ -12,7 +12,7 @@ const PetitionDetails = () => {
   const { id, description, creator, current, goal, image_url } = useSelector(state => state.currentPetition)
   const { first_name, last_name, profile_pic_url } = creator
   const dispatch = useDispatch()
-
+  const isCreator = id === creator.id
   useEffect(() => {
     dispatch(fetchPetitionDetails(header))
   }, [])
@@ -35,6 +35,9 @@ const PetitionDetails = () => {
           <Paragraph fill={true}>{description}</Paragraph>
           {/* TO DO: */}
           <div>UPDATES</div>
+          {isCreator && (
+            <Button>Click Here</Button>
+          )}
           <div>REASONS FOR SIGNING</div>
         </Box>
         <Box flex={{ grow: 1 }}>
