@@ -69,7 +69,6 @@ const SettingsPage = () => {
 
   return (
     <>
-      <Navbar />
       <Box justify="center" align="center" >
         <Heading margin={{ bottom: "small" }} textAlign="center">{firstName} {lastName}</Heading>
         <Text margin={{ top: "small" }} weight="bold">Thanks for being an active member of our community. Together we are Change.  </Text>

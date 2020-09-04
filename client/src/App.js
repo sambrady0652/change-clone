@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
-
+import React, { useEffect } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import Footer from './components/Footer'
 import Home from "./components/Home"
 import Search from "./components/Search"
 import UpdateForm from "./components/UpdateForm"
@@ -55,6 +55,7 @@ function App() {
             path="/petitions/:name/updateform"
             component={UpdateForm} />
         </Switch>
+        <Footer/>
       </BrowserRouter>
     </>
   );
