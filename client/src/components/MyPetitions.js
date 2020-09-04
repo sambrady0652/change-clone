@@ -62,6 +62,7 @@ const MyPetitions = () => {
 
   return (
     <>
+    <div style={{height: '100%', overflow: "hidden", paddingBottom: '125px', zIndex: '1'}}>
       <Navbar />
       <Heading margin={{ bottom: "small" }} textAlign="center">{firstName} {lastName}</Heading>
         <Box justify="center" align="center" style={{ position: "relative" }}>
@@ -80,6 +81,7 @@ const MyPetitions = () => {
               </Tab>
           </Tabs>
         </Box>
+    </div>
       </>
   )
 }
