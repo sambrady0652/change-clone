@@ -12,14 +12,9 @@ const reducer = combineReducers({
   currentUser,
   currentPetition,
   petitions,
-<<<<<<< HEAD
   users, 
   updates,
   topics
-=======
-  users,
-  updates
->>>>>>> 10d2d7da25b7119e5da8680ec3cc24d3f6a94ea0
   //ADD ADDITIONAL SLICES OF STATE HERE 
 });
 

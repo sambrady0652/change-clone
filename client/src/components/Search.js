@@ -1,21 +1,18 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import Navbar from './Navbar'
 import 'bulma/css/bulma.css'
 import { makeCard } from '../components/Petitions'
+import { fetchPetitions } from '../store/petitions'
 
 const Search = () => {
-<<<<<<< HEAD
-  return (
-    <>
-      <div style={{display: "flex", justifyContent: "center"}}>
-        <div class="control">
-          <div>Search</div>
-          <div style={{display: "flex"}}>
-            <input class="input" type="text" placeholder="Search petitions"/>
-            <button class="button is-link">Search</button>
-=======
-  let petitions = useSelector(state => state.petitions);
+  const { petitions } = useSelector(state => state)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchPetitions())
+  }, [])
+
   let array = []
   for(let key in petitions){
     array.push(petitions[key])
@@ -67,7 +64,6 @@ const Search = () => {
   if (searchResults.length === 0 && !flag){
     return (
       <>
-        <Navbar/>
         <div style={{display: "flex", justifyContent: "center"}}>
           <div className="control">
             <div>Search</div>
@@ -100,7 +96,6 @@ const Search = () => {
               {searchResults.map(ele =>
                   makeCard(ele))}
             </div>
->>>>>>> 10d2d7da25b7119e5da8680ec3cc24d3f6a94ea0
           </div>
         </div>
       </>

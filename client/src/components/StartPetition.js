@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import { Button, RadioButtonGroup, TextInput, TextArea, Heading, Box, Image, Paragraph } from 'grommet'
 import { NumberInput } from 'grommet-controls'
 
 import { postPetition } from '../store/petitions'
+import { fetchTopics } from '../store/topics'
 
 const StartPetitions = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchTopics())
+  }, [])
+
   const [topic, setTopic] = useState('1');
   const [header, setHeader] = useState("");
   const [description, setDescription] = useState("");
@@ -27,8 +34,6 @@ const StartPetitions = () => {
     let prev = currentView - 1
     setCurrentView(prev)
   }
-
-  const dispatch = useDispatch()
 
   const creator_id = useSelector(state => state.currentUser.id)
   

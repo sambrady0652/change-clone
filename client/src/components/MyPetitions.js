@@ -62,7 +62,6 @@ const MyPetitions = () => {
 
   return (
     <>
-      <Navbar />
       <Heading margin={{ bottom: "small" }} textAlign="center">{firstName} {lastName}</Heading>
         <Box justify="center" align="center" style={{ position: "relative" }}>
           <Heading level={2} >{location}</Heading>

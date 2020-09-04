@@ -46,7 +46,6 @@ const UpdateForm = (props) => {
 
   return (
     <Fragment>
-      <Navbar />
       <div id="siteWrapper">
         <div id="updateh1">Update your supporters</div>
         <div id="update_form_wrapper">

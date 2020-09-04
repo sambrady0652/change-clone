@@ -19,7 +19,6 @@ const PetitionDetails = () => {
 
   return (
     <>
-      <Navbar />
       {/* TO DO */}
       <div>Secondary Nav Here?</div>
       <Box>
