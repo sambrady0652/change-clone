@@ -2,17 +2,21 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-
-import Navbar from './components/Navbar'
-import Home from "./components/Home";
-import Search from "./components/Search";
-import StartPetition from "./components/StartPetition";
-import MyPetitions from "./components/MyPetitions";
-import Petitions from "./components/Petitions";
-import SettingsPage from "./components/SettingsPage";
+import Home from "./components/Home"
+import Search from "./components/Search"
+import UpdateForm from "./components/UpdateForm"
+import StartPetition from "./components/StartPetition"
+import MyPetitions from "./components/MyPetitions"
+import Petitions from "./components/Petitions"
+import SettingsPage from "./components/SettingsPage"
+import UpdateCard from './components/UpdateCard'
+import { fetchTopics } from "./store/topics";
+import { setUser } from './store/auth'
+import { fetchPetitions } from './store/petitions'
+// import { fetchUsers } from './store/users'
 import PetitionDetails from './components/PetitionDetails';
 import { fetchUserDetails } from './store/auth'
-import UpdateForm from './components/UpdateForm'
+import Navbar from './components/Navbar'
 
 function App() {
   const token = localStorage.getItem("SESSION_TOKEN");
