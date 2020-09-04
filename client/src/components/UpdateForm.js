@@ -1,13 +1,15 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import Navbar from "./Navbar"
+import { baseUrl } from '../config';
+import axios from 'axios';
 
 const UpdateForm = (props) => {
-  const [headline, setHeadline] = useState('')
+  const [header, setHeader] = useState('')
   const [link, setLink] = useState('')
   const [displayText, setDisplayText] = useState('');
-  const [body, setBody] = useState('');
-  const [mediaUrl, setMediaUrl] = useState('');
+  const [content, setContent] = useState('');
+  const [mediaurl, setMediaUrl] = useState('');
   const dispatch = useDispatch();
 
   const handleInsertLink = async (e) => {
@@ -27,8 +29,20 @@ const UpdateForm = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch()
-  }
+    var formData = new FormData();
+  
+   formData.append('header', header)
+   formData.append('content', content)
+   formData.append('mediaurl', mediaurl)
+    axios.post(`${baseUrl}/api/petitions/1/updates`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+    })
+    return 
+ 
+  };
+  
 
   return (
     <Fragment>
@@ -41,8 +55,8 @@ const UpdateForm = (props) => {
               <label id="headline_label">Headline:</label>
               <div id="inputdiv2">
                 <input type="text" name="headline" id="update_headline"
-                  value={headline}
-                  onChange={e => setHeadline(e.target.value)} />
+                  value={header}
+                  onChange={e => setHeader(e.target.value)} />
               </div>
             </div>
 
@@ -71,8 +85,8 @@ const UpdateForm = (props) => {
                 <label id="development_label">Your latest development</label>
                 <div id="body_input_div">
                   <input type="text" name="body" id="update_body"
-                    value={body}
-                    onChange={e => setBody(e.target.value)} />
+                    value={content}
+                    onChange={e => setContent(e.target.value)} />
                 </div>
               </div>
               <div id="media_div">
@@ -84,7 +98,7 @@ const UpdateForm = (props) => {
                     <div id="url_add">
                       <div id="urlinputdiv">
                         <input type="text" id="url_input"
-                          value={mediaUrl}
+                          value={mediaurl}
                           onChange={e => setMediaUrl(e.target.value)} />
                       </div>
                       <span id="addSpan">
