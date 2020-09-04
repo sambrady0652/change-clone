@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import { Button, RadioButtonGroup, TextInput, TextArea, Heading, Box, Image, Paragraph } from 'grommet'
 import { NumberInput } from 'grommet-controls'
@@ -29,6 +30,8 @@ const StartPetitions = () => {
 
   const dispatch = useDispatch()
 
+  const creator_id = useSelector(state => state.currentUser.id)
+  
   const onSubmit = e => {
     e.preventDefault()
     console.log({
@@ -39,13 +42,14 @@ const StartPetitions = () => {
       imageUrl
     })
     dispatch(postPetition({
-      topic,
+      topic_id: topic,
       header,
       description,
       goal,
+      creator_id,
       file: imageUrl
     }))
-
+    
   }
 
   const formViews = [
@@ -54,8 +58,10 @@ const StartPetitions = () => {
     <InputDescription prevView={prevView} nextView={nextView} description={description} setDescription={setDescription} />,
     <InputGoal prevView={prevView} nextView={nextView} goal={goal} setGoal={setGoal} />,
     <InputImage prevView={prevView} nextView={nextView} imageUrl={imageUrl} setImageUrl={setImageUrl} imagePreview={imagePreview} setImagePreivew={setImagePreivew} />,
-    <SubmitConfirmation onSubmit={onSubmit} prevView={prevView} topic={useSelector(state => state.topics[topic])} header={header} description={description} goal={goal} imagePreview={imagePreview} />
+    <SubmitConfirmation nextView={nextView} onSubmit={onSubmit} prevView={prevView} topic={useSelector(state => state.topics[topic])} header={header} description={description} goal={goal} imagePreview={imagePreview} />,
+    <Redirect to='/' />
   ];
+
 
   return (
     <div style={{ margin: '0 auto', textAlign: 'center', maxWidth: '750px' }}>
@@ -87,7 +93,7 @@ function SelectTopic(props) {
         onChange={pickTopic}
         style={{ margin: '0 auto', width: '25%' }}
       />
-      <Button secondary label="Next >" onClick={props.nextView} style={{ marginTop: '20px' }} />
+      <Button color='#ED2D23' secondary label="Next >" onClick={props.nextView} style={{ marginTop: '20px' }} />
     </div>
   );
 }
@@ -103,8 +109,8 @@ function InputHeader(props) {
       <TextInput size='xlarge' value={props.header} onChange={e => props.setHeader(e.target.value)} />
 
       <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around' }} >
-        <Button secondary label="< Previous" onClick={props.prevView} />
-        {props.header === '' ? null : <Button secondary label="Next >" onClick={props.nextView} />}
+        <Button color='#ED2D23' secondary label="< Previous" onClick={props.prevView} />
+        {props.header === '' ? null : <Button color='#ED2D23' secondary label="Next >" onClick={props.nextView} />}
       </div>
 
     </div>
@@ -122,8 +128,8 @@ function InputDescription(props) {
       <TextArea size='xlarge' value={props.description} onChange={e => props.setDescription(e.target.value)} />
 
       <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around' }} >
-        <Button secondary label="< Previous" onClick={props.prevView} />
-        {props.description === '' ? null : <Button secondary label="Next >" onClick={props.nextView} />}
+        <Button color='#ED2D23' secondary label="< Previous" onClick={props.prevView} />
+        {props.description === '' ? null : <Button color='#ED2D23' secondary label="Next >" onClick={props.nextView} />}
       </div>
     </div>
   )
@@ -140,8 +146,8 @@ function InputGoal(props) {
       <NumberInput min={0} max={100000000} step={100} value={props.goal} onChange={e => props.setGoal(e.target.value)} />
 
       <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around' }} >
-        <Button secondary label="< Previous" onClick={props.prevView} />
-        {props.goal == 0 ? null : <Button secondary label="Next >" onClick={props.nextView} />}
+        <Button color='#ED2D23' secondary label="< Previous" onClick={props.prevView} />
+        {props.goal == 0 ? null : <Button color='#ED2D23' secondary label="Next >" onClick={props.nextView} />}
       </div>
     </div>
   )
@@ -177,8 +183,8 @@ function InputImage(props) {
       <input type='file' onChange={onChange} accept='image/*' />
 
       <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around' }} >
-        <Button secondary label="< Previous" onClick={props.prevView} />
-        <Button secondary label="Next >" onClick={props.nextView} />
+        <Button color='#ED2D23' secondary label="< Previous" onClick={props.prevView} />
+        <Button color='#ED2D23' secondary label="Next >" onClick={props.nextView} />
       </div>
     </div>
 
@@ -186,7 +192,11 @@ function InputImage(props) {
 }
 
 function SubmitConfirmation(props) {
-  console.log(props.topic)
+  const submit_redirect = e => {
+    props.onSubmit(e)
+    props.nextView()
+  }
+
   return (
     <div>
       <Box>
@@ -210,8 +220,8 @@ function SubmitConfirmation(props) {
       </Box>
 
       <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around', marginBottom: '30px'}} >
-        <Button secondary label="< Previous" onClick={props.prevView} />
-        <Button primary label="Submit" onClick={props.onSubmit} />
+        <Button color='#ED2D23' secondary label="< Previous" onClick={props.prevView} />
+        <Button color='#ED2D23' primary label="Submit" onClick={submit_redirect} />
       </div>
     </div>
 

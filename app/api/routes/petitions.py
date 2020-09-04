@@ -1,11 +1,17 @@
 from flask import Blueprint, request
+import boto3
+from datetime import datetime
 
 from app.models import Petition, db, Signature, Update
 
 bp = Blueprint('petitions', __name__)
 
+s3 = boto3.resource('s3')
+bucket = s3.Bucket(name='change-clone')
+print(bucket.creation_date)
+# print(dir(bucket))
 
-@bp.route('/', methods=['GET'])
+@bp.route('', methods=['GET'])
 def get_petitions():
     petitions = Petition.query.all()
     formatted_petitions = {str(petition.id): petition.to_dict()
@@ -13,25 +19,29 @@ def get_petitions():
     return formatted_petitions
 
 
-@bp.route('/', methods=['POST'])
+@bp.route('', methods=['POST'])
 def post_petition():
     # print(dir(request.data))
-    # print(request.form['files'][0])
-    print(request.form.to_dict())
-    # print(file)
-    return '200', 200
-    # new_petition = Petition(header=data['header'], description=data['description'], goal=int(
-    #     data['goal']), current=1, creator_id=data['creator_id'], topic_id=data['topic_id'])
-    # db.session.add(new_petition)
-    # db.session.commit()
-    # return {
-    #     'header': new_petition.header,
-    #     'description': new_petition.description,
-    #     'goal': new_petition.goal,
-    #     'current': new_petition.current,
-    #     'creator_id': new_petition.creator_id,
-    #     'topic_id': new_petition.topic_id
-    # }
+    data = dict(request.form)
+    img_url = 'https://change-clone.s3-us-west-1.amazonaws.com/default_petition.png'
+    if len(request.files) > 0:
+        img = request.files['file']
+        key=f'{datetime.now()}{img.filename}'
+        bucket.put_object(Key=key, Body=img, ContentType=img.content_type)
+        img_url = f'https://change-clone.s3-us-west-1.amazonaws.com/{key}'
+
+    new_petition = Petition(header=data['header'], description=data['description'], goal=int(
+        data['goal']), current=1, creator_id=data['creator_id'], topic_id=data['topic_id'], image_url=img_url)
+    db.session.add(new_petition)
+    db.session.commit()
+    return {
+        'header': new_petition.header,
+        'description': new_petition.description,
+        'goal': new_petition.goal,
+        'current': new_petition.current,
+        'creator_id': new_petition.creator_id,
+        'topic_id': new_petition.topic_id
+    }
 
 
 @bp.route('/<int:id>', methods=['GET', 'PUT', 'PATCH', 'DELETE'])
