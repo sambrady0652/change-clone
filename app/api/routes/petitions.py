@@ -31,7 +31,7 @@ def post_petition():
         img_url = f'https://change-clone.s3-us-west-1.amazonaws.com/{key}'
 
     new_petition = Petition(header=data['header'], description=data['description'], goal=int(
-        data['goal']), current=1, creator_id=data['creator_id'], topic_id=data['topic_id'], image_url=img_url)
+        data['goal']), current=0, creator_id=data['creator_id'], topic_id=data['topic_id'], image_url=img_url)
     db.session.add(new_petition)
     db.session.commit()
     return {

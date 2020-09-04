@@ -37,16 +37,10 @@ const StartPetitions = () => {
 
   const creator_id = useSelector(state => state.currentUser.id)
   
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault()
-    console.log({
-      topic,
-      header,
-      description,
-      goal,
-      imageUrl
-    })
-    dispatch(postPetition({
+ 
+    await dispatch(postPetition({
       topic_id: topic,
       header,
       description,
@@ -64,7 +58,7 @@ const StartPetitions = () => {
     <InputGoal prevView={prevView} nextView={nextView} goal={goal} setGoal={setGoal} />,
     <InputImage prevView={prevView} nextView={nextView} imageUrl={imageUrl} setImageUrl={setImageUrl} imagePreview={imagePreview} setImagePreivew={setImagePreivew} />,
     <SubmitConfirmation nextView={nextView} onSubmit={onSubmit} prevView={prevView} topic={useSelector(state => state.topics[topic])} header={header} description={description} goal={goal} imagePreview={imagePreview} />,
-    <Redirect to='/' />
+    <Redirect to={`/p/${header}`} />
   ];
 
 
@@ -197,8 +191,8 @@ function InputImage(props) {
 }
 
 function SubmitConfirmation(props) {
-  const submit_redirect = e => {
-    props.onSubmit(e)
+  const submit_redirect = async e => {
+    await props.onSubmit(e)
     props.nextView()
   }
 

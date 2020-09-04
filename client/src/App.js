@@ -33,7 +33,7 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar />
-        <Switch>
+        <Switch >
           <Route
             exact path="/"
             component={Home}
@@ -56,11 +56,7 @@ function App() {
           <Route
             path="/settings"
             component={SettingsPage} />
-<<<<<<< HEAD
           <Route 
-=======
-          <Route
->>>>>>> ba51bc9a9d19b68a9e998847cc9abcf2a53f42a9
             path="/petitions/:name/updateform"
             component={UpdateForm} />
         </Switch>
