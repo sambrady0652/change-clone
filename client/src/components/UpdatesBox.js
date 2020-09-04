@@ -6,7 +6,9 @@ const UpdatesBox = (props) => {
   const [updates, setUpdates] = useState([])
   const dispatch = useDispatch();
 
-  return ();
+  return (
+    
+  );
 }
 
 export default Updates

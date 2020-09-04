@@ -22,10 +22,10 @@ export const signIn = (email, password) => async dispatch => {
       throw response;
     }
     //Place token in Local Storage, update Redux State
-    const { access_token, id } = await response.json();
+    const { access_token, id, signed_petitions } = await response.json();
     localStorage.setItem(SESSION_TOKEN, access_token);
     localStorage.setItem(USER_ID, id);
-    dispatch(setUser(access_token, id));
+    dispatch(setUser(access_token, id, signed_petitions));
   }
   catch (err) {
     const errJSON = await err.json()
@@ -54,15 +54,26 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
       throw response
     }
     //Place token in Local Storage, update Redux State
-    const { access_token, id } = await response.json();
+    const { access_token, id, signed_petitions } = await response.json();
     localStorage.setItem(SESSION_TOKEN, access_token);
     localStorage.setItem(USER_ID, id);
-    dispatch(setUser(access_token, id));
+    dispatch(setUser(access_token, id, signed_petitions));
   }
   catch (err) {
     const errJSON = await err.json()
     dispatch(handleAuthErrors(errJSON))
   }
+}
+
+//FETCH USER DETAILS 
+export const fetchUserDetails = (access_token, id) => async dispatch => {
+  const res = await fetch(`${baseUrl}/api/users/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('SESSION_TOKEN')}`,
+    }
+  })
+  const { signed_petitions } = await res.json()
+  dispatch(setUser(access_token, id, signed_petitions))
 }
 
 //SIGN OUT
@@ -74,10 +85,11 @@ export const signOut = () => async (dispatch) => {
 
 
 //ACTION CREATOR FUNCTIONS
-export const setUser = (access_token, id) => ({
+export const setUser = (access_token, id, signed_petitions) => ({
   type: SET_USER,
   access_token,
-  id
+  id,
+  signed_petitions
 });
 
 export const handleAuthErrors = (errJSON) => ({
@@ -91,7 +103,7 @@ export const removeUser = () => ({
 
 
 //REDUCER
-export default function reducer(state = { needSignIn: true }, action) {
+export default function reducer(state = { needSignIn: true, signedPetitions: [] }, action) {
   Object.freeze(state);
   const newState = Object.assign({}, state);
   switch (action.type) {
@@ -99,18 +111,21 @@ export default function reducer(state = { needSignIn: true }, action) {
       return {
         token: action.access_token,
         id: action.id,
+        signedPetitions: action.signed_petitions,
         needSignIn: false
       }
     }
     case AUTH_ERROR: {
       return {
         needSignIn: true,
-        authErrors: action.errJSON['errors']
+        authErrors: action.errJSON['errors'],
+        signedPetitions: []
       }
     }
     case REMOVE_USER: {
       return {
-        needSignIn: true
+        needSignIn: true,
+        signedPetitions: []
       }
     }
     default: return newState;

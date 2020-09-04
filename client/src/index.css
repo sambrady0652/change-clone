@@ -7,3 +7,684 @@
   max-height: calc(var(--lh) * var(--max-lines));
   overflow: hidden;
 }
+
+#siteWrapper{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+ 
+}
+#update_form_wrapper{
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  display:block;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  line-height:24px;
+  margin-bottom:60px;
+  margin-top:0px;
+  text-size-adjust:100%;
+}
+
+#updateh1{
+    display: block;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    font-size: 2.44140625rem;
+    line-height: 1.2288;
+    margin: .3072em 0;
+    width: 540px;
+}
+
+#headline_div {
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  display:block;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  line-height:24px;
+  margin-bottom:10px;
+  text-size-adjust:100%;
+  
+}
+#headline_label{
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  cursor:default;
+  display:block;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  line-height:24px;
+  margin-bottom:5px;
+  text-size-adjust:100%;
+}
+
+#form_form{
+  color:rgb(54, 49, 53);
+display:block;
+font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+font-size:16px;
+height:830px;
+line-height:24px;
+margin-top:0px;
+text-size-adjust:100%;
+width:560px;
+-webkit-font-smoothing:antialiased;
+
+}
+
+#inputdiv2 {
+  color:rgb(54, 49, 53);
+display:block;
+font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+font-size:16px;
+line-height:24px;
+margin-top:0px;
+text-size-adjust:100%;
+-webkit-font-smoothing:antialiased;
+
+}
+
+#update_headline{
+  appearance:none;
+  background-color:rgb(255, 255, 255);
+  border-bottom-color:rgb(219, 217, 219);
+  border-bottom-left-radius:5px;
+  border-bottom-right-radius:5px;
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+  border-image-outset:0;
+  border-image-repeat:stretch;
+  border-image-slice:100%;
+  border-image-source:none;
+  border-image-width:1;
+  border-left-color:rgb(219, 217, 219);
+  border-left-style:solid;
+  border-left-width:1px;
+  border-right-color:rgb(219, 217, 219);
+  border-right-style:solid;
+  border-right-width:1px;
+  border-top-color:rgb(219, 217, 219);
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+  border-top-style:solid;
+  border-top-width:1px;
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  cursor:text;
+  display:block;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  font-stretch:100%;
+  font-style:normal;
+  font-variant-caps:normal;
+  font-variant-east-asian:normal;
+  font-variant-ligatures:normal;
+  font-variant-numeric:normal;
+  font-weight:400;
+  letter-spacing:normal;
+  line-height:normal;
+  margin-bottom:0px;
+  margin-left:0px;
+  margin-right:0px;
+  width: 97%;
+  margin-top:0px;
+  overflow-x:visible;
+  overflow-y:visible;
+  padding-bottom:10px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:10px;
+  text-align:start;
+  text-indent:0px;
+  text-rendering:auto;
+  text-shadow:none;
+  text-size-adjust:100%;
+  text-transform:none;
+  word-spacing:0px;
+  writing-mode:horizontal-tb;
+  -webkit-rtl-ordering:logical;
+  -webkit-border-image:none;
+}
+
+#body_div {
+ 
+}
+#body_control{
+  box-sizing:border-box;
+color:rgb(54, 49, 53);
+display:block;
+font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+font-size:16px;
+height:314px;
+line-height:24px;
+margin-bottom:10px;
+text-size-adjust:100%;
+}
+
+#update_body{
+  font-family: sans-serif;
+  margin: 10;
+  width: 540px;
+  height: 314px;
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-size: 1rem;
+    vertical-align: top;
+    background: transparent;
+    text-decoration: none;
+    color: #595959;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    text-shadow: none;
+    float: none;
+    position: static;
+    white-space: nowrap;
+    cursor: inherit;
+    -webkit-tap-highlight-color: transparent;
+    line-height: normal;
+    font-weight: normal;
+    text-align: left;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    direction: ltr;
+}
+
+#development_label{
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  cursor:default;
+  display:block;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  line-height:24px;
+  margin-bottom:5px;
+  text-size-adjust:100%;
+}
+
+#update_body {
+background-clip:border-box;
+
+border-bottom-left-radius:5px;
+border-bottom-right-radius:5px;
+border-bottom-style:solid;
+border-bottom-width:1px;
+border-left-style:solid;
+border-left-width:1px;
+border-right-style:solid;
+border-right-width:1px;
+border-top-left-radius:5px;
+border-top-right-radius:5px;
+border-top-style:solid;
+border-top-width:1px;
+box-shadow:rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+box-sizing:content-box;
+display:block;
+font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size:14px;
+font-weight:400;
+height:283px;
+line-height:normal;
+outline-color:rgb(89, 89, 89);
+text-align:left;
+text-decoration-color:rgb(89, 89, 89);
+text-decoration-line:none;
+text-decoration-style:solid;
+text-shadow:none;
+text-size-adjust:100%;
+vertical-align:top;
+width:100%;
+
+
+}
+#addmediadiv {
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  cursor:default;
+  display:block;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  line-height:24px;
+  margin-bottom:5px;
+  text-size-adjust:100%;
+}
+#upload_media_div{
+  box-sizing:border-box;
+color:rgb(54, 49, 53);
+display:block;
+font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+font-size:16px;
+line-height:24px;
+position:relative;
+text-size-adjust:100%;
+  
+
+}
+
+#upload_container {
+  background-color:rgb(246, 244, 246);
+border-bottom-color:rgb(219, 217, 219);
+border-bottom-left-radius:5px;
+border-bottom-right-radius:5px;
+border-bottom-style:solid;
+border-bottom-width:1px;
+border-image-outset:0;
+border-image-repeat:stretch;
+border-image-slice:100%;
+border-image-source:none;
+border-image-width:1;
+border-left-color:rgb(219, 217, 219);
+border-left-style:solid;
+border-left-width:1px;
+border-right-color:rgb(219, 217, 219);
+border-right-style:solid;
+border-right-width:1px;
+border-top-color:rgb(219, 217, 219);
+border-top-left-radius:5px;
+border-top-right-radius:5px;
+border-top-style:solid;
+border-top-width:1px;
+box-sizing:border-box;
+color:rgb(54, 49, 53);
+display:block;
+font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+font-size:16px;
+height:238px;
+line-height:24px;
+margin-bottom:0px;
+margin-top:0px;
+padding-bottom:20px;
+padding-left:20px;
+padding-right:20px;
+padding-top:20px;
+position:relative;
+text-size-adjust:100%;
+}
+
+#url_description{
+  box-sizing:border-box;
+color:rgb(54, 49, 53);
+cursor:default;
+display:block;
+font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+font-size:16px;
+line-height:24px;
+margin-bottom:5px;
+padding-bottom:10px;
+text-size-adjust:100%;
+}
+
+#url_input {
+  appearance:none;
+  background-color:rgb(255, 255, 255);
+  border-bottom-color:rgb(219, 217, 219);
+  border-bottom-left-radius:5px;
+  border-bottom-right-radius:0px;
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+  border-image-outset:0;
+  border-image-repeat:stretch;
+  border-image-slice:100%;
+  border-image-source:none;
+  border-image-width:1;
+  border-left-color:rgb(219, 217, 219);
+  border-left-style:solid;
+  border-left-width:1px;
+  border-right-color:rgb(219, 217, 219);
+  border-right-style:solid;
+  border-right-width:1px;
+  border-top-color:rgb(219, 217, 219);
+  border-top-left-radius:5px;
+  border-top-right-radius:0px;
+  border-top-style:solid;
+  border-top-width:1px;
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  cursor:text;
+  display:block;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  font-stretch:100%;
+  font-style:normal;
+  font-variant-caps:normal;
+  font-variant-east-asian:normal;
+  font-variant-ligatures:normal;
+  font-variant-numeric:normal;
+  font-weight:400;
+  height:47px;
+  letter-spacing:normal;
+  line-height:normal;
+  margin-bottom:0px;
+  margin-left:0px;
+  margin-right:0px;
+  margin-top:0px;
+  overflow-x:visible;
+  overflow-y:visible;
+  padding-bottom:10px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:10px;
+  text-align:start;
+  text-indent:0px;
+  text-rendering:auto;
+  text-shadow:none;
+  text-size-adjust:100%;
+  text-transform:none;
+  word-spacing:0px;
+  writing-mode:horizontal-tb;
+  width: 450px;
+}
+
+#url_add {
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  display:table;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  line-height:24px;
+  text-size-adjust:100%;
+  
+}
+
+#addUrl{
+  display: inline-block;
+  padding: 8px 16px;
+  border: 2px solid #adacad;
+  font-size: 1rem;
+  line-height: normal;
+  margin-left: -1px;
+  white-space: nowrap;
+  border-radius: 0 5px 5px 0;
+  width: auto;
+  height: 78%;
+  background: #dbd9db;
+    color: #adacad;
+    -webkit-filter: none;
+    filter: none;
+    cursor: default;
+    border-color: #dbd9db;
+}
+
+#addSpan{
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  display:table-cell;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  height:60px;
+  line-height:24px;
+  text-size-adjust:100%;
+  vertical-align:top;
+}
+
+#urlinputdiv {
+  box-sizing:border-box;
+color:rgb(54, 49, 53);
+display:table-cell;
+font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+font-size:16px;
+line-height:24px;
+text-size-adjust:100%;
+vertical-align:top;
+
+
+}
+#orContainer {
+  box-sizing:border-box;
+  color:rgb(115, 114, 115);
+  display:block;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  height:25px;
+  line-height:24px;
+  margin-bottom:5px;
+  margin-top:5px;
+  overflow-x:hidden;
+  overflow-y:hidden;
+  position:relative;
+  text-align:center;
+  text-size-adjust:100%;
+}
+
+#orSmallerContainer {
+  box-sizing:border-box;
+  color:rgb(115, 114, 115);
+  display:inline-block;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  height:24px;
+  line-height:24px;
+  padding-bottom:0px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:0px;
+  position:relative;
+  text-align:center;
+  text-size-adjust:100%;
+  width:34.7812px;
+}
+
+#uploadPhoto_container {
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  display:block;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  height:38px;
+  line-height:24px;
+  margin-left:-10px;
+  margin-right:-10px;
+  margin-top:20px;
+  text-size-adjust:100%;
+  
+}
+
+#uploadPhoto {
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  display:block;
+  float:left;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  height:36px;
+  line-height:24px;
+  margin-right:20px;
+  min-height:1px;
+  padding-left:10px;
+  padding-right:10px;
+  position:relative;
+  text-size-adjust:100%;
+  width:150px;
+  
+
+}
+
+#submit_div {
+
+  
+  color:rgb(54, 49, 53);
+  display:flex;
+  flex-direction: row;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  line-height:24px;
+  margin-left:-10px;
+  margin-right:-10px;
+  margin-top:25px;
+  text-size-adjust:100%;
+
+  
+}
+
+#photoWarningDiv {
+  box-sizing:border-box;
+color:rgb(115, 114, 115);
+display:block;
+font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+font-size:12.8px;
+height:38px;
+line-height:19.2px;
+margin-block-end:0px;
+margin-block-start:0px;
+margin-bottom:0px;
+margin-inline-end:0px;
+margin-inline-start:0px;
+margin-left:0px;
+margin-right:0px;
+margin-top:0px;
+padding-left:10px;
+padding-right:10px;
+text-size-adjust:100%;
+}
+
+#postButton {
+  align-items:flex-start;
+  appearance:none;
+  background-attachment:scroll;
+  background-clip:border-box;
+  background-color:rgb(236, 44, 34);
+  background-image:none;
+  background-origin:padding-box;
+  background-position-x:0%;
+  background-position-y:0%;
+  background-repeat-x:;
+  background-repeat-y:;
+  background-size:auto;
+  border-bottom-color:rgb(236, 44, 34);
+  border-bottom-left-radius:5px;
+  border-bottom-right-radius:5px;
+  border-bottom-style:solid;
+  border-bottom-width:2px;
+  border-image-outset:0;
+  border-image-repeat:stretch;
+  border-image-slice:100%;
+  border-image-source:none;
+  border-image-width:1;
+  border-left-color:rgb(236, 44, 34);
+  border-left-style:solid;
+  border-left-width:2px;
+  border-right-color:rgb(236, 44, 34);
+  border-right-style:solid;
+  border-right-width:2px;
+  border-top-color:rgb(236, 44, 34);
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+  border-top-style:solid;
+  border-top-width:2px;
+  box-sizing:border-box;
+  color:rgb(255, 255, 255);
+  cursor:pointer;
+  display:inline-block;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  font-stretch:100%;
+  font-style:normal;
+  font-variant-caps:normal;
+  font-variant-east-asian:normal;
+  font-variant-ligatures:normal;
+  font-variant-numeric:normal;
+  font-weight:700;
+  height:44px;
+  letter-spacing:normal;
+  line-height:16px;
+  margin-bottom:0px;
+  margin-left:0px;
+  margin-right:0px;
+  margin-top:0px;
+  overflow-x:visible;
+  overflow-y:visible;
+  padding-bottom:12px;
+  padding-left:16px;
+  padding-right:16px;
+  padding-top:12px;
+  text-align:center;
+  text-decoration-color:rgb(255, 255, 255);
+  text-decoration-line:none;
+  text-decoration-style:solid;
+  text-indent:0px;
+  text-rendering:auto;
+  text-shadow:none;
+  text-size-adjust:100%;
+  text-transform:none;
+  transition-delay:0s, 0s;
+  transition-duration:0.1s, 0.1s;
+  transition-timing-function:ease, ease;
+  user-select:none;
+  white-space:pre;
+  width:166.656px;
+  word-spacing:0px;
+  writing-mode:horizontal-tb;
+}
+
+#submit_container {
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  display:flex;
+  flex-direction: row;
+  float:left;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  height:44px;
+  line-height:24px;
+  min-height:1px;
+  padding-left:10px;
+  padding-right:10px;
+  right:373.328px;
+  text-size-adjust:100%;
+  width:186.656px;
+}
+
+#warning_div {
+  box-sizing:border-box;
+color:rgb(54, 49, 53);
+display:flex;
+float:left;
+font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+font-size:16px;
+line-height:24px;
+min-height:1px;
+padding-left:10px;
+padding-right:10px;
+position:relative;
+text-size-adjust:100%;
+}
+
+strong{
+  box-sizing:border-box;
+color:rgb(54, 49, 53);
+display:inline;
+font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+font-size:12.8px;
+font-weight:700;
+height:auto;
+line-height:19.2px;
+text-size-adjust:100%;
+}
+
+#warningP{
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  display:block;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:12.8px;
+  height:38px;
+  line-height:19.2px;
+  margin-block-end:0px;
+  margin-block-start:0px;
+  margin-bottom:0px;
+  margin-inline-end:0px;
+  margin-inline-start:0px;
+  margin-left:0px;
+  margin-right:0px;
+  margin-top:0px;
+  text-size-adjust:100%;
+}

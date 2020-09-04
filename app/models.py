@@ -125,15 +125,18 @@ class Update(db.Model):
         "petitions.id"), nullable=False)
     header = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
+    mediaurl = db.Column(db.Text, nullable=True)
     petition = db.relationship("Petition", back_populates="updates")
     comments = db.relationship("Comment", back_populates="update")
+    
 
     def to_dict(self):
         return {
             "id": self.id,
             "header": self.header,
             "content": self.content,
-            "petition": self.petition_id
+            "petition": self.petition_id,
+            "mediaurl": self.mediaurl
         }
 
 

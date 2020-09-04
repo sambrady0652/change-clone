@@ -6,7 +6,7 @@ import { Paragraph } from 'grommet';
 const GET_PETITIONS = 'change/petitions/GET_PETITIONS';
 // const CREATE_PETITION = 'change/petitions/CREATE_PETITION';
 
-//PRIMARY FUNCTIONS
+//FETCH ALL PETITIONS 
 export const fetchPetitions = () => async dispatch => {
   console.log('FETCHING')
   const response = await fetch(`${baseUrl}/api/petitions`)

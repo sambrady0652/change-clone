@@ -10,7 +10,7 @@ const StartPetitions = () => {
   const [topic, setTopic] = useState('1');
   const [header, setHeader] = useState("");
   const [description, setDescription] = useState("");
-  const [goal, setGoal] = useState(0);
+  const [goal, setGoal] = useState(1000);
   const [imageUrl, setImageUrl] = useState("");
   const [imagePreview, setImagePreivew] = useState('https://change-clone.s3-us-west-1.amazonaws.com/default_petition.png');
 

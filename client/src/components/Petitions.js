@@ -1,11 +1,12 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import { Main, Heading, Box, Tab, Tabs } from 'grommet'
 
 import PetitionCard from './PetitionCard'
 import Navbar from './Navbar'
+import { fetchPetitions } from '../store/petitions';
 
-const makeCard = (petition) => {
+export const makeCard = (petition) => {
   const { id, image_url, header, description, goal, current } = petition
   return (
     <Box alignSelf="center" pad="small" key={`box-around-card-${id}`}>
@@ -21,6 +22,11 @@ const makeCard = (petition) => {
 
 const Petitions = () => {
   const { petitions } = useSelector(state => state)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchPetitions())
+  }, [])
   // TODO: Develop algorithm to select Featured, Popular, and Recent Petitions
   const allPetitions = Object.values(petitions)
   return (
