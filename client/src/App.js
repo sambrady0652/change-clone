@@ -54,7 +54,7 @@ function App() {
                         path="/settings"
                         component={SettingsPage} />
                     <Route 
-                        path="/*/updateform"
+                        path="/:name/updateform"
                         component={UpdateForm} />
                 </Switch>
             </BrowserRouter>

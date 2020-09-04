@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import Navbar from "./Navbar"
 import { baseUrl } from '../config';
 import axios from 'axios';
+import { useParams } from 'react-router-dom'
 
 const UpdateForm = (props) => {
   const [header, setHeader] = useState('')
@@ -10,8 +11,10 @@ const UpdateForm = (props) => {
   const [displayText, setDisplayText] = useState('');
   const [content, setContent] = useState('');
   const [mediaurl, setMediaUrl] = useState('');
+  // const [petitionId, setPetitionId]
   const dispatch = useDispatch();
-
+  const { name }  = useParams()
+console.log(name)
   const handleInsertLink = async (e) => {
     e.preventDefault();
     dispatch()
@@ -30,11 +33,16 @@ const UpdateForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     var formData = new FormData();
-  
+    var imagefile = document.querySelector('#file');
    formData.append('header', header)
    formData.append('content', content)
    formData.append('mediaurl', mediaurl)
-    axios.post(`${baseUrl}/api/petitions/1/updates`, formData, {
+   formData.append('name', name)
+   console.log(`this is ${name}`)
+  //  if (imagefile.files[0]){
+  //  formData.append('uploadPhoto', imagefile.files[0])
+  //  }
+    axios.post(`${baseUrl}/api/petitions/${name}/updates`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
