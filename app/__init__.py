@@ -20,6 +20,7 @@ db.init_app(app)
 jwt = JWTManager(app)
 Migrate(app, db, compare_type=True)
 app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['FLASKS3_BUCKET_NAME'] = ''
 
 
 # Application Security

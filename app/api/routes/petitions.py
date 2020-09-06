@@ -20,6 +20,7 @@ def get_petitions():
 @bp.route('', methods=['POST'])
 def post_petition():
     data = dict(request.form)
+    print(request.files['file'])
     img_url = 'https://change-clone.s3-us-west-1.amazonaws.com/default_petition.png'
     if len(request.files) > 0:
         img = request.files['file']
@@ -100,21 +101,35 @@ def petiton_signatures(petition_id):
         return new_sig.to_dict()
 
 
-@bp.route('/<int:petition_id>/updates', methods=['GET', 'POST'])
+@bp.route('/<int:petition_id>/updates')
 def petition_updates(petition_id):
     if request.method == 'GET':
         updates = Update.query.filter(
             Update.petition_id == petition_id).all()
         return {str(update.id): update.to_dict() for update in updates}
-    if request.method == 'POST':
+
+@bp.route('/<int:petition_id>/updates', methods=['POST'])
+def petition_updates_post(petition_id):
+    if len(request.files) == 0 and request.form.get('mediaurl') == '':
         header = request.form.get('header')
         content = request.form.get('content')
-        mediaurl = request.form.get('mediaurl')
+        mediaurl = 'https://change-clone.s3-us-west-1.amazonaws.com/default_petition.png'
+    elif len(request.files) > 0:
+            header = request.form.get('header')
+            content = request.form.get('content')
+            img = request.files['file']
+            key=f'{datetime.now()}{img.filename}'
+            bucket.put_object(Key=key, Body=img, ContentType=img.content_type)
+            mediaurl = f'https://change-clone.s3-us-west-1.amazonaws.com/{key}'
+    else:
+            header = request.form.get('header')
+            content = request.form.get('content')
+            mediaurl = request.form.get('mediaurl')
 
-        newUpdate = Update(petition_id = petition_id, header=header, content=content, mediaurl=mediaurl)
+    newUpdate = Update(petition_id = petition_id, header=header, content=content, mediaurl=mediaurl)
     db.session.add(newUpdate)
     db.session.commit()
-    return newUpdate.to_dict()
+    return newUpdate.to_dict()   
 
   
 
