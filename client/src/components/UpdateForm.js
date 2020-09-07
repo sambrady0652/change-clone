@@ -63,7 +63,7 @@ const UpdateForm = (props) => {
                 <div id="body_input_div">
                   <input type="text" name="body" id="update_body"
                     value={content}
-                    onChange={e => setContent(e.target.value)} />
+                    onChange={e => setContent(`${Date.now()} - ${e.target.value}`)} />
                 </div>
               </div>
               <div id="media_div">

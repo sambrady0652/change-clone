@@ -692,3 +692,53 @@ text-size-adjust:100%;
 /* #uploadPhotoInput {
   display: none;
 } */
+
+#updateCardDiv {
+  box-sizing:border-box;
+  color:rgb(54, 49, 53);
+  display:block;
+  font-family:"Change Calibre", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size:16px;
+  line-height:24px;
+  margin-bottom:60px;
+  margin-top:0px;
+  text-size-adjust:100%;
+  width: 540px;
+}
+
+/* #cardWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+   
+  
+} */
+#carousel {
+  height: 500px;
+  width:800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#carousel_div{
+  height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#carousel_image {
+  display: flex;
+  height: 50%;
+  width: 65%
+
+}
+
+#headercarousel {
+  font-weight: 900;
+}
