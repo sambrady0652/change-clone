@@ -10,20 +10,28 @@ const UpdateForm = (props) => {
   const [mediaurl, setMediaUrl] = useState('');
   const dispatch = useDispatch();
   const { name } = useParams()
-
-  const handleMediaSubmit = async (e) => {
-    e.preventDefault();
-    dispatch()
+  var formData = new FormData();
+  const handleMediaChange = async (e) => {
+    e.preventDefault()
+    var imagefile = e.target.files
+    formData.append("file", imagefile[0]);
   }
-
+  const AddUrlHandler = e => {
+    e.preventDefault()
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    var formData = new FormData();
+    
 
     formData.append('header', header)
     formData.append('content', content)
-    formData.append('mediaurl', mediaurl)
     formData.append('name', name)
+    if (document.querySelector('#file') === null)
+    {formData.append('mediaurl', mediaurl)}
+    else {
+      formData.append("file", e.target.files[0]);
+
+    }
 
     axios.post(`${baseUrl}/api/petitions/${name}/updates`, formData, {
       headers: {
@@ -55,7 +63,7 @@ const UpdateForm = (props) => {
                 <div id="body_input_div">
                   <input type="text" name="body" id="update_body"
                     value={content}
-                    onChange={e => setContent(e.target.value)} />
+                    onChange={e => setContent(`${Date.now()} - ${e.target.value}`)} />
                 </div>
               </div>
               <div id="media_div">
@@ -65,12 +73,13 @@ const UpdateForm = (props) => {
                     <label id="url_description">URL for an article, image, or video</label>
                     <div id="url_add">
                       <div id="urlinputdiv">
-                        <input type="text" id="url_input"
+                        <input type="text" id="url_input" class="url_input"
                           value={mediaurl}
-                          onChange={e => setMediaUrl(e.target.value)} />
+                          onChange={e => setMediaUrl(e.target.value)} 
+                          onClick={AddUrlHandler}/>
                       </div>
                       <span id="addSpan">
-                        <button id="addUrl">Add</button>
+                        <button htmlFor="url_input" id="addUrl" onClick={AddUrlHandler}>Add</button>
                       </span>
                     </div>
                     <div id="orContainer">
@@ -79,7 +88,8 @@ const UpdateForm = (props) => {
                       </div>
                     </div>
                     <div id="uploadPhoto_container">
-                      <button id="uploadPhoto" type='file' name='updatePhoto' onClick={handleMediaSubmit}> Upload photo</button>
+                      <input id="uploadPhotoInput" type='file' name='file' onChange={handleMediaChange}></input> 
+                      {/* <button htmlFor="uploadPhotoInput" id="uploadPhoto" >Upload Photo</button> */}
                       <div id="photoWarningDiv">
                         Photos should be at least 1200 × 675 pixels. Large photos without text are best.
                 </div>

@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Home from "./components/Home"
 import Search from "./components/Search"
 import UpdateForm from "./components/UpdateForm"
+import UpdatesBox from "./components/UpdatesBox"
 import StartPetition from "./components/StartPetition"
 import MyPetitions from "./components/MyPetitions"
 import Petitions from "./components/Petitions"
@@ -52,8 +53,15 @@ function App() {
             path="/settings"
             component={SettingsPage} />
           <Route
+<<<<<<< HEAD
             path="/petitions/:name/updateform"
+=======
+            path="/:name/updateform"
+>>>>>>> 4829bf3462de65a52e28bc44a1cd90eef6be9b52
             component={UpdateForm} />
+          <Route 
+            path="/:name/updates"
+            component={UpdatesBox} />
         </Switch>
         <Footer />
       </BrowserRouter>
