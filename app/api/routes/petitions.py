@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 import boto3
 from datetime import datetime
+import random
 
 from app.models import Petition, db, Signature, Update, User
 
@@ -16,6 +17,23 @@ def get_petitions():
                            for petition in petitions}
     return formatted_petitions
 
+@bp.route('/featured')
+def featured_petitions():
+    all_petitions = Petition.query.all()
+    k = 10 if len(all_petitions) >= 10 else len(all_petitions)
+    petitions = random.sample(all_petitions, k)
+    return {'petitions': [petition.to_dict() for petition in petitions]}
+
+@bp.route('/recent')
+def recent_petitions():
+    petitions = Petition.query.order_by(Petition.id.desc()).limit(10)
+    return {'petitions': [petition.to_dict() for petition in petitions]}
+
+@bp.route('/popular')
+def popular_petitions():
+    all_petitions = Petition.query.all()
+    petitions = reversed(sorted(all_petitions, key=lambda petition: len(petition.signatures)))    
+    return {'petitions': [petition.to_dict() for petition in petitions]}
 
 @bp.route('', methods=['POST'])
 def post_petition():
