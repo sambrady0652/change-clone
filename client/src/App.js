@@ -53,11 +53,7 @@ function App() {
             path="/settings"
             component={SettingsPage} />
           <Route
-<<<<<<< HEAD
-            path="/petitions/:name/updateform"
-=======
             path="/:name/updateform"
->>>>>>> 4829bf3462de65a52e28bc44a1cd90eef6be9b52
             component={UpdateForm} />
           <Route 
             path="/:name/updates"
