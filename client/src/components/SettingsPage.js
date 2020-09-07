@@ -27,9 +27,10 @@ const SettingsPage = () => {
       setLastName(responseData.last_name)
       setLocation(responseData.location)
       setId(userId)
+      console.log('useEffect')
     }
     fetchData();
-  });
+  },[]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -109,6 +110,7 @@ const SettingsPage = () => {
       <Button
         type="submit"
         plain={false}
+        margin="3px"
         primary
         color="#ED2D23" onClick={deleteAccount}>
         Delete Account</Button>
