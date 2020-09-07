@@ -13,7 +13,8 @@ const SignPetitionForm = (props) => {
   const [message, setMessage] = useState("")
   const dispatch = useDispatch()
   const { petitionId, header } = props
-  const { id, needSignIn, signedPetitions } = useSelector(state => state.currentUser)
+  let { id, needSignIn, signedPetitions } = useSelector(state => state.currentUser)
+  if(!signedPetitions) signedPetitions = []
   const alreadySigned = signedPetitions.includes(petitionId)
 
   const handleGuestSubmit = async (e) => {

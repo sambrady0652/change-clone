@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Main, Heading, Box, Tab, Tabs } from 'grommet'
 
 import PetitionCard from './PetitionCard'
-import { fetchPetitions } from '../store/petitions';
+import { fetchFeatured, fetchPopular, fetchRecent } from '../store/petitions';
 
 export const makeCard = (petition) => {
   const { id, image_url, header, description, goal, current } = petition
@@ -20,14 +20,21 @@ export const makeCard = (petition) => {
 }
 
 const Petitions = () => {
-  const { petitions } = useSelector(state => state)
   const dispatch = useDispatch()
+  const { petitions } = useSelector(state => state)
+  let { featured, popular, recent } = petitions
+  if (!popular) popular = []
+  if (!featured) featured = []
+  if (!recent) recent =[]
 
   useEffect(() => {
-    dispatch(fetchPetitions())
+    dispatch(fetchFeatured())
+    dispatch(fetchPopular())
+    dispatch(fetchRecent())
+
   }, [dispatch])
-  // TODO: Develop algorithm to select Featured, Popular, and Recent Petitions
-  const allPetitions = Object.values(petitions)
+  // console.log(featured)
+  console.log(featured)
   return (
     <>
       <Box justify="center" align="center" style={{ position: "relative" }}>
@@ -35,17 +42,17 @@ const Petitions = () => {
         <Tabs>
           <Tab title="Featured">
             <Main background="#F6F4F6">
-              {allPetitions.map(petition => makeCard(petition))}
+              {featured.map(petition => makeCard(petition))}
             </Main>
           </Tab>
           <Tab title="Popular">
             <Main background="#F6F4F6">
-              <div>popular</div>
+              {popular.map(petition => makeCard(petition))}
             </Main>
           </Tab>
           <Tab title="Recent">
             <Main background="#F6F4F6">
-              <div>recent</div>
+              {recent.map(petition => makeCard(petition))}
             </Main>
           </Tab>
           <Tab title="Victories">

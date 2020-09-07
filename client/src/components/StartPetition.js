@@ -35,18 +35,10 @@ const StartPetitions = () => {
   }
 
   const creator_id = useSelector(state => state.currentUser.id)
-<<<<<<< HEAD
-  
-  const onSubmit = async e => {
-    e.preventDefault()
- 
-    await dispatch(postPetition({
-=======
 
   const onSubmit = e => {
     e.preventDefault()
     dispatch(postPetition({
->>>>>>> 4829bf3462de65a52e28bc44a1cd90eef6be9b52
       topic_id: topic,
       header,
       description,
