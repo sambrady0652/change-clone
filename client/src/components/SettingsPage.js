@@ -27,10 +27,10 @@ const SettingsPage = () => {
       setLastName(responseData.last_name)
       setLocation(responseData.location)
       setId(userId)
-      console.log('useEffect')
+
     }
     fetchData();
-  },[]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

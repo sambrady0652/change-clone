@@ -26,14 +26,8 @@ const UpdateForm = (props) => {
     setBlack(true)
     setMediaUrl(e.target.value)
   }
-<<<<<<< HEAD
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-=======
   const handleClick = async (e) => {
     e.preventDefault()
->>>>>>> ab478c501dc2f9562337925201c0b8e816cbf1cb
 
     formData.append('header', header)
     formData.append('content', content)
@@ -81,17 +75,17 @@ const UpdateForm = (props) => {
                     data=""
                     onInit={ editor => {
                         // You can store the "editor" and use when it is needed.
-                        console.log( '', editor );
+                        // console.log( '', editor );
                     } }
                     onChange={ ( event, editor ) => {
                         const data = editor.getData();
                         setContent(data);
                     } }
                     onBlur={ ( event, editor ) => {
-                        console.log( 'Blur.', editor );
+                        // console.log( 'Blur.', editor );
                     } }
                     onFocus={ ( event, editor ) => {
-                        console.log( 'Focus.', editor );
+                        // console.log( 'Focus.', editor );
                     } }
                 />
                   </div>
@@ -107,12 +101,6 @@ const UpdateForm = (props) => {
                     <label id="url_description">URL for an article, image, or video</label>
                     <div id="url_add">
                       <div id="urlinputdiv">
-<<<<<<< HEAD
-                        <input type="text" id="url_input" className="url_input"
-                          value={mediaurl}
-                          onChange={e => setMediaUrl(e.target.value)}
-                          onClick={AddUrlHandler} />
-=======
                         {black ?
 
 <div style={{ width: 300, height: 175}}>
@@ -130,7 +118,6 @@ const UpdateForm = (props) => {
                           onChange={e => setMediaUrl(e.target.value)} 
                          />
                         }
->>>>>>> ab478c501dc2f9562337925201c0b8e816cbf1cb
                       </div>
                         
                       <span id="addSpan">
@@ -143,18 +130,12 @@ const UpdateForm = (props) => {
                         <div id="orDiv">or</div>
                       </div>
                     </div>
-<<<<<<< HEAD
-                    <div id="uploadPhoto_container">
-                      <input id="uploadPhotoInput" type='file' name='file' onChange={handleMediaChange}></input>
-                      {/* <button htmlFor="uploadPhotoInput" id="uploadPhoto" >Upload Photo</button> */}
-=======
                
                       <div>
                       <div id="uploadPhoto_container">
                       <div>
                       <input id="uploadPhotoInput" type='file' name='file' onChange={handleMediaChange}></input> 
                       
->>>>>>> ab478c501dc2f9562337925201c0b8e816cbf1cb
                       <div id="photoWarningDiv">
                         Photos should be at least 1200 × 675 pixels. Large photos without text are best.
                         

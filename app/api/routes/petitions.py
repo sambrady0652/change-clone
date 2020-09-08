@@ -38,7 +38,7 @@ def popular_petitions():
 @bp.route('', methods=['POST'])
 def post_petition():
     data = dict(request.form)
-    print(request.files['file'])
+    
     img_url = 'https://change-clone.s3-us-west-1.amazonaws.com/default_petition.png'
     if len(request.files) > 0:
         img = request.files['file']
