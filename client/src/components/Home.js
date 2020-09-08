@@ -1,17 +1,34 @@
 import React from 'react';
 import { Box, Heading, Text, Anchor } from 'grommet'
 
-// import Navbar from './Navbar'
+import HomeCarousel from './HomeCarousel'
+
 
 const Home = () => {
   return (
     <>
-      <Box justify="center" align="center" > {/*TO DO: Set Background to Map Image once AWS is setup */}
-        <Heading margin={{ bottom: "small" }} textAlign="center">The world’s platform for change</Heading>
-        <Text margin={{ top: "small" }} weight="bold">##### people taking action. <Anchor href="" color="#ED2D23" weight={600}> Victories every day.</Anchor></Text>
+      <Box justify="center" align="center" background={{ image: "url(https://change-clone.s3-us-west-1.amazonaws.com/Globe-Red-Dot.png)", size: "contain" }} height="medium" >
+        <Heading textAlign="center">The world’s platform for change</Heading>
+        <Text margin={{ top: "small", bottom: "large" }} weight="bold">people are taking action. <Anchor disabled href="" color="#ED2D23" weight={600}> get started today.</Anchor></Text>
+      </Box>
+      <Box justify="center" align="center" >
+        <HomeCarousel />
       </Box>
     </>
   )
 }
 
 export default Home;
+
+
+{/* <>
+  <Box>
+    <Box justify="center" align="center" background={{ image: "url(https://change-clone.s3-us-west-1.amazonaws.com/Globe-Red-Dot.png)", size: "contain" }} height="medium" >
+      <Heading textAlign="center">The world’s platform for change</Heading>
+      <Text margin={{ top: "small", bottom: "large" }} weight="bold">people are taking action. <Anchor disabled href="" color="#ED2D23" weight={600}> get started today.</Anchor></Text>
+    </Box>
+    <Box alignContent="center">
+      <HomeCarousel />
+    </Box>
+  </Box>
+</> */}

@@ -25,7 +25,7 @@ const Petitions = () => {
   let { featured, popular, recent } = petitions
   if (!popular) popular = []
   if (!featured) featured = []
-  if (!recent) recent =[]
+  if (!recent) recent = []
 
   useEffect(() => {
     dispatch(fetchFeatured())
@@ -33,8 +33,6 @@ const Petitions = () => {
     dispatch(fetchRecent())
 
   }, [dispatch])
-  // console.log(featured)
-  console.log(featured)
   return (
     <>
       <Box justify="center" align="center" style={{ position: "relative" }}>

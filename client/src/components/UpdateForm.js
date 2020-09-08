@@ -21,13 +21,12 @@ const UpdateForm = (props) => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
 
     formData.append('header', header)
     formData.append('content', content)
     formData.append('name', name)
-    if (document.querySelector('#file') === null)
-    {formData.append('mediaurl', mediaurl)}
+    if (document.querySelector('#file') === null) { formData.append('mediaurl', mediaurl) }
     else {
       formData.append("file", e.target.files[0]);
 
@@ -73,10 +72,10 @@ const UpdateForm = (props) => {
                     <label id="url_description">URL for an article, image, or video</label>
                     <div id="url_add">
                       <div id="urlinputdiv">
-                        <input type="text" id="url_input" class="url_input"
+                        <input type="text" id="url_input" className="url_input"
                           value={mediaurl}
-                          onChange={e => setMediaUrl(e.target.value)} 
-                          onClick={AddUrlHandler}/>
+                          onChange={e => setMediaUrl(e.target.value)}
+                          onClick={AddUrlHandler} />
                       </div>
                       <span id="addSpan">
                         <button htmlFor="url_input" id="addUrl" onClick={AddUrlHandler}>Add</button>
@@ -88,7 +87,7 @@ const UpdateForm = (props) => {
                       </div>
                     </div>
                     <div id="uploadPhoto_container">
-                      <input id="uploadPhotoInput" type='file' name='file' onChange={handleMediaChange}></input> 
+                      <input id="uploadPhotoInput" type='file' name='file' onChange={handleMediaChange}></input>
                       {/* <button htmlFor="uploadPhotoInput" id="uploadPhoto" >Upload Photo</button> */}
                       <div id="photoWarningDiv">
                         Photos should be at least 1200 × 675 pixels. Large photos without text are best.

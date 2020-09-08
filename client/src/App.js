@@ -44,7 +44,7 @@ function App() {
             path="/petitions"
             component={Petitions} />
           <Route
-            path="/p/:header"
+            exact path="/p/:header"
             component={PetitionDetails} />
           <Route
             path="/search"
@@ -53,9 +53,9 @@ function App() {
             path="/settings"
             component={SettingsPage} />
           <Route
-            path="/:name/updateform"
+            path="/p/:name/updateform"
             component={UpdateForm} />
-          <Route 
+          <Route
             path="/:name/updates"
             component={UpdatesBox} />
         </Switch>
