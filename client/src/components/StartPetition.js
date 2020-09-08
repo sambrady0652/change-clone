@@ -56,7 +56,7 @@ const StartPetitions = () => {
     <InputGoal prevView={prevView} nextView={nextView} goal={goal} setGoal={setGoal} />,
     <InputImage prevView={prevView} nextView={nextView} imageUrl={imageUrl} setImageUrl={setImageUrl} imagePreview={imagePreview} setImagePreivew={setImagePreivew} />,
     <SubmitConfirmation nextView={nextView} onSubmit={onSubmit} prevView={prevView} topic={useSelector(state => state.topics[topic])} header={header} description={description} goal={goal} imagePreview={imagePreview} />,
-    <Redirect to={`/p/${header}`} />
+    <Redirect to={`/petitions`} />
   ];
 
 

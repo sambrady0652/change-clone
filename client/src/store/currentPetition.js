@@ -1,5 +1,5 @@
 //REQUISITE IMPORTS
-import { baseUrl } from '../config';
+import { apiUrl } from '../config';
 import { signUp, fetchUserDetails } from './auth';
 
 //VARIABLE DECLARATIONS
@@ -8,7 +8,7 @@ const GET_PETITION = 'change/petitions/GET_PETITION';
 
 //FETCH PETITION
 export const fetchPetitionDetails = (header) => async dispatch => {
-  const response = await fetch(`${baseUrl}/api/petitions/${header}`)
+  const response = await fetch(`${apiUrl}/petitions/${header}`)
   if (!response.ok) {
     throw response;
   }
@@ -21,7 +21,7 @@ export const fetchPetitionDetails = (header) => async dispatch => {
 
 //GET CREATOR DETAILS
 export const fetchCreator = async (id) => {
-  const response = await fetch(`${baseUrl}/api/users/creator/${id}`)
+  const response = await fetch(`${apiUrl}/users/creator/${id}`)
   if (!response.ok) {
     throw response;
   }
@@ -43,7 +43,7 @@ export const guestSignPetition = (firstName, lastName, email, password, message,
 //USER SIGN PETITION
 export const userSignPetition = (user_id, message, petition_id, header) => async dispatch => {
   const body = { user_id, message }
-  await fetch(`${baseUrl}/api/petitions/${petition_id}/signatures`, {
+  await fetch(`${apiUrl}/petitions/${petition_id}/signatures`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

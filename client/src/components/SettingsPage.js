@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import Navbar from './Navbar'
 import { Box, Heading, Text, Button, Form, FormField } from 'grommet'
 import { apiUrl } from '../config';
 

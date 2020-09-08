@@ -1,5 +1,5 @@
 //REQUISITE IMPORTS
-import { baseUrl } from '../config';
+import { apiUrl } from '../config';
 
 //VARIABLE DECLARATIONS
 const GET_USERS = 'change/users/GET_USERS';
@@ -8,7 +8,7 @@ const GET_USERS = 'change/users/GET_USERS';
 
 //GET USERS
 export const fetchUsers = () => async dispatch => {
-  const response = await fetch(`${baseUrl}/api/users`)
+  const response = await fetch(`${apiUrl}/users`)
   if (!response.ok) {
     throw response;
   }

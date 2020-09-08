@@ -1,9 +1,9 @@
-import { baseUrl } from "../config";
+import { apiUrl } from "../config";
 
 export const GET_TOPICS = "change/topics/GET_TOPICS";
 
 export const fetchTopics = () => async (dispatch) => {
-  const res = await fetch(`${baseUrl}/api/topics`);
+  const res = await fetch(`${apiUrl}/topics`);
 
   if (!res.ok) {
     throw res;

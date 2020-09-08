@@ -1,18 +1,15 @@
 import React, { useState, Fragment } from 'react';
-import { useDispatch } from 'react-redux';
-import { baseUrl } from '../config';
+import { apiUrl } from '../config';
 import axios from 'axios';
-import { useParams, Redirect, Link, useHistory} from 'react-router-dom'
+import { useParams, useHistory} from 'react-router-dom'
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Embed from './Embedder';
-import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
-const UpdateForm = (props) => {
+const UpdateForm = () => {
   const [header, setHeader] = useState('')
   const [content, setContent] = useState('');
   const [mediaurl, setMediaUrl] = useState('');
   const [black, setBlack] = useState(false)
-  const dispatch = useDispatch();
+
   const { name } = useParams()
   let history = useHistory();
   var formData = new FormData();
@@ -39,17 +36,13 @@ const UpdateForm = (props) => {
     }
    
 
-    axios.post(`${baseUrl}/api/petitions/${name}/updates`, formData, {
+    axios.post(`${apiUrl}/petitions/${name}/updates`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
     return history.push(`/${name}/updates`);
   };
-  const handleSubmit = e => { 
-    e.preventDefault()
-    return <Redirect to={`/${name}/updates`} />}
-
 
   return (
     <Fragment>

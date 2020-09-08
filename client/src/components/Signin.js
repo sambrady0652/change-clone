@@ -18,6 +18,11 @@ const Signin = (props) => {
     e.preventDefault();
     dispatch(signIn(email, password))
   }
+
+  const handleGuestSubmit = async (e) => {
+    e.preventDefault()
+    dispatch(signIn("default@user.com", "password"))
+  }
   return (
     <Box align="center" pad="large">
       <div>
@@ -25,6 +30,16 @@ const Signin = (props) => {
       </div>
       {/* if authErrors, show Error Box */}
       {authErrors && <ErrorBox />}
+      <Box margin="small">
+        <Form onSubmit={handleGuestSubmit}>
+          <Button
+            type="submit"
+            plain={false}
+            primary
+            color="#ED2D23">
+            sign in as guest</Button>
+        </Form>
+      </Box>
       <Form
         onSubmit={handleSubmit}>
         <FormField

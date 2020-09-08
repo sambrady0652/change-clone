@@ -1,5 +1,5 @@
 //REQUISITE IMPORTS HERE
-import { baseUrl } from '../config';
+import { apiUrl } from '../config';
 
 //ACTION TYPES AND LOCAL STORAGE ASSIGNMENTS
 const SET_USER = 'change/auth/SET_USER';
@@ -12,7 +12,7 @@ const USER_ID = 'USER_ID';
 export const signIn = (email, password) => async dispatch => {
   try {
     //Retrieve Information from Server
-    const response = await fetch(`${baseUrl}/api/users/signin`, {
+    const response = await fetch(`${apiUrl}/users/signin`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
@@ -45,7 +45,7 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
     //   formData.append("profPic", profPic, `${firstName}-profpic`)
     // }
 
-    const response = await fetch(`${baseUrl}/api/users/signup`, {
+    const response = await fetch(`${apiUrl}/users/signup`, {
       method: 'post',
       body: formData
     });
@@ -67,7 +67,7 @@ export const signUp = (firstName, lastName, email, password) => async dispatch =
 
 //FETCH USER DETAILS 
 export const fetchUserDetails = (access_token, id) => async dispatch => {
-  const res = await fetch(`${baseUrl}/api/users/${id}`, {
+  const res = await fetch(`${apiUrl}/users/${id}`, {
     headers: {
       'Authorization': `Bearer ${localStorage.getItem('SESSION_TOKEN')}`,
     }

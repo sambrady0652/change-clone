@@ -1,5 +1,5 @@
 //REQUISITE IMPORTS
-import { baseUrl } from '../config';
+import { apiUrl } from '../config';
 
 //VARIABLE DECLARATIONS
 const GET_PETITIONS = 'change/petitions/GET_PETITIONS';
@@ -10,7 +10,7 @@ const GET_RECENT = 'change/petitions/GET_RECENT';
 
 //FETCH ALL PETITIONS 
 export const fetchPetitions = () => async dispatch => {
-  const response = await fetch(`${baseUrl}/api/petitions`)
+  const response = await fetch(`${apiUrl}/petitions`)
   if (!response.ok) {
     throw response;
   }
@@ -20,7 +20,7 @@ export const fetchPetitions = () => async dispatch => {
 }
 
 export const fetchFeatured = () => async dispatch => {
-  const response = await fetch(`${baseUrl}/api/petitions/featured`)
+  const response = await fetch(`${apiUrl}/petitions/featured`)
   if (!response.ok) {
     throw response;
   }
@@ -30,7 +30,7 @@ export const fetchFeatured = () => async dispatch => {
 }
 
 export const fetchPopular = () => async dispatch => {
-  const response = await fetch(`${baseUrl}/api/petitions/popular`)
+  const response = await fetch(`${apiUrl}/petitions/popular`)
   if (!response.ok) {
     throw response;
   }
@@ -40,7 +40,7 @@ export const fetchPopular = () => async dispatch => {
 }
 
 export const fetchRecent = () => async dispatch => {
-  const response = await fetch(`${baseUrl}/api/petitions/recent`)
+  const response = await fetch(`${apiUrl}/petitions/recent`)
   if (!response.ok) {
     throw response;
   }
@@ -52,7 +52,7 @@ export const fetchRecent = () => async dispatch => {
 export const postPetition = data => async dispatch => {
   const formData = new FormData()
   Object.keys(data).forEach(key => formData.append(key, data[key]))
-  const response = await fetch(`${baseUrl}/api/petitions`, { method: 'post', body: formData })
+  const response = await fetch(`${apiUrl}/petitions`, { method: 'post', body: formData })
   if (!response.ok) {
     throw response;
   }

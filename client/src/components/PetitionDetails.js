@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom'
-import { Heading, Box, Button, Meter, Text, Image, Avatar, Paragraph } from 'grommet'
+import { Heading, Box, Meter, Text, Image, Avatar, Paragraph } from 'grommet'
 
 import SignPetitionForm from './SignPetitionForm'
 import { fetchPetitionDetails } from '../store/currentPetition';
