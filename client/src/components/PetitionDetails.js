@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom'
+import { useParams, Link} from 'react-router-dom'
 import { Heading, Box, Button, Meter, Text, Image, Avatar, Paragraph } from 'grommet'
 
 import SignPetitionForm from './SignPetitionForm'
@@ -37,9 +37,11 @@ const PetitionDetails = () => {
           </Box>
           <Paragraph fill={true}>{description}</Paragraph>
           {/* TO DO: */}
-          <div>UPDATES</div>
+          <Link to={`/${id}/updates`} id="updateFormLink">UPDATES</Link>
           {isCreator === true && (
-            <Button>Click Here</Button>
+             <div id="LinkDivend">
+             <Link to={`/${id}/updateform`} id="updateFormLink">Create Update</Link>
+             </div>
           )}
           <div>REASONS FOR SIGNING</div>
         </Box>
