@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom'
-import { Heading, Box, Anchor, Meter, Text, Image, Avatar, Paragraph } from 'grommet'
+import { useParams, Link } from 'react-router-dom'
+import { Heading, Box, Button, Meter, Text, Image, Avatar, Paragraph } from 'grommet'
 
 import SignPetitionForm from './SignPetitionForm'
 import { fetchPetitionDetails } from '../store/currentPetition';
@@ -43,9 +43,12 @@ const PetitionDetails = () => {
             <Text size="small" color="#737273" weight="bold" margin={{ left: "xsmall" }}>{first_name} {last_name} started this petition</Text>
           </Box>
           <Paragraph fill={true}>{description}</Paragraph>
-          <Heading level={3} margin="small">Updates</Heading>
+          {/* TO DO: */}
+          <Link to={`/${id}/updates`} id="updateFormLink">UPDATES</Link>
           {isCreator === true && (
-            <Text><Anchor color="inherit" href={`/p/${header}/updateform`}>Click Here</Anchor> to update everyone on how the petition is going</Text>
+            <div id="LinkDivend">
+              <Link to={`/${id}/updateform`} id="updateFormLink">Create Update</Link>
+            </div>
           )}
         </Box>
         <Box flex={{ grow: 1 }}>

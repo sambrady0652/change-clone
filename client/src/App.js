@@ -6,6 +6,7 @@ import Home from "./components/Home"
 import Search from "./components/Search"
 import UpdateForm from "./components/UpdateForm"
 import UpdatesBox from "./components/UpdatesBox"
+import UpdateCard from "./components/UpdateCard"
 import StartPetition from "./components/StartPetition"
 import MyPetitions from "./components/MyPetitions"
 import Petitions from "./components/Petitions"
@@ -58,6 +59,9 @@ function App() {
           <Route
             path="/:name/updates"
             component={UpdatesBox} />
+          <Route 
+          path="/:name/update/:id"
+          component={UpdateCard} />
         </Switch>
         <Footer />
       </BrowserRouter>
