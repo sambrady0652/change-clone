@@ -30,16 +30,6 @@ const Signin = (props) => {
       </div>
       {/* if authErrors, show Error Box */}
       {authErrors && <ErrorBox />}
-      <Box margin="small">
-        <Form onSubmit={handleGuestSubmit}>
-          <Button
-            type="submit"
-            plain={false}
-            primary
-            color="#ED2D23">
-            sign in as guest</Button>
-        </Form>
-      </Box>
       <Form
         onSubmit={handleSubmit}>
         <FormField
@@ -60,6 +50,14 @@ const Signin = (props) => {
           primary
           color="#ED2D23">
           sign in</Button>
+          <Button
+            onClick={handleGuestSubmit}
+            type="submit"
+            margin="small"
+            plain={false}
+            primary
+            color="#ED2D23">
+            sign in as guest</Button>
       </Form>
 
     </Box>

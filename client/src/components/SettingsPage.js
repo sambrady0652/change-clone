@@ -104,15 +104,15 @@ const SettingsPage = () => {
             primary
             color="#ED2D23">
             Save</Button>
+          <Button
+            type="submit"
+            plain={false}
+            margin="3px"
+            primary
+            color="#ED2D23" onClick={deleteAccount}>
+            Delete Account</Button>
         </Form>
       </Box>
-      <Button
-        type="submit"
-        plain={false}
-        margin="3px"
-        primary
-        color="#ED2D23" onClick={deleteAccount}>
-        Delete Account</Button>
     </>
   )
 }
