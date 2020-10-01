@@ -1,6 +1,7 @@
 
 import React from 'react'
 import { Card, CardBody, Box, Image, Heading, Meter, Text, Anchor, Stack, CardHeader } from 'grommet'
+import { Link } from 'react-router-dom'
 
 export const makeHomeCard = (petition) => {
   const { id, image_url, header, description, goal, current } = petition
@@ -12,13 +13,14 @@ export const makeHomeCard = (petition) => {
         description={description}
         goal={goal}
         current={current}
+        id={id}
       />
     </Box>)
 }
 
 
 const HomeCard = (props) => {
-  const { image_url, header, goal, current } = props
+  const { image_url, header, goal, current, id } = props
 
   return (
 
@@ -38,11 +40,14 @@ const HomeCard = (props) => {
         >
 
           <Box>
-            <Anchor color="inherit" href={`/p/${header}`}>
-              <Heading level="3" margin="none" >
-                {header}
-              </Heading>
-            </Anchor>
+            <Link to={`/p/${id}`}>
+              <Anchor color="#fff" >
+                <Heading level="3" margin="none" >
+                  {header}
+                </Heading>
+              </Anchor>
+
+            </Link>
             <Box flex="grow" overflow="auto">
               <Meter
                 max={goal}

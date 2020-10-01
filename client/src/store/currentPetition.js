@@ -7,8 +7,8 @@ const GET_PETITION = 'change/petitions/GET_PETITION';
 // const CREATE_PETITION = 'change/petitions/CREATE_PETITION';
 
 //FETCH PETITION
-export const fetchPetitionDetails = (header) => async dispatch => {
-  const response = await fetch(`${apiUrl}/petitions/${header}`)
+export const fetchPetitionDetails = (id) => async dispatch => {
+  const response = await fetch(`${apiUrl}/petitions/${id}`)
   if (!response.ok) {
     throw response;
   }
@@ -41,7 +41,7 @@ export const guestSignPetition = (firstName, lastName, email, password, message,
 }
 
 //USER SIGN PETITION
-export const userSignPetition = (user_id, message, petition_id, header) => async dispatch => {
+export const userSignPetition = (user_id, message, petition_id) => async dispatch => {
   const body = { user_id, message }
   await fetch(`${apiUrl}/petitions/${petition_id}/signatures`, {
     method: "POST",
@@ -54,7 +54,7 @@ export const userSignPetition = (user_id, message, petition_id, header) => async
   const id = Number(localStorage.getItem("USER_ID"))
   const token = localStorage.getItem("SESSION_TOKEN")
   dispatch(fetchUserDetails(token, id))
-  dispatch(fetchPetitionDetails(header))
+  dispatch(fetchPetitionDetails(petition_id))
 }
 
 //ACTION CREATORS

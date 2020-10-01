@@ -71,9 +71,9 @@ def get_current_petition(header):
 
 @bp.route('/<int:id>', methods=['GET', 'PUT', 'PATCH', 'DELETE'])
 def petition(id):
-    petition = Petition.query.filter(Petition.id == id).one()
+    petition = Petition.query.get(id)
     if petition == None:
-        return {"error": "User not found"}
+        return {"error": "Petition not found"}, 404
 
     if request.method == 'GET':
         return petition.to_dict()

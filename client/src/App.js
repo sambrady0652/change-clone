@@ -36,31 +36,31 @@ function App() {
             component={Home}
           />
           <Route
-            path="/start-a-petition"
+            exact path="/start-a-petition"
             component={StartPetition} />
           <Route
-            path="/u/me"
+            exact path="/u/me"
             component={MyPetitions} />
           <Route
-            path="/petitions"
+            exact path="/petitions"
             component={Petitions} />
           <Route
-            exact path="/p/:header"
+            exact path="/p/:id"
             component={PetitionDetails} />
           <Route
-            path="/search"
+            exact path="/search"
             component={Search} />
           <Route
-            path="/settings"
+            exact path="/settings"
             component={SettingsPage} />
           <Route
-            path="/p/:name/updateform"
+            path="/p/:id/updateform"
             component={UpdateForm} />
           <Route
-            path="/:name/updates"
+            path="/p/:id/updates"
             component={UpdatesBox} />
           <Route 
-          path="/:name/update/:id"
+          path="/:petitionId/update/:updateId"
           component={UpdateCard} />
         </Switch>
         <Footer />

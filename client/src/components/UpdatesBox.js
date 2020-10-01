@@ -5,8 +5,8 @@ import { apiUrl } from '../config';
 import { Box, Carousel, Image } from 'grommet'
 import Embed from 'react-embed';
 const UpdatesBox = () => {
-  const { name } = useParams()
-  const { id, creator, } = useSelector(state => state.currentPetition)
+  const { id } = useParams()
+  const { creator, } = useSelector(state => state.currentPetition)
   let isCreator = null
   if (id && creator.id) {
     isCreator = (id === creator.id)
@@ -14,7 +14,7 @@ const UpdatesBox = () => {
 
   const [state, setState] = useState([])
   useEffect(() => {
-    fetch(`${apiUrl}/petitions/${name}/updates`)
+    fetch(`${apiUrl}/petitions/${id}/updates`)
       .then(res => res.json())
       .then(data => setState(data))
 
@@ -35,7 +35,7 @@ const UpdatesBox = () => {
                 :
                 <Embed id="embedid" url={data.mediaurl} />
               }
-              <Link to={`/${name}/update/${data.id}`} id="headercarousel">{data.header}</Link>
+              <Link to={`/${id}/update/${data.id}`} id="headercarousel">{data.header}</Link>
               <div id="contentcaraousel">{data.content}</div>
             </div>
           )}

@@ -7,9 +7,9 @@ import SignPetitionForm from './SignPetitionForm'
 import { fetchPetitionDetails } from '../store/currentPetition';
 
 const PetitionDetails = () => {
-  const { header } = useParams()
+  const { id } = useParams()
   const { currentUser } = useSelector(state => state)
-  const { id, description, creator, current, goal, image_url } = useSelector(state => state.currentPetition)
+  const { header, description, creator, current, goal, image_url } = useSelector(state => state.currentPetition)
   const { first_name, last_name, profile_pic_url } = creator
   const dispatch = useDispatch()
   let [isCreator, setCreator] = useState(false)
@@ -24,7 +24,7 @@ const PetitionDetails = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchPetitionDetails(header))
+    dispatch(fetchPetitionDetails(id))
     checkCreator()
   }, [dispatch, isCreator, currentUser.id])
 
@@ -44,10 +44,10 @@ const PetitionDetails = () => {
           </Box>
           <Paragraph fill={true}>{description}</Paragraph>
           {/* TO DO: */}
-          <Link to={`/${id}/updates`} id="updateFormLink">UPDATES</Link>
+          <Link to={`/p/${id}/updates`} id="updateFormLink">UPDATES</Link>
           {isCreator === true && (
             <div id="LinkDivend">
-              <Link to={`/${id}/updateform`} id="updateFormLink">Create Update</Link>
+              <Link to={`/p/${id}/updateform`} id="updateFormLink">Create Update</Link>
             </div>
           )}
         </Box>

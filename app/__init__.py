@@ -27,6 +27,7 @@ app.config['FLASKS3_BUCKET_NAME'] = ''
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+
 @app.after_request
 def inject_csrf_token(response):
     response.set_cookie('csrf_token',
@@ -34,11 +35,14 @@ def inject_csrf_token(response):
                         secure=True if os.environ.get('FLASK_ENV') else False,
                         samesite='Strict' if os.environ.get(
                             'FLASK_ENV') else None,
-                        httponly=True)
+                        httponly=True
+                        )
     return response
 
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path>')
 def react_root(path):
+    if path == 'favicon.ico':
+        return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')

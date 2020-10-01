@@ -5,6 +5,7 @@ import { Search } from 'grommet-icons'
 import SignInButton from './SignInButton'
 import AccountMenu from './AccountMenu'
 import NavAnchor from './NavAnchor';
+import { Link } from 'react-router-dom';
 
 
 const Navbar = () => {
@@ -13,14 +14,18 @@ const Navbar = () => {
   return (
     <Header justify="around" pad={{ vertical: "xsmall" }}>
       <Header justify="center" >
-        <Anchor href='/' alignSelf='center'><Heading level={3} color='#ED2D23'>Cause.com</Heading></Anchor>
-        {needSignIn ? null : <NavAnchor label="Start a petition" href="/start-a-petition" />}
-        {needSignIn ? null : <NavAnchor label="My petitions" href="/u/me" />}
-        <NavAnchor label="Browse" href="/petitions" />
+        <Link to='/'>
+          <Anchor alignSelf='center'><Heading level={3} color='#ED2D23'>Cause.com</Heading></Anchor>
+        </Link>
+        {needSignIn ? null : <Link to='/start-a-petition'><NavAnchor label="Start a petition" /></Link>}
+        {needSignIn ? null : <Link to='/u/me'><NavAnchor label="My petitions" /></Link>}
+        <Link to="/petitions"><NavAnchor label="Browse" /></Link>
         <NavAnchor disabled label="Membership" href="" />
       </Header>
       <Header >
-        <NavAnchor href="/search" icon={<Search color="plain" />} />
+        <Link to='/search'>
+          <NavAnchor icon={<Search color="plain" />} />
+        </Link>
         {needSignIn ?
           <SignInButton label="Sign in" />
           :

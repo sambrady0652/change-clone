@@ -1,16 +1,17 @@
 import React, { useState, Fragment } from 'react';
 import { apiUrl } from '../config';
 import axios from 'axios';
-import { useParams, useHistory} from 'react-router-dom'
+import { useParams, useHistory, Link} from 'react-router-dom'
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 const UpdateForm = () => {
   const [header, setHeader] = useState('')
   const [content, setContent] = useState('');
   const [mediaurl, setMediaUrl] = useState('');
   const [black, setBlack] = useState(false)
 
-  const { name } = useParams()
+  const { id } = useParams()
   let history = useHistory();
   var formData = new FormData();
   const handleMediaChange = async (e) => {
@@ -28,7 +29,7 @@ const UpdateForm = () => {
 
     formData.append('header', header)
     formData.append('content', content)
-    formData.append('name', name)
+    // formData.append('name', name)
     if (document.querySelector('#file') === null) { formData.append('mediaurl', mediaurl) }
     else {
       formData.append("file", e.target.files[0]);
@@ -36,12 +37,12 @@ const UpdateForm = () => {
     }
    
 
-    axios.post(`${apiUrl}/petitions/${name}/updates`, formData, {
+    axios.post(`${apiUrl}/petitions/${id}/updates`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
-    return history.push(`/${name}/updates`);
+    return history.push(`/p/${id}/updates`);
   };
 
   return (
@@ -147,16 +148,16 @@ const UpdateForm = () => {
                 </div>
               </div>
             </div>
-            <a href={`/${name}/updates`}>
+            <Link to={`/${id}/updates`}>
             <div id="submit_div" >
-              <div id="submit_container" href={`/${name}/updates`}>
+              <div id="submit_container" href={`/${id}/updates`}>
             <button id="postButton"   onClick={handleClick}>Post</button>
               </div>
               
               <div id="warning_div"><p id="warningP"><strong>You can post one update every 24 hours.</strong> Updates appear on your
                 petition page, and will be sent in an email to all of your supporters.</p></div>
             </div>
-            </a>
+            </Link>
           </form>
         </div>
       </div>

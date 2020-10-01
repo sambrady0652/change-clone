@@ -15,6 +15,7 @@ export const makeCard = (petition) => {
         description={description}
         goal={goal}
         current={current}
+        id={id}
       />
     </Box>)
 }

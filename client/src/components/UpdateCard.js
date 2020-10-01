@@ -3,12 +3,12 @@ import { apiUrl } from '../config';
 import { useParams } from 'react-router-dom'
 
 const UpdateCard = () => {
-  const { id } = useParams()
+  const { updateId } = useParams()
 
 
   const [state, setState] = useState([])
   useEffect(() => {
-    fetch(`${apiUrl}/updates/${id}`)
+    fetch(`${apiUrl}/updates/${updateId}`)
       .then(res => res.json())
       .then(data => setState(data))
 
