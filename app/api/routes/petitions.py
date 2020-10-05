@@ -105,6 +105,11 @@ def petiton_signatures(petition_id):
     if request.method == 'POST':
         user_id = request.json.get('user_id')
         message = request.json.get('message')
+
+        existing_sig = Signature.query.filter(Signature.user_id == user_id, Signature.petition_id == petition_id).all()
+        if len(existing_sig) > 0:
+            return {'message': 'Signature already exists'}, 204
+            
         new_sig = Signature(user_id=user_id, petition_id=petition_id, message=message)
         db.session.add(new_sig)
         db.session.commit()
