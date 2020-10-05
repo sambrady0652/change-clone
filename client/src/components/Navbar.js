@@ -20,7 +20,6 @@ const Navbar = () => {
         {needSignIn ? null : <Link to='/start-a-petition'><NavAnchor label="Start a petition" /></Link>}
         {needSignIn ? null : <Link to='/u/me'><NavAnchor label="My petitions" /></Link>}
         <Link to="/petitions"><NavAnchor label="Browse" /></Link>
-        <NavAnchor disabled label="Membership" href="" />
       </Header>
       <Header >
         <Link to='/search'>
