@@ -5,8 +5,8 @@ import React from 'react';
 const Footer = () => {
   return (
     <>
-        <div className="Footer" style={{position: 'relative', bottom: '0', width: '100%', height: '125px', backgroundColor: "#F6F4F6", borderTop: '2px solid black', paddingTop: '20px', zIndex: '0'}}>
-            <div className="Footer__names" style={{display: "flex", justifyContent: "space-around"}}>
+        <div className="Footer" style={{position: 'relative', height: '150px', marginTop: 'auto', bottom: '0', width: '100%', backgroundColor: "#F6F4F6", borderTop: '2px solid black', padding: '10px 0'}}>
+            <div className="Footer__names" style={{display: "flex", justifyContent: "space-around", padding: '20px'}}>
                 <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', fontWeight: 'bold'}}>
                     Stedman Houston
                     <a href="https://github.com/StedHouston">

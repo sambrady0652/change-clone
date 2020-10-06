@@ -59,12 +59,12 @@ function App() {
           <Route
             path="/p/:id/updates"
             component={UpdatesBox} />
-          <Route 
-          path="/:petitionId/update/:updateId"
-          component={UpdateCard} />
+          <Route
+            path="/:petitionId/update/:updateId"
+            component={UpdateCard} />
         </Switch>
-        <Footer />
       </BrowserRouter>
+      <Footer />
     </>
   );
 }

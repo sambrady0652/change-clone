@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Heading, Text, Anchor } from 'grommet'
 
 import HomeCarousel from './HomeCarousel'
+import Footer from './Footer';
 
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
       <Box justify="center" align="center" >
         <HomeCarousel />
       </Box>
+      {/* <Footer /> */}
     </>
   )
 }

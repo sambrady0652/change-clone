@@ -78,7 +78,7 @@ function SelectTopic(props) {
   }
 
   return (
-    <div>
+    <>
       <Box>
         <Heading level={3} textAlign='center' alignSelf='center' margin='xxsmall'>Choose a topic for your petitition:</Heading>
       </Box>
@@ -90,7 +90,7 @@ function SelectTopic(props) {
         style={{ margin: '0 auto', width: '25%' }}
       />
       <Button color='#ED2D23' secondary label="Next >" onClick={props.nextView} style={{ marginTop: '20px' }} />
-    </div>
+    </>
   );
 }
 
