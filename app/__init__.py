@@ -5,7 +5,7 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 
-from app.models import db, User
+from app.models import db, User, Petition, Update, Topic
 from app.api.api import user_routes, petition_routes, update_routes, topic_routes
 from app.config import Config
 
