@@ -25,7 +25,7 @@ with app.app_context():
             "password".encode('utf-8'), bcrypt.gensalt(14)),
         profile_pic_url="https://64.media.tumblr.com/3e0c719e439014c6b222de0b6ba8098c/dece21e92204663a-81/s250x400/a46553bd93b74d926700ea0b81c94a8a97d2d4af.jpg",
         location="Chicago, IL, USA")
-     mr_3 = User(
+    mr_3 = User(
         first_name="Mr",
         last_name="3",
         email="mr3@user.com",
@@ -81,7 +81,7 @@ with app.app_context():
         topic_id=4)
 
     
-     potatoPetition = Petition(
+    potatoPetition = Petition(
         image_url="https://64.media.tumblr.com/3f3ac7cfd0eeaa1d74dd7e85cf24515d/f86e7fab64031d0a-6f/s540x810/a0e5cf337b69bdbc8785b69c0ec013bf89bc39fe.jpg",
         header="Eat more potatoes",
         description="They're neat!!!"
