@@ -46,7 +46,7 @@ with app.app_context():
     pizzaPetition = Petition(
         image_url="https://64.media.tumblr.com/0819d96f8c887bcf593f9cb28c006f05/f86e7fab64031d0a-5f/s1280x1920/4851237d06b2c2ab3996cf635089fb5c32e82948.jpg",
         header="Save THe Mexican Pizza",
-        description='Taco Bell plans to discontinue the Mexican Pizza by Q4 2020. This is an item loved by many, especially the South Asian community. Losing this item would not only be the loss of one of our favorite foods but a piece of our childhood & heritage as Indian Americans. Please band together, show support, and save the Mexican Pizza.'
+        description='Taco Bell plans to discontinue the Mexican Pizza by Q4 2020. This is an item loved by many, especially the South Asian community. Losing this item would not only be the loss of one of our favorite foods but a piece of our childhood & heritage as Indian Americans. Please band together, show support, and save the Mexican Pizza.',
         goal=5000,
         current=0,
         creator_id=1,
@@ -55,7 +55,7 @@ with app.app_context():
     pokemonPetition = Petition(
         image_url="https://64.media.tumblr.com/b7bee50a1d574847af243427e12e513b/f86e7fab64031d0a-65/s400x600/e9d11302ff4104a03e3cef9e4a685e41b23530cc.png",
         header="Look at this pokemon!",
-        description='I SAID LOOK AT IT!'
+        description='I SAID LOOK AT IT!',
         goal=5000,
         current=0,
         creator_id=2,
@@ -65,7 +65,7 @@ with app.app_context():
     famousPetition = Petition(
         image_url="https://64.media.tumblr.com/83d3abdc0889629396b383ac6ac39b9c/f86e7fab64031d0a-81/s540x810/55ed9095e7b62213e70d08d8af77619ffafac66b.jpg",
         header="Make Me Famous",
-        description='I used to perform a lot of comedy and thought for a second I was going to be famous. In hindsight, that seems silly but you all could make that former dream a reality!'
+        description='I used to perform a lot of comedy and thought for a second I was going to be famous. In hindsight, that seems silly but you all could make that former dream a reality!',
         goal=5000,
         current=0,
         creator_id=3,
@@ -74,7 +74,7 @@ with app.app_context():
     schoolsPetition = Petition(
         image_url="https://64.media.tumblr.com/06c4752cb3a53b12fa1785043a816d70/f86e7fab64031d0a-cb/s1280x1920/9a94db1d3b369adb05ff1309298c9371b3ee9754.jpg",
         header="Help Chicago's Schools",
-        description="Why are the public schools getting taken advantage of when charter schools are being given a lot of incentives? Doesn't seem right to me, especially when considering one has the option of 'selective enrollment' and the other does not."
+        description="Why are the public schools getting taken advantage of when charter schools are being given a lot of incentives? Doesn't seem right to me, especially when considering one has the option of 'selective enrollment' and the other does not.",
         goal=5000,
         current=0,
         creator_id=2,
@@ -84,7 +84,7 @@ with app.app_context():
     potatoPetition = Petition(
         image_url="https://64.media.tumblr.com/3f3ac7cfd0eeaa1d74dd7e85cf24515d/f86e7fab64031d0a-6f/s540x810/a0e5cf337b69bdbc8785b69c0ec013bf89bc39fe.jpg",
         header="Eat more potatoes",
-        description="They're neat!!!"
+        description="They're neat!!!",
         goal=5000,
         current=0,
         creator_id=1,
