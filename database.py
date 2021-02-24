@@ -18,7 +18,7 @@ with app.app_context():
         profile_pic_url="https://64.media.tumblr.com/a943ef66b1ba80fd211fb96b333eb011/dece21e92204663a-61/s400x600/6a54f69ade8ffb7a7e98a63f1b0d8e564d7eca19.png",
         location="Chicago, IL, USA")
     miss_wednesday = User(
-        first_name="Miss",
+        first_name="Ms",
         last_name="GoldenWeek",
         email="missgoldenweek@user.com",
         encrypted_password=bcrypt.hashpw(
