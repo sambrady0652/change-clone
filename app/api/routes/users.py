@@ -78,7 +78,7 @@ def get_creator(id):
 
 
 @bp.route('/<int:id>', methods=['GET','PATCH'])
-@jwt_required
+@jwt_required()
 def user_page(id):
     if request.method == 'GET':
         found_user = User.query.filter(User.id == id).first()
@@ -113,7 +113,7 @@ def user_page(id):
             return {'error': 'User was not found'}, 400
 
 @bp.route('/delete_account', methods=['DELETE'])
-@jwt_required
+@jwt_required()
 def delete_account():
     #get id from json web token
     current_user_id = get_jwt_identity()
